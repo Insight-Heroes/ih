@@ -1,0 +1,63 @@
+<div class="">
+  <ng-include ng-init="activeSurveyNav='distribute'" src="'modules/shared/client/views/survey-navbar.client.html'">
+  </ng-include>
+</div>
+<div class="w-static-sidebar d-in p-r-120" ng-if="vm.userGatherer && (vm.userGatherer.length > 0)">
+  <div class="container-fluid">
+    <div class="row">
+  </div>
+  <div class="user-table m-t-80">
+    <table class="user-table-border w-100 table-layout-fixed">
+      <thead>
+      <tr>
+        <th width="65px">
+        <th width="75px"></th>
+        <th class="align-left p-l-0" width="20%">USER NAME</th>
+        <th width="20%">EMAIL </th>
+        <th>CREATED ON</th>
+        <th>LAST SIGNED IN</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="user-info" ng-repeat = 'userGatherer in vm.userGatherer' >
+        <td class="text-left" ng-hide="userGatherer.isDisabled" ng-init="userGatherer.selected = false" ng-click="vm.checks(list)"><md-checkbox  md-no-ink=""  aria-label="Checkbox No Ink" ng-model="userGatherer.selected" value={{userGatherer.name}} class="f-l md-primary" ></md-checkbox></td>
+        <td class="text-left user-info" ng-show="userGatherer.isDisabled">
+          <i class="ion-android-done ion p-r-5"></i>
+        </td>
+        <td class="text-left">
+          <img class="w-35-px h-35-px f-l b-r-50" src={{userGatherer.profileImage}} class="w-20"/>
+        </td>
+        <td class="l-h-40 align-left p-l-0 word-break">
+          {{ userGatherer.firstName }} {{ userGatherer.lastName }}
+        </td>
+        <td>{{userGatherer.email}}</td>
+        <td>{{userGatherer.created | date:'d MMM yyyy'}}</td>
+        <td>{{userGatherer.lastSignInAt | date:'d MMM yyyy'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+
+
+  <!-- Empty state -->
+  <div class="col-md-11 p-t-150 m-l-60 projectPage-color-height" ng-if="vm.userGatherer && (vm.userGatherer.length === 0)">
+    <div class="w-80 m-auto text-center">
+      <div>
+        <img class="p-r-4 p-b-2" src="../../../../../modules/core/client/img/insight-images/ic_users_empty.png"/>
+      </div>
+      <div class="f-32 l-s-1 p-t-10">Users</div>
+      <div class="grey-dark opacity-3 f-18 w-40 m-auto">Please create new user with gatherer role in user section by clicking on the button below !</div>
+      <div class="w-60">
+        <button class='f-15 create-project-button dark-red white f-r m-t-25 w-30' type="button" ui-sref="users.create">Create User</button>
+      </div>
+      <div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+

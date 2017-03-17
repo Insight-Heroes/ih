@@ -1,0 +1,75 @@
+<!--Static side bar-->
+<ng-include ng-init="activeSurveyNav='presentation'" ng-show="vm.showNavBar || vm.presentLength === true"  src="'modules/shared/client/views/survey-navbar.client.html'">
+</ng-include>
+      <div ng-show="vm.presentation.length === 0 && vm.showNavBar === false" class="p-t-200 p-l-100 content surveyPage-color-height col-xs-12 col-md-8 col-md-offset-2">
+              <div class="w-80 m-auto ng-scope">
+                <div class="m-l-minus-90 text-center">
+                  <img class="p-r-4 p-b-2 m-b-10" src="../../../../../modules/core/client/img/present/ic_present_empty.svg">
+                  <div class="f-32 grey-dark l-s-1">Welcome to Present</div>
+                  <div class="grey-dark opacity-6  f-18 w-70 m-auto">You have no storyboards yet, you can export your</br> graphs and stastics to present from the Analyse section.</div>
+                  <div class="w-60 m-l-20">
+                    <button ui-sref="dashboard" class="create-project-button dark-red white f-r m-t-20 w-40" type="button" value="projects.new">VIEW PROJECTS</button>
+                  </div>
+                </div>
+
+              </div><!-- end ngIf: vm.surveys && (vm.surveys.length == 0) -->
+            </div>
+
+
+<div class="" >
+  <div layout="column"  class="p-relative sideNavSection ng-scope layout-column"  ng-hide="vm.presentation.length === 0 && vm.showNavBar === false">
+    <nav class="dark-container layout dark-grey  navbar navbar-default m-t-50" ui-view>
+      <div class="w-100">
+        <div class="col-md-2 p-r-10">
+          <div ng-messages="vm.presentationFrom.storyBoard.$error" role="alert">
+            <p class="help-block error-text italic-style" ng-message="required">storyBoard is required.</p>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div>
+      <div class="w-static-sidebar-property d-in">
+        <div class="container-fluid">
+          <div class="row p-t-10 m-minus-30">
+            <div class="storyboard-search m-r-20 m-b-10">
+              <input data-ng-model="searchStoryBoard" class="h-30 form-control form-analyse w-80 d-in" type="text" ng-hide="!vm.searchStory"/>
+              <img src="../../../../../modules/core/client/img/insight-images/search_icon.png"
+                 class="outline-none  pull-right m-t-5" ng-click="vm.searchStoryBoard()" />
+            </div>
+            <div class="col-md-4 col-lg-3 col-sm-6 m-t-30"  ng-repeat="presentation in present = ( vm.presentation | filter: {storyboardName: searchStoryBoard} )">
+              <div class="project-inner-blocks p-0 white-b m-0">
+                <div class="project-inner-section b-style">
+                  <div class="f-16 w-100 project-name">
+                    <p class="d-in o-auto w-65 m-0 survey-name   bold-color">{{::presentation.survey.name | truncate: 45 }}</p>
+                  </div>
+                </div>
+                <div class="project-inner-section">
+
+                  <div class="m-b-7">
+                    <span class="w-40 p-b-10 created-on">Slides:</span><span class="p-l-10 black-generic w-40">{{::presentation.slides}}</span>
+                  </div>
+
+                  <div class="m-b-7">
+                    <span class="w-40 p-b-10 created-on">Created on :</span><span calss="w-40 black-generic">
+                      {{ ::presentation.created | date:'d MMM, yyyy' }}
+                    </span>
+                  </div>
+                  <div class="m-b-7">
+                    <span class="w-40 p-b-10 created-on">Last Opened on :</span><span calss="w-40 black-generic">
+                      {{ ::presentation.lastOpenedOn | date:'EEE h:mm a' }}
+                    </span>
+                  </div>
+                </div>
+                <div class="p-20 b-bottom-style view-detail">
+                  <button  class="view-hover p-15"  ng-if="vm.showNavBar" ui-sref="surveys.view({id: presentation._id, name: presentation.storyboardName})">VIEW DETAILS</button>
+                  <button  class="view-hover p-15"  ng-if="!vm.showNavBar" ui-sref="presentation.view({id: presentation._id, name: presentation.storyboardName})">VIEW DETAILS</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

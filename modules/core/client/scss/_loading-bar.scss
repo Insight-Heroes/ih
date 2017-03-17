@@ -1,0 +1,21 @@
+#loading-bar-spinner .spinner-icon {
+  display: none !important;
+  width: 50px !important;
+  height: 50px !important;
+  border: solid 4px red !important;
+  border-top-color: #29d !important;
+  border-left-color: #29d !important;
+  border-radius: 50% !important;
+  animation: loading-bar-spinner 750ms linear infinite !important;
+}
+#loading-bar .bar {
+  height: 50px !important;
+  box-shadow: 0 0 10px 0;
+  opacity: 0.3;
+  background: #000 !important;
+}
+
+#loading-bar-spinner {
+  left: calc(50% - 25px) !important;
+  top: calc(50% - 25px) !important;
+}

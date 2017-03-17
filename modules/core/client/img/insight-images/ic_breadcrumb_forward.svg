@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="13px" viewBox="0 0 8 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_breadcrumb_forward</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Users-and-Roles" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="03_users_usertype" transform="translate(-225.000000, -119.000000)">
+            <g id="ic_breadcrumb_forward" transform="translate(217.000000, 113.000000)">
+                <g id="Group">
+                    <polygon id="Shape" fill="#000000" points="8.59 17.34 13.17 12.75 8.59 8.16 10 6.75 16 12.75 10 18.75"></polygon>
+                    <polygon id="Shape" points="0 0.75 24 0.75 24 24.75 0 24.75"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

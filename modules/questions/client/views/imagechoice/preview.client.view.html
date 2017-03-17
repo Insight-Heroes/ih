@@ -1,0 +1,15 @@
+<!-- Image Choice questions preview -->
+<div class="w-100 m-auto m-t-10 form-builder-option-block p-r-200">
+    <div class="flex-container" >
+      <div class="flex-item" ng-if="file.thumbUrl" ng-repeat="file in vm.mediaFiles track by $index">
+        <div class="img-choice-wrapper">
+          <div class="table-cell">
+            <div class="option-a">
+              <span class="dark-red-c">{{ $index + 1 }}</span>
+            </div>
+            <img ng-src="{{file.thumbUrl}}" class="file-preview">
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<!-- Image uploads -->
+<ul class="tweak-pages p-0">
+  <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle">
+    Images (2MB max)
+  </li>
+  <li class="w-100 p-15 p-l-20 p-r-20 clearfix" ng-repeat="img in vm.mediaFiles track by $index">
+      <div class="uploaded-image-name">
+        {{ img.name }}
+      </div>
+      <div class="text-center">
+        <button
+            ngf-select
+            type="button"
+            class="red-button w-80 m-auto"
+            ngf-pattern="vm.whitelistExtensions.image.join(',')"
+            ngf-accept="'image/*'"
+            ngf-multiple="false"
+            ng-model="img.file"
+            name="img{{$index}}"
+            ngf-change="vm.validateFile($file, $invalidFile, $index, img)"
+            ng-hide="img.thumbUrl">
+            Upload
+        </button>
+      </div>
+      <div class="uploaded-image-small-preview">
+        <div class="p-relative d-in m-r-5 img-preview" ng-if="img.thumbUrl">
+          <img
+            ngf-thumbnail="img.thumbUrl">
+          <div class="p-absolute clear-image-deprecated hide"
+            ng-click="vm.clearImage(img)">
+              x
+          </div>
+        </div>
+        <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png"
+            class="m-t-5"
+            ng-hide="$last"
+            ng-click="vm.removeImage($index, img)"/>
+      </div>
+  </li>
+</ul>

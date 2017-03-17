@@ -1,0 +1,52 @@
+<nav class="insight-nav dark-red h-50 p-absolute z-1 p-t-15 p-l-20 p-r-20 w-100"
+  ng-controller="HeaderController as hc">
+  <div class="layout d-b text-center">
+    <a ng-click="hc.goBack()" class="cursor-pointer d-in w-20-p f-l">
+      <img src="../../../../../modules/core/client/img/insight-images/ic_back.png" />
+    </a>
+    <img
+      ui-sref="dashboard"
+      src="../../../../../modules/core/client/img/insight-images/IH_logo_top.png" class="cursor-pointer text-center">
+    <div class="cursor-pointer pull-right" uib-dropdown>
+      <a uib-dropdown-toggle class="d-in w-50-p profile-dropdown-btn">
+        <span></span><span></span><span></span>
+      </a>
+      <ul class="dropdown-menu text-center user-profile-dropdown" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+        <li role="menuitem">
+          <div class="p-l-20 p-r-20 p-t-20">
+            <div class="text-center">
+              <img ng-src="{{hc.authentication.user.profileImage}}" class="user-profile-image img-circle"/>
+            </div>
+            <div class="text-center">
+              <p class="user-name">
+                {{hc.authentication.user.firstName}} {{hc.authentication.user.lastName}}
+              </p>
+              <p class="user-email">{{hc.authentication.user.email}}</p>
+            </div>
+          </div>
+          <div class="bottom-links clearfix">
+            <p class="text-left respondent">Respondents: {{ hc.authentication.user.plan.totalNoOfRespondants - hc.authentication.user.plan.receivedUserResponses }}</p>
+            <a href="#" ng-click="hc.logout()" class="text-right logout">
+              signout
+            </a>
+          </div>
+        </li>
+        <li role="menuitem" class="hide">
+          <a href=""  class="href-disabled">
+          {{hc.authentication.user.email}}
+            </a>
+        </li>
+        <li role="menuitem" class="hide">
+          <a href="#" class="href-disabled">
+          {{hc.authentication.user.roles}}
+          </a>
+        </li>
+        <li class="divider hide"></li>
+        <li role="menuitem" class="hide"><a href="#">Separated link</a></li>
+      </ul>
+    </div>
+    <div class="pull-right white p-r-20" ng-show="(hc.authentication.user.plan.totalNoOfRespondants - hc.authentication.user.plan.receivedUserResponses) <= 10"> REMAINING RESPONDANTS: {{ hc.authentication.user.plan.totalNoOfRespondants - hc.authentication.user.plan.receivedUserResponses }} </div>
+    <span  class="nav-collapse collapse navbar-responsive-collapse">hi</span>
+  </div>
+    </div>
+</nav>

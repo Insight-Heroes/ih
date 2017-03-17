@@ -1,0 +1,13 @@
+<ng-include ng-init="activeSurveyNav='distribute'"
+    src="'modules/shared/client/views/survey-navbar.client.html'">
+</ng-include>
+
+<div class="" ui-view>
+    <!-- Upload CSV -->
+    <ng-include src="'modules/lists/client/views/upload-csv.client.view.html'"
+        ng-if='vm.activeState=="upload-csv"'></ng-include>
+
+    <!-- Map CSV Columns -->
+    <ng-include src="'modules/lists/client/views/map-csv-columns.client.view.html'"
+        ng-if='vm.activeState=="map-csv-columns"'></ng-include>
+</div>

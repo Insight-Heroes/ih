@@ -1,0 +1,65 @@
+
+<div layout="column" class="sideNavSection  layout-column">
+  <div>
+    <div class="w-static-sidebar d-in">
+      <div class="container-fluid">
+        <!-- Payment list-->
+        <div class="col-md-11 p-l-50 p-r-50 db">
+          <div class="m-b-40 confirmation-email text-center" ng-if="vm.failureReason == 'already_subscribed'">
+              <h2><b>Sorry! Payment unsuccessful, you have already subscribed to one of the plans.</b></h2>
+              <p class="m-auto text-center">
+                <i class="f-103 text-center ion-ios-close-outline dark-red-c"></i>
+              </p>
+              <div class="w-40 m-auto m-b-40">
+                  <p  class="text-center gr-font f-18">You can purchase Add-On respondents from Manage Subscription below.
+                  </p>
+               </div>
+               <div class="p-l-50 p-r-50 db">
+                  <div class="confirmation-email text-center">
+                    <button class="f-aveinr h-50 red-button text-center" ui-sref="dashboard">Dashboard</button>
+                    <button class="f-aveinr h-50 red-button text-center" ui-sref="payments">Manage Subscription</button>
+                  </div>
+              </div>
+          </div>
+
+          <div class="m-b-40 confirmation-email text-center" ng-if="vm.failureReason=='not_subscribed'">
+              <h2><b>Sorry! Payment unsuccessful, you have not purchased any basic plans.</b></h2>
+              <p class="m-auto text-center">
+                <i class="f-103 text-center ion-ios-close-outline dark-red-c"></i>
+              </p>
+              <div class="w-40 m-auto m-b-40">
+                  <p  class="text-center gr-font f-18">You can purchase basic plans from Manage Subscription below.
+                  </p>
+               </div>
+               <div class="p-l-50 p-r-50 db">
+                  <div class="confirmation-email text-center">
+                    <button class="f-aveinr h-50 red-button text-center" ui-sref="dashboard">Dashboard</button>
+                    <button class="f-aveinr h-50 red-button text-center" ui-sref="payments">Manage Subscription</button>
+                  </div>
+              </div>
+          </div>
+
+          <div class="m-b-40 confirmation-email text-center" ng-if="vm.failureReason=='transaction_failed'">
+              <h2><b>Transaction has been failed.</b></h2>
+              <p class="m-auto text-center">
+                <i class="f-103 text-center ion-ios-close-outline dark-red-c"></i>
+              </p>
+              <div class="w-40 m-auto m-b-40">
+                  <p  class="text-center gr-font f-18">You can purchase basic plans from Manage Subscription below.
+                  </p>
+               </div>
+               <div class="p-l-50 p-r-50 f-12 db">
+                  <div class="confirmation-email text-center">
+                    <button class="f-aveinr h-50 red-button text-center" ui-sref="dashboard">Dashboard</button>
+                    <button class="f-aveinr h-50 red-button text-center" ui-sref="payments">Manage Subscription</button>
+                  </div>
+              </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

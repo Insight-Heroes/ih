@@ -1,0 +1,48 @@
+<nav class="dark-container layout dark-grey navbar navbar-default dark-navbar">
+    <div class="w-100 p-b-12">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="titan">
+            <span class="white  p-l-15 survey-name t-capitalize" href="#" title="{{vm.survey.name}}">
+          {{::vm.survey.name | truncate: 35}}
+        </span>
+            <a ng-click="vm.toggleSidebar()" class="md-raised h-60 toggle-button font-24 white">
+            </a>
+        </div>
+        <div class=" nav-dark-list m-auto f-16">
+            <md-nav-bar md-selected-nav-item="activeSurveyNav" nav-bar-aria-label="navigation links">
+                <md-nav-item class="f-16 white"
+                    md-nav-click="goto('build')"
+                    name="build"
+                    ui-sref="surveys.design({id: vm.survey._id})">
+                    Build
+                </md-nav-item>
+                <md-nav-item class="f-16 white hide"
+                    md-nav-click="goto('settings')">
+                    Settings
+                </md-nav-item>
+              <md-nav-item class="f-16 white"
+                           md-nav-click="goto('distribute')"
+                           name="distribute"
+                           ui-sref="surveys.distribute({ id: vm.survey._id })">
+                Distribute
+              </md-nav-item>
+                <md-nav-item class="f-16 white"
+                    md-nav-click="goto('analyse')"
+                    name="analyse"
+                    ui-sref="surveys.analysis({ id: vm.survey._id })">
+                    Analyse
+                </md-nav-item>
+              <md-nav-item class="f-16 white"
+                           md-nav-click="goto('presentation')"
+                           name="presentation"
+                           ui-sref="surveys.presentation({ id: vm.survey._id })">
+                Present
+              </md-nav-item>
+            </md-nav-bar>
+        </div>
+        <div class="f-r p-t-20 w-30 m-r-20" ng-hide="vm.hidePublish">
+            <button class="f-r red-button b-r-2 w-40 m-r-10" type="button" ng-hide="vm.hidePublishButton" ng-click="vm.openPublishModal()">{{vm.publishText}}</button>
+            <button class="f-r dark-greytopnav b-r-2 w-40 m-l-10 m-r-10" ng-hide="vm.hidePreview" ng-click="vm.showPreview()">Preview</button>
+        </div>
+    </div>
+</nav>

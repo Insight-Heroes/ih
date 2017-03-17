@@ -1,0 +1,302 @@
+<ng-include ng-init="activeSurveyNav='analyse'" src="'modules/shared/client/views/survey-navbar.client.html'">
+</ng-include>
+<div layout="column" ng-cloak="" class="h-100 sideNavSection ui-analysis">
+    <div class="m-r-0 b-grey" id='sortable-container'>
+        <!-- Sidebar -->
+        <div class="primary-white side-shadow design-sidebar">
+            <section class="position-content-center">
+                 <div class="sidebar-top">
+                    <h2 class="p-t-13 f-22">Control Center</h2>
+                    <p class="grey-dark p-b-10 opacity-6 m-t-10">
+                        Select metrics from below & choose one of the options
+                    </p>
+                    <!-- Variables heading -  -->
+                     <li class="header-nav light-grey w-100 p-l-15 p-t-10 p-b-10 p-r-10 click-toggle">
+                        <img class="p-r-5 p-l-10 p-b-2" src="../../../../../modules/core/client/img/form-builder-icons/ic_variables.png" /> Variables
+                        <div class="pull-right d-in">
+                            <!-- Edit, Save & Cancel buttons -->
+                            <i class="ion ion-edit p-r-5"
+                              ng-click="vm.inPlaceEditing = true"
+                              ng-show="vm.selectedQuestions.length > 0 && !vm.inPlaceEditing"></i>
+                            <i class="ion ion-checkmark m-r-20"
+                              ng-click="vm.saveVariableNames()"
+                              ng-show="vm.inPlaceEditing"></i>
+                            <i class="ion ion-close m-r-10"
+                              ng-click="vm.cancelVariableRename()"
+                              ng-show="vm.inPlaceEditing"></i>
+                            <input data-ng-model="searchAnalyse" maxlength="100" class="form-analyse b-r-4 w-75 d-in" type="text" ng-hide="vm.inPlaceEditing || vm.search"/>
+                             <img src="../../../../../modules/core/client/img/insight-images/search-icon1.png"
+                              ng-hide="vm.inPlaceEditing" class="outline-none  pull-right" ng-click="vm.searchBar()" />
+                          </div>
+                      </li>
+                    </div>
+                    <div class="sidebar-bottom o-scroll">
+                        <ul class="tweak-pages p-0">
+                            <!-- Variable lists -->
+                            <li ng-repeat="q in vm.questions | filter: {varName: searchAnalyse} | orderBy:'position'" class="p-l-0 p-r-3" ng-class="{active: q.isSelected}" ng-click="vm.toggleQuestionSelection(q)">
+                                <p class="red-key dark-red w-5-p d-in p-l-3 b-t-r b-b-r p-b-5 p-t-3 " ng-show="vm.selectedQuestions[0] == q._id" >
+                                <!-- {{q}} -->
+                                    <img src="../../../../../modules/core/client/img/insight-images/ic_key_variable.svg">
+                                </p>
+                                <p class="text-wrap-block w-70 present-{{q.questionType}}" ng-hide="q.isSelected && vm.inPlaceEditing" title="{{ q.varName }}" ng-class="{'selected-{{q.questionType}}' : q.isSelected, 'b-4-position': q.isSelected && vm.selectedQuestions[0] == q._id, 'p-l-30': q.isSelected && vm.selectedQuestions[0] == q._id}">
+                                    {{ q.varName | truncate:20 | removetags }}
+                                </p>
+                                <span class="btn-red-check b-r-50 pull-right" role="button" tabindex="0" ng-show="q.isSelected">
+                                </span>
+                                <div class="d-in">
+                                    <input type="text" ng-model="q.varName" class="form-control" ng-show="vm.inPlaceEditing && q.isSelected" maxlength="100">
+                                </div>
+                            </li>
+                     </ul>
+                   </div>
+            </section>
+        </div>
+        <!-- Analyse Container-->
+        <div class="w-design-sidebar container">
+            <div class="row" ng-show="vm.selectedQuestions.length > 0">
+                <div class="col-md-6 col-sm-6">
+                    <p>TOOLS</p>
+                    <div class="outline-none">
+                        <div class="white-b chart-box tabulation"
+                            uib-tooltip="Tab"
+                            ng-click="vm.getTabData()"
+                            ng-class="{'red-btn': vm.selectedQuestions.length == 1 }">
+                        </div>
+                        <div class="white-b chart-box cross-tab"
+                            uib-tooltip="Cross Tab"
+                            ng-click="vm.getCrossTabData()"
+                            ng-class="{'red-btn': vm.selectedQuestions.length > 1}">
+                        </div>
+                        <img class="upper-row m-w-50" src="../../../../../modules/core/client/img/analyse/img_arrow_2.png" ng-show="vm.selectedQuestions.length > 0 && !vm.graphMode">
+                    </div>
+                </div>
+                <div class="pull-right text-right p-r-15">
+                    <p class="m-b-0">ACTIONS</p>
+                    <div class="outline-none m-t-10">
+                        <div class="export-box p-relative m-r-5 m-b-7 pull-left"
+                            ng-click="vm.exportToPresent()"
+                            ng-class="{'red-export': (vm.selectedQuestions.length > 0 && vm.graphData
+                            && vm.graphData.sampleSize > 0)}">
+                            <span ng-if="(vm.selectedQuestions.length > 0 && vm.graphData
+                            && vm.graphData.sampleSize > 0)">Export to Storyboard</span>
+                        </div>
+                        <a href="/api/analysis/rawData/{{vm.survey._id}}" target="_blank"><div class="note-box" ng-click=""></div></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Variables not selected -->
+            <div class="Insight-container h-auto p-t-100 p-l-0 p-r-0" ng-if="vm.selectedQuestions.length === 0">
+                <div class="text-center w-100 m-auto p-r-360">
+                    <img class="p-b-50 m-w-50 p-r-10" src="../../../../../modules/core/client/img/analyse/img_arrow.png"/>
+                    <img class="" src="../../../../../modules/core/client/img/analyse/ic_welcome.png"/>
+                </div>
+                <p class="f-24 text-center m-b-0 p-b-10">Welcome to Analyse</p>
+                <p class="text-center grey-dark opacity-6 p-b-10">Choose variables from the left panel, and then choose one of the options to Analyse!</p>
+            </div>
+            <!-- Variables selected -->
+            <div class="Insight-container h-auto p-t-23" ng-show="vm.selectedQuestions.length > 0 && !vm.graphMode">
+                <div class="text-center w-100 m-auto p-r-50">
+               <!--      <img class="p-b-50 m-w-50" src="../../../../../modules/core/client/img/analyse/img_arrow_2.png"> -->
+                    <img class="" src="../../../../../modules/core/client/img/analyse/ic_welcome.png">
+                </div>
+                <p class="f-24 text-center m-b-0">Great! Now choose your method of analysis</p>
+                <p class="text-center grey-dark opacity-6">Choose a tool from top left to analyse your data sets.</p>
+            </div>
+            <div class="container-fluid" ng-if="!vm.graphMode">
+                <div class=" p-t-20">
+                    <div class="col-md-4 col-md-offset-2">
+                        <p class="text-center">
+                            <img class="text-center" src="../../../../../modules/core/client/img/analyse/ic_tab_landing.png" />
+                        </p>
+                        <p class="text-center">TAB</p>
+                        <p class="text-center">Loreum IpsumLoreum IpsumLoreum IpsumLoreum IpsumLoreum Ipsum</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-center">
+                            <img class="text-center" src="../../../../../modules/core/client/img/analyse/ic_crosstab_landing.svg" />
+                        </p>
+                        <p class="text-center">CROSS</p>
+                        <p class="text-center">Loreum IpsumLoreum IpsumLoreum IpsumLoreum IpsumLoreum Ipsum</p>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="col-md-12 text-center">
+                        <button class="blue-button white m-t-25 p-l-20 p-r-20 p-5">View our tutorial videos</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Graph -->
+            <div class="m-t-15" ng-if="vm.graphMode == 'tab'">
+                   <p class="f-18 p-t-20">Tabulation of
+                        <span class="f-bold f-italics">{{ vm.graphData.varName[0] }}</span>
+                    </p>
+                <!-- Commenting this as per the client requirement-->
+                <!-- Stats table -->
+<!--                 <div>
+                    <p class="f-18 p-t-20">Summary of
+                        <span class="f-bold f-italics">{{ vm.graphData.question.varName || vm.graphData.question.title | removetags }}</span>
+                    </p>
+                </div>
+                <div class="user-table col-md-12 p-r-0 p-l-0">
+                    <table class="p-t-40 w-100 m-auto">
+                        <thead>
+                            <tr>
+                                <th class="f-12-i">SAMPLE SIZE</th>
+                                <th class="f-12-i">MEDIAN</th>
+                                <th class="f-12-i">AVERAGE</th>
+                                <th class="f-12-i">MODE</th>
+                                <th class="f-12-i">STANDARD DEVIATION</th>
+                                <th class="f-12-i">MINIMUM</th>
+                                <th class="f-12-i">MAXIMUM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="f-bold">{{ vm.graphData.sampleSize }}</td>
+                                <td class="f-bold">NA</td>
+                                <td class="f-bold">NA</td>
+                                <td class="f-bold" ng-if="vm.graphData.sampleSize">{{ vm.graphData.analysisData.max.label }} </td>
+                                <td class="f-bold" ng-if="!vm.graphData.sampleSize">NA</td>
+                                <td class="f-bold">NA</td>
+                                <td class="f-bold">
+                                    NA
+                                    <div class="hide">
+                                        {{ vm.graphData.analysisData.min.label }}
+                                    </div>
+                                </td>
+                                <td class="f-bold">
+                                    NA
+                                    <div class="hide">
+                                        {{ vm.graphData.analysisData.max.label }}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> -->
+                <!-- Graph View -->
+                <div class="col-md-12 chart-size board d-in m-b-30">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-md-4 p-l-40 p-t-20" ng-if="vm.graphData.sampleSize > 0">
+                                <md-radio-group ng-model="vm.graphData.statsType">
+                                    <md-radio-button aria-label="Percentile" class="m-0 f-l md-primary" value="percentile">
+                                    </md-radio-button>
+                                    <span class="m-r-10 pull-left">Percentile</span>
+                                    <md-radio-button aria-label="Count" class="m-0 f-l md-primary" value="count">
+                                    </md-radio-button>
+                                    <span>Count</span>
+                                </md-radio-group>
+                            </div>
+                            <div class="m-t-20 col-md-3 text-center">
+                                SAMPLE SIZE :
+                                <b>{{ vm.graphData.sampleSize }}</b>
+                            </div>
+                            <div class="m-t-20 col-md-5">
+                                <div ng-if="vm.graphData.sampleSize > 0" class="pull-right">
+                                    <span class="control-graph f-12"> GRAPH TYPE</span>
+                                    <div class="select-box-wrapper d-in">
+                                    <select ng-if="!vm.graphData.seriesData" ng-options="key as value for (key , value) in vm.defaultCharts" ng-model="vm.graphData.chartType" class="l-h-16 h-30 control-select form-control">
+                                    </select>
+                                    <select ng-if="vm.graphData.seriesData" ng-options="key as value for (key , value) in vm.seriesCharts" ng-model="vm.graphData.chartType" class="l-h-16 h-30 control-select form-control">
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="resize-chart p-t-50 m-b-40 {{vm.graphData.chartType}}" ng-if="vm.graphData.sampleSize > 0">
+                            <canvas class="chart-base" ng-show="vm.graphData.statsType == 'percentile'" chart-options="vm.graphData.graphOptions" chart-type="vm.graphData.chartType" chart-series="vm.graphData.series" chart-data="vm.graphData.percentData" chart-labels="vm.graphData.labels">
+                            </canvas>
+                            <canvas class="chart-base" ng-show="vm.graphData.statsType == 'count'" chart-options="vm.graphData.graphOptions" chart-type="vm.graphData.chartType" chart-series="vm.graphData.series" chart-data="vm.graphData.data" chart-labels="vm.graphData.labels">
+                            </canvas>
+                        </div>
+                        <div class="text-center p-t-50 m-b-40" ng-if="vm.graphData.sampleSize === 0">
+                            No Responses received
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cross Tab Graph Start-->
+            <div class="m-t-15" ng-if="vm.graphMode == 'crossTab'">
+                    <p class="f-18 p-t-20">Cross Tabulation of
+                          <span class="f-bold f-italics">{{ vm.graphData.varName[0]}}</span>
+                          <span ng-if="vm.graphData.varName[1]">with</span>
+                          <span class="f-bold f-italics">{{vm.graphData.varName[1]}}</span>
+                          <span ng-if="vm.graphData.varName[2]">and</span>
+                          <span class="f-bold f-italics">{{vm.graphData.varName[2]}}</span>
+                    </p>
+                <!-- Switch Variable button -->
+                <div class=" m-b-15" ng-if="vm.graphData.sampleSize > 0">
+                    <!-- <div class="col-md-8 col-sm-12 p-t-20">
+                        Number stats table
+                    </div> -->
+                    <div class="col-md-12 col-sm-12 text-right p-r-0 p-t-10">
+                        <button class="switch-inner" ng-click="vm.switchVariables()">
+                            <i class="ion ion-arrow-swap"></i> Switch Variables
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Graph container -->
+                <div class="" ng-if="vm.graphData.sampleSize > 0">
+                    <!-- Stats table -->
+                    <div class="chart-size board col-md-12 p-r-0 p-l-0 m-b-30">
+                        <!-- Table Merge-->
+<!--                         <div class="col-md-6 pull-left user-table-analyse col-md-12 p-r-0 p-l-0">
+                            <table class="b-style-hidden p-t-40 w-100 m-auto">
+                                <thead>
+                                    <tr>
+                                        <th class="h-45 f-12-i">VARIABLE1</th>
+                                        <th class="h-45 f-12-i">Count</th>
+                                        <th class="h-45 f-12-i">AVERAGE</th>
+                                        <th class="h-45 f-12-i">MEDIAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="f-bold ng-binding">1</td>
+                                        <td class="f-bold">NA</td>
+                                        <td class="f-bold">NA</td>
+                                        <td class="f-bold">NA</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> -->
+                        <!-- Graph in Canvas -->
+                        <div class="col-md-12 pull-right p-l-0 p-r-0">
+                            <!-- Graph type Selection -->
+                                <!-- <div class="col-md-3 pull-left p-t-15">
+                                    <p class="d-in p-l-10"> STATS</p>
+                                </div> -->
+                            <div class="row">
+                                <div class="m-t-20 col-md-6 text-right">
+                                  SAMPLE SIZE :
+                                    <b>{{ vm.graphData.sampleSize }}</b>
+                                </div>
+                                <div class="col-md-4 pull-right p-t-20 p-relative p-r-0">
+                                    <span class="f-12 p-r-20 pull-left p-t-5"> GRAPH TYPE</span>
+                                    <div class="select-box-wrapper-analyse-cross p-relative pull-left w-60">
+                                        <select ng-options="key as value for (key , value) in vm.seriesCharts" ng-model="vm.graphData.chartType" class=" primary-white l-h-16 form-control pull-left d-in">
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="cross-tab-chart p-t-50 m-b-40" ng-if="vm.graphData.sampleSize > 0">
+                                <canvas class="chart-base" chart-options="vm.crossTabOptions" chart-type="vm.graphData.chartType" chart-series="vm.graphData.series" chart-data="vm.graphData.data" chart-labels="vm.graphData.labels">
+                                </canvas>
+                            </div>
+                        </div>
+                        <!-- Empty State -->
+                        <div class="text-center p-t-50 m-b-40" ng-if="vm.graphData.sampleSize === 0">
+                            No Responses received
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Cross Tab Graph End-->
+        </div>
+    </div>
+</div>

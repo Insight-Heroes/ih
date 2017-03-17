@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_add_profilepic</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Sign-In-/-Sign-Up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="12_SignUp_step1" transform="translate(-453.000000, -360.000000)" fill="#959595">
+            <path d="M480.5625,372.8625 L469.5375,372.8625 L469.5375,361.8375 C469.5375,360.82425 468.715875,360 467.7,360 C466.68675,360 465.8625,360.82425 465.8625,361.8375 L465.8625,372.8625 L454.8375,372.8625 C453.821625,372.8625 453,373.684125 453,374.7 C453,375.715875 453.821625,376.5375 454.8375,376.5375 L465.8625,376.5375 L465.8625,387.5625 C465.8625,388.578375 466.68675,389.4 467.7,389.4 C468.715875,389.4 469.5375,388.578375 469.5375,387.5625 L469.5375,376.5375 L480.5625,376.5375 C481.578375,376.5375 482.4,375.715875 482.4,374.7 C482.4,373.684125 481.578375,372.8625 480.5625,372.8625" id="ic_add_profilepic"></path>
+        </g>
+    </g>
+</svg>

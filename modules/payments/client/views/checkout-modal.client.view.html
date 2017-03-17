@@ -1,0 +1,30 @@
+<section> <!-- action="/api/checkout" -->
+  <form name="vm.paymentForm" novalidate autocomplete="off" method="post" action="/api/checkout">
+  <div class="modal-header">
+    <h3 class="modal-title">Checkout</h3>
+  </div>
+  <div class="modal-body">
+    <div>
+      <input type="hidden" name="userid" ng-value = "vm.userid">
+      <input type="hidden" name="planType" ng-value = "vm.planType">
+      <input type="hidden" name="noOfRespondants" ng-value = "vm.noOfRespondants">
+      <input readonly="true" type="text" name="amount" ng-model="vm.amount"
+        style="opacity: 0"
+        ng-if="vm.planType == 'A'"
+      />
+    </div>
+    <div id="payment-form"></div>
+  </div>
+  <div class="modal-footer">
+      <div ng-hide="vm.ajaxOn">
+        <button class="btn btn-primary" type="submit" ng-click="vm.ajaxOn = true">Submit</button>
+        <button class="btn btn-default" type="button"
+            ng-click="vm.closeModal()">Cancel</button>
+      </div>
+      <div ng-show="vm.ajaxOn" class="text-center">
+        <img src="modules/core/client/img/loader.gif">
+        Please wait..
+      </div>
+  </div>
+</form>
+</section>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Generate pdf</title>
+    <script src="{{protocol}}//{{host}}/plugins/charts.js"></script>
+    <script src="../../../core/client/css/fonts/AvenirNextLTPro-MediumCn.otf"></script>
+    <link rel="stylesheet" href="{{protocol}}//{{host}}/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="{{protocol}}//{{host}}/lib/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="{{protocol}}//{{host}}/modules/core/client/css/core.css">
+    <link rel="stylesheet" href="{{protocol}}//{{host}}/modules/core/client/css/override-medium-editor.css">
+</head>
+<body>
+{{ log 'Inside html' details }}
+<script>
+    var ctx = [];
+    var newData = {{{ details }}};
+    for (var i = 0; i < newData.length; i++) {
+        var cdiv = document.createElement("div");
+        cdiv.setAttribute('id', 'myChartDiv' + i);
+        if ((newData.length - 1) === i) {
+            cdiv.setAttribute('style',
+                'width:400px;max-height:1000px;page-break-after:auto;margin-left:20px;');
+        } else {
+            cdiv.setAttribute('style',
+                'width:400px;max-height:1000px;page-break-after:always;margin-left:20px;');
+        }
+        document.body.appendChild(cdiv);
+        document.getElementById('myChartDiv' + i).innerHTML = '<span class="f-18"        style="word-wrap: break-word;">' + newData[i].data.slideTitle + '</span><br/><span class="f-16" style="word-wrap: break-word;">' + newData[i].data.description + '</span><br/><span class="f-14" style="word-wrap: break-word;">' + newData[i].data.graphTitle + '</span></br><br>';
+        var canv = document.createElement("canvas");
+        canv.setAttribute('width', 400);
+        canv.setAttribute('height', 300);
+        canv.setAttribute('id', 'myChart' + i);
+        document.getElementById('myChartDiv' + i).appendChild(canv);
+        ctx[i] = document.getElementById('myChart' + i);
+    }
+    for (var i = 0; i < newData.length; i++) {
+        var myChart = new Chart(ctx[i], newData[i]);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<div layout="column" class="sideNavSection ng-scope layout-column absolute-top">
+  <div class="user-details user-sign-up">
+    <div class="p-l-50 p-r-50 p-t-30">
+      <div class="upper-navigation-header">
+        <font size="5" color="grey" ui-sref="surveys.distribute({ id: vm.survey._id })">Distribute</font>
+        <img src="../../../../../modules/core/client/img/insight-images/ic_arrow_low.png"  class="m-l-10" style="margin-bottom: 7px"/>
+        <font size="5" color="grey" class="m-l-10" ui-sref="lists.list({ id: vm.survey._id })">Lists</font>
+        <img src="../../../../../modules/core/client/img/insight-images/ic_arrow_low.png"  class="m-l-10" style="margin-bottom: 7px"/>
+        <font class="m-l-10" size="5" >{{ vm.list.name }}</font>
+      </div>
+      <div class="upper-sign-in m-auto">
+        <div class="container">
+          <div class="col-md-10 col-md-offset-1">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <div class="circle-decoration p-lr-distribute" ng-class="w-60-log">
+                  <div ui-sref="lists.edit({surveyId: vm.survey._id, listId: vm.list._id})" class="circle-one circle-background  text-center f-l sign-up-red">
+                    <span ng-show="vm.userForm.$invalid">1</span>
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_check.png" ng-hide="vm.userForm.$invalid" class="icon-checkmark p-relative" />
+                  </div>
+                  <hr class="custom-hr">
+                  <span class="circle-grey text-center f-l sign-up-red" ng-class="{'signup-red': vm.userForm.$valid == true}">2</span>
+                </div>
+                <div class="signup-page-heading m-auto" ng-class="">
+                  <span ui-sref="lists.edit({surveyId: vm.survey._id, listId: vm.list._id})" class="text-center f-l  sign-up-red f-16 l-s-2 f-aveinr-medium">
+                    List Details
+                  </span>
+                  <span class=" text-center f-r sign-up-grey f-16 l-s-2 f-aveinr-medium" ng-class="{'company-form': vm.userForm.$valid == true}">Import Respondents</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form name="csvUploadForm" novalidate>
+      <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="text-center csv-dottedbox m-b-110" name="csvDragDiv" cngf-pattern="'text/csv'" ngf-accept="'text/csv'" ngf-max-size="2MB" csv-type ngf-drop="vm.fileDragged($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event)" ng-model="vm.csv.file">
+              <img src="../../../../../modules/core/client/img/insight-images/ic_csv.png" class="img-center m-t-40" />
+              <p class="text-center grey-dark m-t-20 opacity-5">Drag and Drop CSV Files<br/>or upload one</p>
+              <div class="text-center ">
+                <button class="f-bold grey-transparent-button grey-dark opacity-5 p-10 w-20 m-t-30" ngf-select="vm.fileDragged($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event)" type="button" name="csvDragInput" cngf-pattern="'text/csv'" ngf-accept="'text/csv'" ngf-max-size="2MB" csv-type ng-model="vm.csv.file">
+                  Browse Computer
+                </button>
+              </div>
+              <!-- File name of CSV uploaded -->
+              <div class="csv-file-name light-blue p-t-15">{{ vm.csv.file.name }}</div>
+              <div class="errors text-center m-t-10">
+                <span class="p-5 alert alert-danger" ng-if="csvUploadForm.csvDragInput.$error.csvType || csvUploadForm.csvDragDiv.$error.csvType">
+                  Only CSV file is allowed to upload.
+                </span>
+                <span class="p-5 alert alert-danger" ng-if="csvUploadForm.csvDragInput.$error.maxSize || csvUploadForm.csvDragDiv.$error.maxSize">
+                  File size error. File size is greater than 2MB. Please upload file upto 2MB size
+                </span>
+              </div>
+            </div>
+        </div>
+      </div>
+      <nav class="dark-container layout dark-grey  navbar navbar-default pos-to-bottom" ui-view>
+        <div class="w-100">
+          <button class="w-14 blue-button white f-r p-t-8 p-b-8" ng-class="{'grey-click': !vm.csv.file}" ng-click="vm.goToColumnSelection()">Next</button>
+        </div>
+      </nav>
+    </form>
+  </div>
+</div>

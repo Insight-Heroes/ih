@@ -1,0 +1,114 @@
+.user-sign-in {
+    background-color: $lighter-grey;
+    a:hover {
+        text-decoration: none;
+    }
+    // .signin-header, .tag-pro {
+    //        font-family: 'AvenirNextLTPro-MediumCn';
+    //        color: $user-grey  !important;
+    //    }
+    .signin-header {
+        text-transform: uppercase;
+        letter-spacing: 0;
+        line-height: 1.6;
+        font-size: 22px;
+    }
+    .tag-pro {
+        padding-top: 10px;
+    }
+    .form-group{
+      margin-bottom: 0 !important;
+      padding-bottom: 24px;
+    }
+    .user-label {
+        font-family: 'AvenirNextLTPro-Regular';
+        letter-spacing: 0;
+        color: $user-dark !important;
+        font-size: 18px;
+        font-weight: 100;
+        line-height: 22px;
+        margin-bottom: 0;
+        padding-bottom: 8px;
+    }
+    .email-style {
+        font-size: 16px;
+        color: #000000;
+        font-family: 'AvenirNextLTPro-Regular';
+        opacity: 0.9;
+    }
+    .user-login,
+    .error-text,
+    .signup-text,
+    .resend,
+    .signup,
+    .forgot-password {
+        font-family: 'AvenirNextLTPro-Regular' !important;
+    }
+    .error-text,
+    .signup-text {
+        color: $dark-red;
+        font-size: 16px;
+    }
+    .box-style {
+        border: none;
+        margin: 0 0;
+        font-size: 16px;
+        letter-spacing: 0;
+        font-weight: 300;
+        height: 60px;
+    }
+    .resend,
+    .signup,
+    .forgot-password {
+        color: $user-grey;
+    }
+    .resend,
+    .forgot-password {
+        &:hover {
+            color: $dark-red;
+        }
+    }
+    .user-login-section {
+        a, button {
+            border: none;
+            border-radius: 4px;
+            color: #ffffff;
+            background-color: #C32026;
+        }
+        button {
+            padding: 13px;
+        }
+    }
+    .insight-logo {
+        text-align: center;
+    }
+    // .email-style::-webkit-input-placeholder {
+    //     font-family: 'AvenirNextLTPro-It';
+    //     color: $user-grey;
+    // }
+    .email-style:-ms-input-placeholder {
+        font-family: 'AvenirNextLTPro-It';
+        color: $user-grey;
+    }
+    .email-style:-moz-placeholder {
+        font-family: 'AvenirNextLTPro-It';
+        color: $user-grey;
+    }
+    .email-style::-moz-placeholder {
+        font-family: 'AvenirNextLTPro-It';
+        color: $user-grey;
+    }
+}
+.upload-fix {
+    position: absolute;
+    top: 17px;
+    right: 20px;
+}
+.password-forgot {
+    position: absolute;
+    top: 49px;
+    right: 30px;
+}
+.password-field{
+    padding-right: 80px;
+}

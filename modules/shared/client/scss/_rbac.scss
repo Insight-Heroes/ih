@@ -1,0 +1,11 @@
+.role-warrior .ui-user-menu, .role-hero .user-user, .role-hero .user-mainUser, .role-client .ui-user-menu {
+    display: none;
+}
+.role-warrior, .role-client {
+    .ui-create-project, .ui-edit-project {
+        display: none;
+    }
+}
+.role-warrior .ui-pricing-menu, .role-client .ui-pricing-menu, .role-hero .ui-pricing-menu, .role-gatherer .ui-pricing-menu {
+    display: none;
+}

@@ -1,0 +1,29 @@
+<div class="w-100 m-auto form-builder-option-block m-t-50 m-b-30">
+  <table class="matrix-preview">
+    <tr>
+      <th></th>
+      <th ng-repeat="c in vm.question.columns track by $index" class=" text-center">
+        <div class="white-button" ng-if="!c.text">
+          {{'Column'+($index+1)}}
+        </div>
+        <div class="white-button overflow-setting" ng-if="c.text">
+          {{c.text}}
+        </div>
+      </th>
+    </tr>
+    <tr ng-repeat="r in vm.question.rows track by $index">
+      <td class=" w-40 text-center">
+        <div class="white-button m-l-0 p-t-15" ng-if="!r.text">
+          {{'Row'+($index+1)}}
+        </div>
+        <div class="white-button m-l-0 p-t-15 overflow-setting" ng-if="r.text">
+          {{r.text}}
+        </div>
+      </td>
+      <td ng-repeat="c in vm.question.columns track by $index">
+        <input type="radio" name="radio{{$parent.$index}}" ng-show="vm.question.radioButtons" readonly />
+        <input type="checkbox" ng-show="!vm.question.radioButtons" />
+      </td>
+    </tr>
+  </table>
+</div>

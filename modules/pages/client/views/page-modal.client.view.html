@@ -1,0 +1,218 @@
+
+<div layout="column" class="form-questionnare" ng-init="bold = false; italic = false; underline = false">
+  <div class="row m-r-0 m-l-0 h-100">
+  <!-- Side Navigation-->
+  <div class=" col-md-3 md-sidenav-left  p-r-0 p-l-0 side-shadow">
+    <!-- Content -->
+    <section class="position-content-center form-builder section-left-scroll modal-background">
+      <form name="vm.questionForm"
+        novalidate>
+        <div class="modal-wrapper">
+          <h2 class="p-t-20 p-b-20 font-22 modal-background p-l-20 p-r-20">
+            {{ vm.defaultPages[vm.page.slug].title }}
+          </h2>
+          <ul class="tweak-pages p-0" show-errors>
+
+            <!-- Question title -->
+            <li class="header-nav w-100 p-20 click-toggle  modal-nav-bar">
+              Page Title
+            </li>
+
+            <!-- Title -->
+            <li>
+              <div class="enter-question-title" ng-model="vm.page.title" medium-editor name="title"
+                bind-options="{'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h2', 'h3', 'quote']}}" required>
+              </div>
+
+              <div ng-messages="vm.questionForm.title.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">
+                  Please enter pages title.
+                </p>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Description -->
+          <ul class="tweak-pages p-0" show-errors>
+            <li class="header-nav modal-nav-bar w-100 p-20 click-toggle border-bottom-style">
+              Description
+              <span class="f-r m-t-20-n">
+                 <md-switch aria-label="test" ng-model="vm.switches.description" class="md-warn">
+                 </md-switch>
+              </span>
+            </li>
+            <li ng-if="vm.switches.description">
+              <textarea class="outline-none p-l-10 p-t-10 form-builder-style-options"
+                placeholder="Enter your descriptive text here.."
+                ng-model="vm.page.description"
+                name="description"
+                required>
+              </textarea>
+              <div ng-messages="vm.questionForm.description.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">
+                  Please enter page description.
+                </p>
+              </div>
+            </li>
+
+            <!-- images module added by nitin -->
+            <li class="header-nav light-grey w-100 p-15 click-toggle">
+              Image
+            </li>
+
+              <li class="w-100 p-15 text-right" ng-repeat="img in vm.mediaFiles track by $index">
+                <!--<span class="m-r-10">
+                  {{ img.name }}
+                </span>-->
+                <button
+                    ngf-select
+                    type="button"
+                    class="red-button w-80 m-auto m-r-30"
+                    ngf-pattern="vm.whitelistExtensions.image.join(',')"
+                    ngf-accept="'image/*'"
+                    ngf-multiple="false"
+                    ng-model="img.file"
+                    name="img{{$index}}"
+                    ngf-change="vm.validateFile($file, $invalidFile, $index, img)"
+                    ng-show="!img.thumbUrl">
+                    Upload
+                </button>
+                <div class="p-relative d-in m-r-5 img-preview" ng-if="img.thumbUrl">
+                  <img
+                    ngf-thumbnail="img.thumbUrl">
+                  <div class="p-absolute clear-image-deprecated hide"
+                    ng-click="vm.clearImage(img)">
+                      x
+                  </div>
+                </div>
+                <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png"
+                    class="m-t-5"
+                    ng-show="img.thumbUrl"
+                    ng-click="vm.removeImage($index, img)"/>
+              </li>
+              <!-- end of images module added by nitin -->
+          </ul>
+
+        <!-- Save and Cancel buttons -->
+        <div class="p-t-20 p-b-20 m-auto w-100 callback-action">
+          <button class="grey-button w-40 m-l-20" type="button"
+            ng-click="vm.closeModal()">Cancel</button>
+          <button class="red-button w-40 m-l-15"
+            ng-show="!vm.ajaxOn"
+            ng-click="vm.savePage(vm.questionForm.$valid, vm.questionForm.$error)">Save</button>
+          <button class="grey-button w-40 m-l-15"
+            ng-show="vm.ajaxOn"
+            disabled="">
+            Saving...
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <!-- Preview Container-->
+  <div class="preview-container col-md-9 col-lg-9 col-sm-12 p-t-20 p-l-40 p-r-40">
+    <div class="form-buider-main-frame  text-center p-t-40"  ng-class="{unindentbox: vm.active == false, indentbox:vm.active == true}">
+      <div class="form-builder-questions clearfix">
+        <img ng-hide="vm.page.title" src="../../../../../modules/core/client/img/insight-images/ic_arrow_right.png" class="question-arrow-img">
+        <img ng-show="vm.page.title" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" class="question-arrow-img">
+        <div ng-hide="vm.page.title" class="question-title">
+          <p>'Enter your questions on the left to begin...'</p>
+        </div>
+        <div ng-show="vm.page.title" class="question-title opacity-1" ng-bind-html="vm.page.title">
+        </div>
+        <div ng-show="vm.state == true" class="font-32 grey-dark" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" ng-bind="vm.questions">
+        </div>
+      </div>
+      <div class="form-builder-description p-t-10"
+        ng-if="vm.switches.description">
+        <span class="f-italics grey-dark">
+          {{ vm.page.description || 'Enter your descriptive text using the textbox on the left' }}
+        </span>
+        <div ng-show="vm.state == true" class="font-30" ng-bind="vm.description">
+        </div>
+      </div>
+      <div class="m-auto form-builder-option-block">
+        <div
+          ng-if="file.thumbUrl"
+          class="v-top"
+          ng-class="{'p-20': !vm.question.alignVertically, 'w-100': vm.question.alignVertically}"
+          ng-repeat="file in vm.mediaFiles track by $index">
+          <div class="">
+            <img ng-src="{{file.thumbUrl}}" class="file-preview">
+          </div>
+        </div>
+      </div>
+
+      
+
+      <!-- Descriptive Text questions preview -->
+      <div class="w-100 p-t-20" ng-if="vm.question.questionType == 'descriptiveText'">
+        <textarea rows="6" class="w-100 p-20 b-r-4" readonly>Answer goes here..</textarea>
+      </div>
+
+      <!-- Picture Type Question Preview  -->
+      <div class="w-100 p-t-20" ng-if="vm.question.questionType == 'dummyPiture'">
+        <button  class="red-button w-80 m-auto m-r-30 ng-pristine ng-valid ng-empty ng-touched" type="button"  aria-hidden="false" aria-invalid="false" style="">
+          Upload
+        </button>
+      </div>
+
+      <!-- Rank Order question preview -->
+      <ng-include
+        src="'modules/questions/client/views/rank-order/preview.client.view.html'"
+        ng-if="vm.question.questionType == 'rankOrder'">
+      </ng-include>
+
+      <!-- Matrix question preview -->
+      <ng-include
+        src="'modules/questions/client/views/matrix/preview.client.view.html'"
+        ng-if="vm.question.questionType == 'matrix'">
+      </ng-include>
+
+      <!-- Date & Time question preview -->
+      <ng-include
+        src="'modules/questions/client/views/time-n-date/preview.client.view.html'"
+        ng-if="vm.question.questionType == 'timeAndDate'">
+      </ng-include>
+
+      <!-- Slider question preview -->
+      <ng-include
+        src="'modules/questions/client/views/slider/preview.client.view.html'"
+        ng-if="vm.question.questionType == 'slider'">
+      </ng-include>
+
+      <!-- Multichoice Question preview -->
+      <ng-include
+        src="'modules/questions/client/views/multichoice/preview.client.view.html'"
+        ng-if="vm.question.questionType == 'multiChoice'">
+      </ng-include>
+
+      <!-- Dropdown Question preview -->
+      <ng-include
+        src="'modules/questions/client/views/dropdown/preview.client.view.html'"
+        ng-if="vm.question.questionType == 'dropdown'">
+      </ng-include>
+
+      <!-- Pairing form preview -->
+      <ng-include
+        src="'modules/questions/client/views/pairing/preview.client.view.html'"
+        ng-if="vm.question.questionType == 'pairing'">
+      </ng-include>
+
+      <!-- Image Choice form preview -->
+      <ng-include
+        src="'modules/questions/client/views/imagechoice/preview.client.view.html'"
+        ng-if="vm.question.questionType == 'imageChoice'">
+      </ng-include>
+
+      <!-- Media question preview -->
+      <ng-include
+        src="'modules/questions/client/views/media/preview.client.view.html'"
+        ng-if="vm.question.questionType == 'media'">
+      </ng-include>
+
+    </div>
+  </div>
+ </div>
+</div>

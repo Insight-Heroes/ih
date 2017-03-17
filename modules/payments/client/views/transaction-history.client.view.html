@@ -1,0 +1,62 @@
+<div layout="column" class="sideNavSection  layout-column">
+    <div>
+        <div class="primary-white static-sidebar">
+            <ng-include ng-init="activeTab='payments'" src="'modules/shared/client/views/dashboard-sidebar.client.html'"></ng-include>
+        </div>
+        <div class="w-static-sidebar d-in">
+            <div class="container-fluid">
+                <!-- Payment list-->
+                <div class="p-l-50 p-r-50 db">
+                    <div class="f-aveinr">
+                        <span class="f-24"><span class="grey-dark opacity-6">
+                            </span>Transaction History</span>
+                    </div>
+                    <div class="f-aveinr">
+                        <div class="user-table">
+                            <div class="well" ng-if="vm.orderHistories && vm.orderHistories.length == 0">
+                                No Records found
+                            </div>
+                            <table class="user-table-border p-t-20 w-100 m-auto table-layout-fixed"
+                                ng-if="vm.orderHistories && vm.orderHistories.length > 0">
+                                <thead>
+                                    <tr>
+                                        <th class="align-left p-l-20">PAYMENT DATE</th>
+                                        <th class="align-left p-l-20">RENEWAL DATE</th>
+                                        <th>PLAN TYPE</th>
+                                        <th>AMOUNT PAID</th>
+                                        <th>RESPONDENT PURCHASED</th>
+                                        <th>SUBSCRIPTION STATUS</th>
+                                        <th>INVOICE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="oh in vm.orderHistories | orderBy:'-_id'">
+                                        <td class="word-break align-left">
+                                            {{ (oh.billingPeriodStartDate || oh.created) | date: 'dd-MMM-yyyy' }}
+                                        </td>
+                                        <td class="word-break align-left">
+                                            {{ vm.renewalDate(oh) }}
+                                        </td>
+                                        <td>
+                                            {{vm.plans[oh.planType].name}}
+                                        </td>
+                                        <td> {{ (oh.status == 'success') ? 
+                                          '$ ' + oh.amount : 'N/A' }}</td>
+                                        <td>{{ (oh.status == 'success') ? oh.numberOfRespondant : 
+                                        'N/A' }}</td>
+                                        <td>
+                                            {{ ((oh.status != 'success' && oh.planType == 'A') || (oh.planType != 'A')) ? oh.braintreeStatus : 'N/A' }}
+                                        </td>
+                                        <td>
+                                            <a href="/api/payments/{{oh._id}}/download-invoice" target="_self"
+                                            class="download-pdf cross-tab" ng-if="oh.status == 'success'"></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

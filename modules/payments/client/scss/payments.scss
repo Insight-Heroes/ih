@@ -1,0 +1,75 @@
+    .upgrade-theme {
+      padding: 10px 0;
+      border-style: solid;
+      border-color: #C32026;
+      border-width: 1px;
+      color: #C32026;
+    }
+    .yearly {
+       border-top-left-radius: 4px;
+       border-bottom-left-radius: 4px;
+    }
+    .add-ons {
+       border-top-right-radius: 4px;
+       border-bottom-right-radius: 4px;
+       border-left: none
+    }
+  .b-year {
+    border: none;
+    background-color: transparent;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    outline: none;
+    text-align: center;
+}
+.boxes-white{
+  background: white;
+  box-shadow: 0 12px 8px -6px rgba(0, 0, 0, 0.05);
+  padding: 30px 20px;
+  margin-bottom: 30px;
+}
+.payment-box-title{
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.payment-button-tab{
+  width: 100%;
+  color: #C32026;
+  font-weight: 600;
+  &.active{
+    background: #C32026;
+    color: white;
+  }
+}
+.plan-box{
+  padding: 20px;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+}
+.box-divider{
+  height: 1px;
+  width: 100%;
+  border-top: 1px solid lightgray;
+  margin-bottom: 10px;
+}
+.download-pdf {
+    background-image: url("../../../../../modules/core/client/img/analyse/ic_download_analyse.svg");
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: 7px 6px;
+    height: 39px;
+    padding: 0 19px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #d8d8d8;
+    top: 7px;
+    left: 5px;
+    display: inline-block;
+        &:hover {
+        background-image: url('../../../../../modules/core/client/img/analyse/ic_download_white.svg');
+        background-repeat: no-repeat;
+        background-position: 8px 7px;
+        background-color: #C32026;
+        }
+}

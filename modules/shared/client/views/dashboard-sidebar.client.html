@@ -1,0 +1,20 @@
+<section class="position-content-center">
+    <ul class="border-bottom-styling list-none p-t-90 p-l-0 dashboard-sidebar">
+        <li class="home m-b-60 p-0 text-center">
+            <img src="../../../../../modules/core/client/img/insight-images/ic_home_selected.png" ui-sref="dashboard" class="cursor-pointer" ng-show="activeTab=='dashboard'"  title="Dashboard" />
+            <img  class="cursor-pointer" src="../../../../../modules/core/client/img/insight-images/ic_home_deselect.png" ui-sref="dashboard" ng-show="activeTab!='dashboard'" title="Dashboard" />
+        </li>
+        <li class="user m-b-60 p-0 text-center ui-user-menu">
+            <img  src="../../../../../modules/core/client/img/insight-images/ic_users_selected.png" ui-sref="users.list" class="cursor-pointer" ng-show="activeTab=='users'" title="Users" />
+            <img src="../../../../../modules/core/client/img/insight-images/ic_users_deselected.png" ui-sref="users.list" class="cursor-pointer" ng-show="activeTab!='users'" title="Users" />
+        </li>
+        <li class="present m-b-60 p-0 text-center ui-present-menu">
+            <img  src="../../../../../modules/core/client/img/insight-images/ic_present_select.png" ui-sref="presentation.list" class="cursor-pointer" ng-show="activeTab=='presentation'" title="Present" />
+            <img src="../../../../../modules/core/client/img/insight-images/ic_present_deselect.png" ui-sref="presentation.list" class="cursor-pointer" ng-show="activeTab!='presentation'" title="Present" />
+        </li>
+        <li class="licence m-b-60 p-0 text-center ui-pricing-menu">
+            <img  src="../../../../../modules/core/client/img/insight-images/ic_licenses_selected.png" ui-sref="payments" class="cursor-pointer" ng-show="activeTab=='payments'" />
+            <img src="../../../../../modules/core/client/img/insight-images/ic_licenses_deselected.png" ui-sref="payments" class="cursor-pointer" ng-show="activeTab!='payments'"  />
+        </li>
+    </ul>
+</section>

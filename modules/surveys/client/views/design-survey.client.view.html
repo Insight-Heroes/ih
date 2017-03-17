@@ -1,0 +1,206 @@
+<ng-include ng-init="activeSurveyNav='build'"
+    src="'modules/shared/client/views/survey-navbar.client.html'">
+</ng-include>
+
+<div layout="column"  ng-cloak="" class="h-100 sideNavSection">
+
+  <div class="m-r-0 b-grey" id='sortable-container'>
+
+    <div class="primary-white side-shadow design-sidebar">
+
+      <!-- Side Navigation-->
+      <!-- Default Pages & Questions - Left Side bar-->
+      <section class="position-content-center">
+        <div class="sidebar-top">
+          <h2 class="p-t-13 f-22">Control Center</h2>
+          <p class="grey-dark p-b-10 opacity-6 m-t-10">Add in your pages and questions from the options given below.</p>
+
+          <ul class="tweak-pages p-0"
+              as-sortable="vm.defaultPageOptions"
+              data-ng-model="vm.defaultPages">
+
+            <!-- Left Side Container - Pages heading -->
+            <li class="header-nav light-grey w-100 p-10 click-toggle" ng-click="vm.togglePageQuestion('page')">
+              <img class="p-r-4 p-b-2" src="../../../../../modules/core/client/img/insight-images/ic_pages_red.png"/>
+              Pages
+              <span class="f-r ">
+                <i class="ion-android-arrow-dropdown  ion" ng-show="!vm.pageVisible"></i>
+                <i class="ion-android-arrow-dropup ion" ng-show="vm.pageVisible"></i>
+                <img class="f-r p-t-7 hide" src="../../../../../modules/core/client/img/insight-images/ic_drop_down.svg"/>
+              </span>
+            </li>
+            <!-- Left Side Container - Page Type list -->
+            <li ng-repeat="page in vm.defaultPages track by $index"
+                ng-hide="!vm.pageVisible"
+                as-sortable-item class="cursor-grab">
+              <div ng-bind="page.title"
+                as-sortable-item-handle class="dashboard-{{page.title}}"></div>
+            </li>
+
+          </ul>
+
+          <!-- Left Side Container - Questions heading -->
+          <li class="header-nav light-grey w-100 p-10 click-toggle" ng-click="vm.togglePageQuestion('question')">
+              <img class="p-r-4 p-b-2" src="../../../../../modules/core/client/img/insight-images/ic_questions.png"/>
+                Questions
+              <span class="f-r">
+                <i class="ion-android-arrow-dropdown ion" ng-show="!vm.questionVisible"></i>
+                <i class="ion-android-arrow-dropup ion" ng-show="vm.questionVisible"></i>
+                <img class="f-r p-t-7 vm.hidetogglePageQuestion(" src)/client/img/insight-images/ic_drop_down.svg"/>
+              </span>
+          </li>
+        </div>
+        <!-- Left Side Container - Question Type list -->
+        <div class="sidebar-bottom o-scroll" ng-hide="!vm.questionVisible">
+          <ul class="tweak-pages p-0 draggable-questions"
+              as-sortable="vm.defaultQuestionTypeOptions"
+              data-ng-model="vm.questionTypes">
+            <li ng-repeat="question in vm.questionTypes track by $index" class="cursor-grab"
+              as-sortable-item>
+              <div as-sortable-item-handle class="dashboard-{{question.title}}" ng-class="{'dashboard-date-time': question.title == 'Date/Time'}">
+                {{ ::question.title }}
+                <span class="grey-dark opacity-6" ng-if='question.subTitle'>
+                  {{ ::question.subTitle }}
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+
+    <!-- Center Container-->
+    <div class="w-design-sidebar">
+      <div class="Insight-container">
+
+        <!-- No pages/questions added by User. Intro to User for adding pages and questions -->
+        <div class="text-center p-t-50" ng-hide="vm.surveyHasPages() || vm.surveyHasQuestions()"  ng-if="vm.pages.length === 0 || vm.questions.length === 0">
+          <div class="start-page p-relative d-in">
+            <div class="insight-logo text-center">
+              <img  src= "../../../../../modules/core/client/img/insight-images/img_rocket.png"/>
+            </div>
+            <h1 class="l-s-1 text-center f-32 m-t-25">Get Started</h1>
+            <div class="p-relative arrow-link-parent">
+              <div class="p-absolute arrowlink"><img src="../../../../../modules/core/client/img/arrow-red.png"></div>
+            </div>
+            <div class="text-center d-i grey-dark f-18 opacity-5 m-b-15">Choose an option from the left, to add </br>a question! You can add pages too, to keep the users engaged.</div>
+            <div class="w-80 m-auto text-center p-t-10">
+              <button class="blue-button text-center white p-5">View our checklist for a perfect survey</button>
+            </div>
+          </div>
+        </div>
+
+      <p class="active-click m-l-70-p p-t-20 f-15 page-color" ng-if="vm.surveyHasPages() || vm.pages.length > 0">
+        PAGES
+      </p>
+      <p class="active-click m-l-70-p p-t-35 f-15 p-l-70" ng-if="!vm.surveyHasPages()">
+        PAGES
+        </p>
+        <ul class=" questions draggable-questions ui-pages"
+            as-sortable="vm.pagesListingOptions"
+            no-is-disabled="vm.survey.status !== 'draft'"
+            data-ng-model="vm.pages">
+          <li ng-if="!vm.surveyHasPages()"
+              as-sortable-item
+              ng-model="dummy1"
+              class="header-nav dummy-li welcome-theme">
+            Add welcome screen here
+          </li>
+          <li  id="question-drag"
+              ng-repeat="page in vm.pages track by $index"
+              as-sortable-item>
+              <div as-sortable-item-handle  class="dashboard-{{page.title}}">
+               <span class="section-count p-absolute">{{ $index+1 }}</span>
+                <div class="drag-questions-text">
+                  <icon class="icon-checked hide"></icon>
+                  <span>{{ ::vm.getPageType(page.slug) }} -
+                    <span ng-bind-html = "page.title" class="bindclass break-all"></span>
+                  <span>
+                </div>
+                <div class="drag-questions">
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_preview.svg" class='' ng-click="vm.editPage(page)"/>
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_delete.png" class='' ng-click="vm.deletePage(page, $index)"/>
+                </div>
+              </div>
+           </li>
+        </ul>
+
+        <p class="active-click m-l-70-p f-15" ng-if="vm.surveyHasQuestions() || vm.questions.length > 0">
+          QUESTIONS
+        </p>
+        <p class="active-click m-l-70-p f-15 p-l-70" ng-if="!vm.surveyHasQuestions()">
+        QUESTIONS
+        </p>
+        <ul class=" questions draggable-questions ui-questions p-b-70"
+            as-sortable="vm.questionListingOptions"
+            data-ng-model="vm.questions">
+          <li class="transparent p-relative questions dummy-li drag-theme"
+              as-sortable-item
+              ng-model="dummy2"
+              ng-if="!vm.surveyHasQuestions()" class="header-nav">
+            Drag and drop questions from the control center
+          </li>
+
+          <li id="question-drag"
+              ng-repeat="question in vm.questions track by $index"
+              as-sortable-item>
+              <div as-sortable-item-handle >
+                <span class="section-count p-absolute">{{ $index+1 }}</span>
+
+                <!-- Question Start -->
+                <div class="dashboard-{{question.questionType}} w-50 drag-questions-text" ng-if="question.modelName === 'question'" ng-class="{'dashboard-date-time': question.title == 'Date/Time'}">
+                  <span>{{ ::vm.getQuestionType(question.questionType) }} -
+                    <span ng-bind-html="question.title" class="bindclass break-all"></span>
+                  <span>
+                </div>
+                <div class="drag-questions" ng-if="question.modelName === 'question'">
+                    <div src="" title="logic-jump" class='logic-jump' ng-click="vm.openLogicJumps(question)" ng-mouseover="vm.jumpRelationQuestion(question, $index)" ng-mouseleave="vm.jumpRelationQuestionHide(question, $index)" ng-if="vm.questions.length > 1 && vm.typeArr.quesType.indexOf(question.questionType) > -1">er</div>
+
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_preview.svg" title="preview" class='' ng-click="vm.editQuestion(question)"/>
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_duplicate.svg" title="duplicate" class='duplicate-hover' ng-click="vm.copyQuestion(question)"/>
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_delete.png" title="delete" class='delete-hover' ng-click="vm.deleteQuestion(question, $index)"/>
+                </div>
+                <!-- Question End -->
+
+                <!-- Page Start -->
+                <div class="dashboard-{{question.title}} w-50 drag-questions-text" ng-if="question.modelName === 'page'">
+                  <span>{{ ::vm.getPageType(question.slug) }} -
+                    <span ng-bind-html = "question.title" class="bindclass"></span>
+                  <span>
+                </div>
+                <div class="drag-questions" ng-if="question.modelName === 'page'">
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_preview.svg" class='' ng-click="vm.editPage(question)"/>
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_delete.png" class='' ng-click="vm.deletePage(question, $index)"/>
+                </div>
+                <!-- Page End -->
+
+              </div>
+           </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="welcome-page-section hide">
+  <div class="welcome-active-resize">
+    <p>Pages</p>
+    <button class="welcome-active b-layout-welcome">
+      <icon class="icon-plus" ng-click= "vm.startPagehide()" ></icon>
+    </button>
+    <button class="p-l-10 w-100 b-layout-welcome text-left welcome-button active-w-90">
+      Welcome Page
+      <span class="group-icons f-r">
+        <icon class="icon-eye"></icon>
+        <icon class="icon-files-empty"></icon>
+        <icon class="icon-bin"></icon>
+      </span>
+    </button>
+  </div>
+  <div class="welcome-active-resize">
+    <p class="p-t-10">Questions</p>
+      <button class="welcome-active b-layout-welcome">1</button><button class="b-layout-welcome w-95 active-w-90 p-l-10 text-left "><icon class="icon-checked"></icon>Multiple Choice - Single</button>
+  </div>
+</div>
+

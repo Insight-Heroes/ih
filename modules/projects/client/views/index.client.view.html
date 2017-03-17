@@ -1,0 +1,205 @@
+<!--Static side bar-->
+<div class="project-container h-100">
+  <div class="project-side-nav">
+    <ul>
+      <li>
+        <icon class="icon-home  p-r-10" ng-click="vm.toggleProjectSideBar();"></icon>
+      </li>
+      <li>
+        <icon class="icon-copy  p-r-10" ng-click="vm.toggleProjectSideBar();"></icon>
+      </li>
+      <li>
+        <icon class="icon-book  p-r-10" ng-click="vm.toggleProjectSideBar();"></icon>
+      </li>
+      <li>
+        <icon class="icon-stats-dots  p-r-10"  ng-click="vm.toggleProjectSideBar();"></icon>
+      </li>
+    </ul>
+  </div>
+  <!-- Configurable side bar-->
+  <div class="project-layout-nav w-20" ng-class="{db: vm.active == true, dn: vm.active == false }">
+    <div class="project-block">
+      <h4 class="w-50 m-auto text-left grey">LAYOUT</h4>
+      <ul>
+        <li>
+          <icon class="icon-list2  p-r-10"></icon>
+          <span class="List View grey">List View</span>
+        </li>
+        <li>
+          <icon class="icon-grid  p-r-10"></icon>
+          <span class="List View grey">Grid View</span>
+        </li>
+      </ul>
+    </div>
+    <div class="project-block">
+      <h4  class="w-50 m-auto text-left">VIEW</h4>
+      <ul>
+        <li>
+          <icon class="icon-list2  p-r-10"></icon>
+          <span  class="grey">All</span>
+        </li>
+        <li>
+          <icon class="icon-grid2 p-r-10"></icon>
+          <span  class="grey">Active Projects</span>
+        </li>
+        <li>
+          <icon class="icon-grid2  p-r-10"></icon>
+          <span  class="grey">In Active projects</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Project Overview section-->
+  <!-- Container-->
+  <div class="project-container light-grey ">
+    <div class="w-80 m-auto  p-20 d-table ">
+      <div class="overview">
+        <div class="w-50 f-l">
+          <span class="f-20">Overview</span>
+          <p class="f-10 primary-grey" >Views all your projects here, and check the details of the project</p>
+        </div>
+        <div class="w-50 f-l">
+          <button class="project  dark-red white f-r">Create New Project</button>
+        </div>
+      </div>
+      <div class="project-container-blocks d-in w-100">
+        <div class=" project-inner-blocks white-b w-30 f-l">
+          <div class="project-inner-section">
+            <icon class="icon-stop2  p-r-10 stuff-1"></icon>
+            <span class="w-80 f-r">Titan Watch Project Customer Satisifaction</span>
+          </div>
+          <div class="project-inner-section">
+            <div>
+              <icon class="icon-primitive-dot stuff-3"></icon>
+              <span class="w-40">Trending:</span><span class="w-40">Increaseby 10.5%</span>
+            </div>
+            <div>
+              <span class="w-40 p-l-40">Started:</span><span calss="w-40">12 Aug, 2016</span>
+            </div>
+          </div>
+          <div class="">
+            <button>VIEW DETAILS</button>
+          </div>
+          <div class="p-t-20">
+            <ul class="project-icons">
+              <li>
+                <icon class="icon-stats-dots  p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-eye  p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-files-empty p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-bin p-r-10"></icon>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class=" project-inner-blocks white-b w-30 f-l">
+          <div class="project-inner-section">
+            <icon class="icon-stop2  p-r-10 stuff-1"></icon>
+            <span class="w-80 f-r">Titan Watch Project Customer Satisifaction</span>
+          </div>
+          <div class="project-inner-section">
+            <div>
+              <icon class="icon-primitive-dot stuff-3"></icon>
+              <span class="w-40">Trending:</span><span class="w-40">Increaseby 10.5%</span>
+            </div>
+            <div>
+              <span class="w-40 p-l-40">Started:</span><span calss="w-40">12 Aug, 2016</span>
+            </div>
+          </div>
+          <div class="">
+            <button>VIEW DETAILS</button>
+          </div>
+          <div class="p-t-20">
+            <ul class="project-icons">
+              <li>
+                <icon class="icon-stats-dots  p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-eye  p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-files-empty p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-bin p-r-10"></icon>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class=" project-inner-blocks white-b w-30 f-l">
+          <div class="project-inner-section">
+            <icon class="icon-stop2  p-r-10 stuff-1"></icon>
+            <span class="w-80 f-r">Titan Watch Project Customer Satisifaction</span>
+          </div>
+          <div class="project-inner-section">
+            <div>
+              <icon class="icon-primitive-dot stuff-3"></icon>
+              <span class="w-40">Trending:</span><span class="w-40">Increaseby 10.5%</span>
+            </div>
+            <div>
+              <span class="w-40 p-l-40">Started:</span><span calss="w-40">12 Aug, 2016</span>
+            </div>
+          </div>
+          <div class="">
+            <button>VIEW DETAILS</button>
+          </div>
+          <div class="p-t-20">
+            <ul class="project-icons">
+              <li>
+                <icon class="icon-stats-dots  p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-eye  p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-files-empty p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-bin p-r-10"></icon>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class=" project-inner-blocks white-b w-30 f-l">
+          <div class="project-inner-section">
+            <icon class="icon-stop2  p-r-10 stuff-1"></icon>
+            <span class="w-80 f-r">Titan Watch Project Customer Satisifaction</span>
+          </div>
+          <div class="project-inner-section">
+            <div>
+              <icon class="icon-primitive-dot stuff-3"></icon>
+              <span class="w-40">Trending:</span><span class="w-40">Increaseby 10.5%</span>
+            </div>
+            <div>
+              <span class="w-40 p-l-40">Started:</span><span calss="w-40">12 Aug, 2016</span>
+            </div>
+          </div>
+          <div class="">
+            <button>VIEW DETAILS</button>
+          </div>
+          <div class="p-t-20">
+            <ul class="project-icons">
+              <li>
+                <icon class="icon-stats-dots  p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-eye  p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-files-empty p-r-10"></icon>
+              </li>
+              <li>
+                <icon class="icon-bin p-r-10"></icon>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

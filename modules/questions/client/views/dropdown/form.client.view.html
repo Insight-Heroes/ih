@@ -1,0 +1,22 @@
+<ul class="tweak-pages p-0" show-errors>
+  <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle border-bottom-style">
+    Dropdown options(Comma Separated)
+  </li>
+  <li>
+    <textarea class="outline-none p-l-10 p-t-10 form-builder-style-options"
+      placeholder="Enter your descriptive text here.."
+      ng-model="vm.question.dropdownOptions"
+      name="dropdown"
+      dropdown-validation
+      ng-change="vm.formDropdownOptions()"
+      required></textarea>
+    <div ng-messages="vm.questionForm.dropdown.$error" role="alert">
+      <p class="help-block error-text" ng-message="required">
+        Please enter dropdown options.
+      </p>
+      <p class="help-block error-text" ng-message="dropdownValidation">
+        Dropdown should contain atleast 2 options
+      </p>
+    </div>
+  </li>
+</ul>

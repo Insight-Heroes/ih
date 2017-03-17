@@ -1,0 +1,82 @@
+<ul class="tweak-pages p-0">
+  <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle border-bottom-style m-b-20"
+      ng-if="vm.question.questionType == 'multiChoice'">
+    Choices
+  </li>
+  <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 m-b-20 click-toggle"
+    ng-if="vm.question.questionType == 'rankOrder'">
+    Entries
+<!--     <span class="f-r">
+      <icon class="ion-arrow-down-b"
+        ng-if="!vm.switches.choices"
+       >
+      </icon>
+      <icon class="ion-arrow-up-b"
+        ng-if="vm.switches.choices"
+       >
+      </icon>
+    </span> -->
+  </li>
+  <span ng-show="vm.switches.choices" class="hide-style">
+    <li class="p-b-20 p-t-0" ng-repeat="choice in vm.question.choices track by $index" show-errors>
+      <div class="hide">{{ name = 'choice' + $index }}</div>
+      <span class="w-5 m-r-5 d-in" ng-if="vm.question.questionType == 'multiChoice'">
+        {{ vm.numberToChars[$index] }}
+      </span>
+      <span class="w-5 m-r-5 d-in" ng-if="vm.question.questionType == 'rankOrder'">
+        {{ $index + 1 }}
+      </span>
+      <input type="text"
+          class="outline-none w-70 p-l-10 form-builder-style-options grey-dark"
+          placeholder="Enter Option {{ vm.question.questionType == 'rankOrder' ? ($index + 1) : vm.numberToChars[$index] }}"
+          ng-model="choice.text"
+          name="{{name}}"
+          required />
+        <img src="../../../../../modules/core/client/img/insight-images/ic_upload_logo.png"
+          ng-click="vm.addChoice($index)"
+          ng-hide="vm.question.choices.length > 25" class="outline-none m-l-10" />
+        <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png"
+          ng-click="vm.removeChoice($index)"
+          ng-hide="vm.question.choices.length < 3" class="outline-none m-l-3"/>
+      <div ng-messages="vm.questionForm[name].$error" role="alert">
+        <p class="help-block error-text" ng-message="required">
+          Please enter choice text.
+        </p>
+      </div>
+    </li>
+    <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle hide" ng-if="vm.question.questionType === 'multiChoice'">
+      Images
+    </li>
+    <li class="w-100 p-15 text-right hide" ng-repeat="img in vm.mediaFiles track by $index"
+      ng-if="vm.question.questionType === 'multiChoice'">
+      <span class="m-r-10">
+        {{ img.name }}
+      </span>
+      <button
+          ngf-select
+          class="red-button w-80 m-auto m-r-25"
+          type="button"
+          ngf-pattern="vm.whitelistExtensions.image.join(',')"
+          ngf-accept="'image/*'"
+          ngf-multiple="false"
+          ng-model="img.file"
+          name="img{{$index}}"
+          ngf-change="vm.validateFile($file, $invalidFile, $index, img)"
+          ng-hide="img.thumbUrl">
+          Upload
+      </button>
+      <div class="p-relative d-in m-r-5 img-preview" ng-if="img.thumbUrl">
+        <img
+          ngf-thumbnail="img.thumbUrl">
+        <div class="p-absolute clear-image-deprecated"
+          ng-click="vm.clearImage(img)">
+            x
+        </div>
+      </div>
+      <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png"
+        class="m-t-5"
+        ng-show="img.thumbUrl"
+        ng-click="vm.clearImage(img)"/>
+    </li>
+  </span>
+</ul>

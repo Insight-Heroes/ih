@@ -1,0 +1,33 @@
+<section class="create-project light-grey b-r-4">
+  <div class="top-section p-20">
+    <p class="modal-title f-aveinr f-24 text-center  d-in m-l-200 grey-dark">Share PDF via Email</p>
+    <img src="../../../../../modules/core/client/img/insight-images/ic_close.png" ng-click="vm.closeModal()" class="pull-right"/>
+  </div>
+  <!-- <div class="col-xs-offset-2 col-xs-8">
+    <div class="form-group">
+      <p class="modal-body f-aveinr f-18 text-center grey-dark">Enter email IDs, separated by commas.</p>
+    </div>
+  </div> -->
+  <form name="vm.sendpdf" ng-submit="vm.sendPdfToUser(vm.sendpdf)" class="signin"
+        novalidate autocomplete="off">
+    <div class="text-center form-group m-t-20">
+      <div class="col-md-8 p-r-10 col-md-offset-2 text-left m-b-5" show-errors>
+        <label class="form-label">Enter email address, separated by commas</label>
+
+        <input type="text" id="email" name="email" multipleEmails class="form-control box-style italic-style " ng-model="vm.email" placeholder="johndoe@xyz.com" lowercase>
+        <div ng-messages="vm.sendpdf.email.$error" role="alert">
+          <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+        </div>
+      </div>
+      <div class="col-md-8 p-r-10 col-md-offset-2 text-left">
+        <label>
+          <input type="checkbox" class="send-yourself" id="myself" name="myself" ng-model="vm.myself" />
+          Send a copy to me
+        </label>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <button type="submit" class="f-aveinr red-button-generic w-14 dark-red white w-40 p-10 m-t-10"  >Send</button>
+    </div>
+  </form>
+</section>

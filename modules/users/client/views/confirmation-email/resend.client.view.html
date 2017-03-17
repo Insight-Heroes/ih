@@ -1,0 +1,39 @@
+<div class="m-auto">
+  <div class="text-center">
+    <p class="p-t-60 m-b-100 m-auto">
+      <img src="../../../../../modules/core/client/img/insight-images/ih_logo_signin.png"/>
+    </p>
+    <h3 class="text-center gr-font m-b-40 f-22">RESEND ACCOUNT CONFIRMATION EMAIL</h3>
+  </div>
+  <div class="text-left">
+    <form name="vm.resendEmailForm" ng-submit="vm.resendConfirmationEmail(vm.resendEmailForm.$valid)" class="" novalidate autocomplete="off">
+      <fieldset>
+        <div class="w-40 m-auto">
+          <div class="form-group" show-errors>
+            <label for="email" class="form-label">Email</label>
+            <input type="text" id="email" name="email" class="form-control" ng-model="vm.credentials.email" placeholder="johndoe@xyz.com" lowercase required>
+            <div ng-messages="vm.resendEmailForm.email.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Email address is required.</p>
+              <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center form-group w-80 m-auto">
+          <button type="submit" class="f-aveinr h-50 red-button text-center">Submit</button>
+        </div>
+        <div ng-show="vm.error" class="text-center text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+        <div ng-show="vm.success" class="text-center text-success">
+          <strong ng-bind="vm.success"></strong>
+        </div>
+        <!-- <div class="text-center">
+          <a ui-sref="authentication.signin">Sign in</a>
+        </div>
+        <div class="text-center forgot-password">
+          <a ui-sref="password.forgot">Forgot your password?</a>
+        </div> -->
+      </fieldset>
+    </form>
+  </div>
+</div>

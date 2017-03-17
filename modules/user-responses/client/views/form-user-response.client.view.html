@@ -1,0 +1,458 @@
+<section>
+  <div class="user-responses-page-header">
+   <div class="p-l-20 p-r-20 clearfix">
+      <span class="user-response-img">
+        <img class="text-center"  src="{{vm.project.logo}}" ui-sref="dashboard"/>
+     </span>
+     <span class="exit-button" ng-click="vm.closeWindowPopup()">
+        Exit
+     </span>
+     <img src="../../../../../modules/core/client/img/insight-images/IH_logo_top.svg" class="tr-transform response-ih-logo text-center pull-right">
+     <p class="text-center t-capitalize white  f-18 p-t-15">{{vm.surveyName}}</p>
+   </div>
+  </div>
+  <div class="text-center dark-red-c m-t-200" ng-if="vm.subscriptionExpired"> <h1>This survey link is expired!</h1> </div>
+  <div class="survey-content" ng-if="!vm.subscriptionExpired">
+    <div class="scrollabe-content">
+
+      <!-- ######################### START NG-REPEAT ####################### -->
+      <div class="" ng-repeat="(key, q) in vm.allQuestions"> <!-- ng-if="vm.startSurvey" -->
+        <div class="container-fluid question-top-wrapper">
+
+            <!-- ############   Welcome page   ###################### -->
+            <div class="page-header text-center" ng-if="q.questionType === 'pages' && q.slug == 'welcome'" ng-class="{ currentQuestion: vm.showkey == key }">
+              <div class="col-sm-8 col-sm-offset-2">
+                  <div ng-bind-html="q.title" class="font-24"> {{q.title}} </div>
+                  <p class="m-t-30 m-b-0"> {{q.description}} </p>
+                  <div ng-repeat="file in q.mediaFiles track by $index" class="m-t-30">
+                    <img ng-src="{{file.url}}" class="file-preview" />
+                  </div>
+                  <div class="m-t-30">
+                  <button class="grey-button" ng-click="vm.slideQuestions('N', vm.allQuestions[vm.showkey].questionType)">Begin Survey</button>
+                  </div>
+              </div>
+            </div>
+            <!-- ############   Welcome page End  ###################### -->
+
+            <!-- ############   custom page not in question page   ###################### -->
+            <div class="page-header text-center" ng-if="q.questionType === 'pages' && q.slug == 'customPage' && q.inQuestions === false" ng-class="{ currentQuestion: vm.showkey == key }">
+                <p ng-bind-html="q.title" class="font-24"> {{q.title}} </p>
+                <p ng-repeat="file in q.mediaFiles track by $index">
+                  <img ng-src="{{file.url}}" class="file-preview" />
+                </p>
+                <p> {{q.description}} </p>
+            </div>
+            <!-- ############   custom page not in question page  ###################### -->
+
+            <!-- ############   custom page in question page   ###################### -->
+            <div class="page-header text-center" ng-if="q.questionType === 'pages' && q.slug == 'customPage' && q.inQuestions === true" ng-class="{ currentQuestion: vm.showkey == key }" ng-init="vm.fetchResponse(key);">
+                <div ng-bind-html="q.title" class="font-24"> {{q.title}} </div>
+                <p class="m-t-30 m-b-0"> {{q.description}} </p>
+                <p ng-repeat="file in q.mediaFiles track by $index" class="m-t-30">
+                  <img ng-src="{{file.url}}" class="file-preview" />
+                </p>
+            </div>
+            <!-- ############   custom not in question page  ###################### -->
+
+            <!-- #################### Multichoice ############################# -->
+            <div class="col-sm-8 col-sm-offset-2 p-t-40" ng-if="q.questionType === 'multiChoice'" ng-class="{currentQuestion: vm.showkey == key}" ng-init="vm.fetchResponse(key);" ng-init="vm.fetchResponse(key);">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                </div>
+              </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+              <div class="flex-container m-t-20">
+                <div class="flex-item m-10" ng-repeat="choice in q.choices track by $index" ng-class="{'w-100': q.alignVertically, 'w-50': !q.alignVertically}" >
+                  <div class="formbuilder-a p-relative outline-none h-100" ng-class="{'red-background': choice.toggle[$index], 'notified': q.toggle[$index]}" ng-click="vm.toggleChoiceSelect($index, choice);">
+                    <div class="choice-dom choice-dom-full-width">
+                      <div ng-class="{'notified': q.toggle[$index]}" class="question-number-block">
+                        {{ vm.numberToChars[$index] }}
+                      </div>
+                      <div ng-bind="choice.text" class="font-15 grey-dark overflow-setting ng-binding p-t-15 p-b-15" ng-class="{'notified': q.toggle[$index], 'grey-dark': !q.toggle[$index]}" ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- #################### Multichoice ###################### -->
+            <!-- ############### Image choice ################# -->
+            <div class="col-sm-8 col-sm-offset-2 p-t-40" ng-if="q.questionType === 'imageChoice'" ng-class="{ currentQuestion: vm.showkey == key }" ng-init="vm.fetchResponse(key);">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                  <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                  <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                  <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                  </div>
+               </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+              <div class="flex-container m-t-30">
+                <div class="flex-item"
+                  ng-class="{'': !q.alignVertically, 'w-100': q.alignVertically, 'checked': q.toggleImg[$index]}"
+                  ng-repeat="file in q.mediaFiles track by $index">
+                  <div class="img-choice-wrapper" ng-click="vm.toggleFileSelect($index, file);">
+                    <div class="table-cell"
+                      ng-class="{'': !q.alignVertically, 'w-100': q.alignVertically, 'checked': q.toggleImg[$index]}">
+                      <div class="option-a">
+                        <span class="dark-red-c">{{ $index + 1 }}</span>
+                      </div>
+                      <span class="triangle"><i class="ion-checkmark-round"></i></span>
+                      <img ng-src="{{file.url}}" class="b-r-4 file-preview"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ############### Image end ################# -->
+
+            <!-- ############### Media ################# -->
+            <div class="col-sm-8 col-sm-offset-2 p-t-40 form-builder-option-block"
+              ng-if="q.questionType === 'media'"
+              ng-readonly="vm.previousKey == key"
+              ng-class="{ currentQuestion: vm.showkey == key }" ng-init="vm.fetchResponse(key);">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                </div>
+              </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+              <div class="v-top f-l"
+                ng-class="{'p-r-20 p-b-20 w-50 d-in': !q.alignVertically, 'w-100': q.alignVertically}"
+                ng-repeat="file in q.mediaFiles track by $index">
+                <div ng-if="file.url">
+                  <img ng-src="{{file.url}}" class="b-r-4 file-preview" ng-if="q.mediaImgShow">
+                  <video id="video_{{key}}" class="w-500" ng-if="!q.mediaImgShow" controls><source src="{{trustSrc(srcAudVid.src)}}"></video>
+                </div>
+              </div>
+              <div ng-init="vm.generatePreview(q.videoUrl)" ng-if="q.videoUrl">
+                <iframe src="{{trustSrc(previewVideo.src)}}" width="432px" height="226px" frameBorder="0" scrolling="no" allowfullscreen class="video" ></iframe>
+              </div>
+            </div>
+            <!-- ############### media end ################# -->
+
+            <!-- ############### Descriptive ################# -->
+            <div class="col-sm-8 col-sm-offset-2 p-t-40"
+              ng-if="q.questionType === 'descriptiveText'" ng-class="{ currentQuestion: vm.showkey == key }" ng-init="vm.fetchResponse(key);">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                </div>
+              </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+
+              <textarea rows="6" class="form-control m-b-20 m-t-30" ng-model="q.resDescription" placeholder="Answer goes here..">{{q.resDescription}}</textarea>
+            </div>
+            <!-- ############### descriptive end ################# -->
+
+            <!-- ############### Dropdown ################# -->
+            <div class="col-sm-8 col-sm-offset-2 p-t-40" ng-if="q.questionType === 'dropdown'" ng-class="{ currentQuestion: vm.showkey == key }" ng-init="vm.fetchResponse(key);">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                </div>
+              </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+
+              <div class="select-box-wrapper d-in m-t-30 m-b-20">
+                <select is-disabled="vm.previousKey == key" ng-model="q.dropChoice" ng-options="value.text for (key , value) in q.choices" class="form-control">
+                  <option value=''>Select Answer</option>
+                </select>
+              </div>
+            </div>
+            <!-- ############### Dropdown end ################# -->
+
+            <!-- ############### Picture ################# -->
+            <div class="col-sm-8 col-sm-offset-2 p-t-40" ng-if="q.questionType === 'picture'" ng-repeat="img in vm.mediaFiles[key] track by $index" ng-class="{ currentQuestion: vm.showkey == key }" ng-init="vm.fetchResponse(key);">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                </div>
+              </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+              <div class="b-r-4 file-preview" ng-if="img.thumbUrl">
+                <img ngf-thumbnail="img.thumbUrl" class="m-t-10 b-r-4 file-preview" />
+                <div class="p-absolute clear-image-deprecated hide"
+                  ng-click="vm.clearImage(img)">
+                    x
+                </div>
+              </div>
+              <div class="p-b-20 text-center m-t-30">
+                <button name="img4" ng-model="img.file" ngf-multiple="false" ngf-accept="'image/*'" ngf-pattern="vm.whitelistExtensions.image.join(',')" class="red-button m-auto ng-pristine ng-valid ng-empty ng-touched" type="button" ngf-select="" aria-hidden="false" aria-invalid="false" style="" ngf-change="vm.validateFile($file, $invalidFile, $index, img)">
+                    Upload
+                </button>
+              </div>
+            </div>
+            <!-- ############### Picture end ################# -->
+
+            <!-- ############### Matrix ################# -->
+
+            <div class="col-sm-8 col-sm-offset-2 p-t-40" ng-if="q.questionType === 'matrix'" ng-class="{ currentQuestion: vm.showkey == key }" ng-init="vm.fetchResponse(key);">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                </div>
+              </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+              <table class="matrix-preview text-center m-t-30 m-b-20">
+                <tr>
+                  <th></th>
+                  <th ng-repeat="(hKey, c) in q.columns" class="text-center">
+                    <div class="overflow-setting white-button p-r-20 p-l-20" ng-if="!c.text">
+                      {{'Column'+(hKey+1)}}
+                    </div>
+                    <div class="overflow-setting white-button p-r-20 p-l-20" ng-if="c.text">
+                      {{c.text}}
+                    </div>
+                  </th>
+                </tr>
+                <tr ng-repeat="(rKey, r) in q.rows">
+                  <td class="text-center">
+                    <div class="overflow-setting white-button white-button p-r-30 p-l-30" ng-if="!r.text">
+                      {{'Row'+(rKey+1)}}
+                    </div>
+                    <div class="overflow-setting white-button white-button p-r-30 p-l-30" ng-if="r.text">
+                      {{r.text}}
+                    </div>
+                  </td>
+                  <td ng-repeat="(cKey, c) in q.columns">
+                <input type="radio" name="vm.radioMatrix{{rKey}}" value="true" ng-show="q.radioButtons" ng-model="q.matrix[rKey][cKey]" ng-change="vm.toggleMatrix(rKey, cKey)"/>
+
+                <input type="checkbox" ng-disabled="vm.previousKey == key" ng-model="q.matrix[rKey][cKey]" ng-if="!q.radioButtons" name="vm.radioMatrix[rKey][cKey]" ng-change="vm.toggleMatrix(rKey, cKey)"/>
+
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- ############### Matrix end ################# -->
+
+            <!-- ############### Slider ################# -->
+            <div class="col-sm-8 col-sm-offset-2 p-t-40" ng-if="q.questionType === 'slider'" ng-class="{ currentQuestion: vm.showkey == key }" ng-init="vm.fetchResponse(key);">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                </div>
+              </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+              <div class="slider-ui" ng-if="q.choices.length">
+                <rzslider
+                  rz-slider-model="vm.sliderConfig.value"
+                  rz-slider-options="vm.sliderConfig.options">
+                </rzslider>
+              </div>
+            </div>
+            <!-- ############### Slider end ################# -->
+
+            <!-- ############### Rank Order ################# -->
+            <div class="col-sm-8 col-sm-offset-2 p-t-40"
+              ng-if="q.questionType === 'rankOrder'" ng-class="{ currentQuestion: vm.showkey == key }" ng-init="vm.fetchResponse(key);">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                </div>
+              </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+              <div class="row">
+                <div class="col-sm-5 m-t-30">
+                  <ul class="user-responses-form p-0"
+                    as-sortable="vm.answerListingOptions"
+                    ng-model="q.choices" is-disabled="vm.previousKey == key">
+                    <li class="m-b-20" ng-repeat="choice in q.choices | orderBy:q.choices"
+                        as-sortable-item>
+                      <div as-sortable-item-handle>
+                        <div class="formbuilder-a p-relative white-button">
+                          <div class="p-t-15 choice-dom">
+                            <div class="question-number-block ng-binding">{{ $index + 1 }}</div>
+                            <p class="font-15 grey-dark overflow-setting w-100 p-l-60 text-left p-r-10"
+                                ng-bind="choice.text" ></p>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- ############### Rank Order ################# -->
+
+
+
+            <!-- ############### Pairing ################# -->
+
+            <div class="col-sm-8 col-sm-offset-2 p-t-40 form-questionnare" ng-if="q.questionType === 'pairing'" ng-class="{ currentQuestion: vm.showkey == key }">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                </div>
+              </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+              <div class="m-t-30 form-buider-main-frame">
+                <div class="flex-container"
+                  ng-repeat="i in vm.getArrayCount(q.leftChoices, q.rightChoices) track by $index" ng-init="vm.pairSelStorage(q);">
+                  <!-- Left box -->
+                  <div class="flex-item poi" ng-if="q.leftChoices[$index]" ng-class="{ test{{q.leftChoices[$index].customId}}: q.leftChoices[$index].selected }">
+                    <label for="left{{$index}}" class="w-100 m-b-0 h-100">
+                      <div class="formbuilder-a p-relative white-button adding">
+                        <input type="checkbox" ng-init="choice.selected=false" id="left{{$index}}" ng-click="vm.selectionQuestionLeftSide(q.leftChoices[$index], $index)" hidden ng-model="q.leftChoices[$index].selected">
+                        <div class="d-in choice-dom">
+                          <div class="question-number-block">{{$index+1}}</div>
+                          <!-- <div class="option-a">
+                            <span class="dark-red-c"> {{ $index + 1 }}</span>
+                          </div> -->
+                          <span class="font-15 grey-dark overflow-setting p-t-15">
+                            {{ q.leftChoices[$index].text }}
+                          </span>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                  <!-- Right Box -->
+                  <div class="flex-item visibilityHidden" ng-if="!q.leftChoices[$index]"></div>
+                  <div class="flex-item added white-button outline-none" ng-if="q.rightChoices[$index]" ng-class="{ test{{q.rightChoices[$index].customId}}: q.rightChoices[$index].selected }">
+                    <label for="right{{$index}}" class="m-b-0 w-100 h-100">
+                      <div class="formbuilder-a p-relative">
+                        <input type="checkbox" id="right{{$index}}"
+                          ng-init="choice.selected=false"
+                          ng-click="vm.selectionQuestionRightSide(q.rightChoices[$index], $index)" hidden ng-model="q.rightChoices[$index].selected">
+                        <div class="d-in choice-dom">
+                          <div class="question-number-block">{{$index+1}}</div>
+                          <span class="font-15 grey-dark overflow-setting p-t-15">
+                          {{ q.rightChoices[$index].text }}
+                          </span>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ############### Pairing End ################# -->
+
+            <!-- ############### Time & Date ################# -->
+            <div class="col-sm-8 col-sm-offset-2 p-t-40" ng-if="q.questionType === 'timeAndDate'" ng-class="{ currentQuestion: vm.showkey == key }" ng-init="vm.fetchResponse(key);">
+              <div class="disable-click"></div>
+              <div class="form-builder-questions clearfix">
+                <img class="question-arrow-img" src="../../../../../modules/core/client/img/insight-images/ic_arrow_full2x.png" />
+                <div ng-bind-html="q.title" class="question-title opacity-1" aria-hidden="false" style="">{{q.title}}</div>
+                <div ng-bind="vm.allQuestions" ng-class="{'bold': bold, 'italic': italic, 'underline': underline}" class="font-32 grey-dark ng-binding ng-hide" ng-show="vm.state == true"  style="">
+                </div>
+              </div>
+              <div class="m-t-30 f-italics grey-dark word-wrap" ng-if="q.description">
+                {{q.description}}
+              </div>
+              <div class="timepicker-wrapper clearfix m-t-30">
+                <div class="m-r-40 m-t-20 pull-left" ng-if="q.timeDate.type === 'Date' || q.timeDate.type === 'TimeAndDate'">
+                  <div class="xtimepicker-wrapper">
+                  <md-datepicker ng-init="vm.createDateInstance(q)" ng-model="q.ansDate" ng-disabled="vm.previousKey == key"  md-placeholder="Enter date"></md-datepicker>
+                  </div>
+                </div>
+                <div
+                  class='w-50 hide text-center'>
+                  <div class="formbuilder-a p-relative m-t-20" is-disabled="vm.previousKey == key" >
+                    <div class="d-in">
+                      <div class="option-a">
+                        <span class="dark-red-c">{{ $index + 1 }}</span>
+                      </div>
+                      <span class="font-15 grey-dark"
+                        ng-bind="choice.text">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="m-auto pull-left"
+                    ng-if="q.timeDate.type === 'Time' || q.timeDate.type === 'TimeAndDate'">
+                  <div class="xtimepicker-wrapper">
+                    <div ng-disabled="vm.previousKey == key" ng-init="vm.createDateInstance(q)"  uib-timepicker
+                      ng-model="q.ansTime"
+                      hour-step="q.timeDate.timeOptions.hourStep"
+                      minute-step="q.timeDate.timeOptions.minuteStep"
+                      show-meridian="q.timeDate.timeOptions.amPm">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ############### Time & Date End################# -->
+
+            <!-- ############   custom page in question page   ###################### -->
+            <div class="page-header text-center" ng-if="q.questionType === 'pages' && q.slug == 'thankYou' && vm.exceptWelThank.length === vm.lastcnt" ng-class="{ currentQuestion: vm.showkey === key }" >
+              <div class="col-sm-8 col-sm-offset-2">
+                <div ng-if="q.title">
+                  <p ng-bind-html="q.title" class="font-24"> {{q.title}} </p>
+                  <p> {{q.description}} </p>
+                  <p ng-repeat="file in q.mediaFiles track by $index">
+                    <img ng-src="{{file.url}}" class="file-preview" />
+                  </p>
+                </div>
+                <div class="page-header text-center">
+                  <p> Go to <a href="/">Home Page</a></p>
+                  <p ng-if="vm.closewindow">
+                    <button ng-click="vm.closeWindowPopup()"> Close Preview</button>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- ############   custom not in question page  ###################### -->
+
+        </div>
+      </div>
+      <!-- ######################### END OF NG-REPEAT ####################### -->
+
+    </div>
+  </div>
+
+      <!-- ####### NEXT/PREV BUTTONS ####### -->
+      <div class="user-responses-page-footer row p-t-0" ng-if="!vm.subscriptionExpired">
+        <div class="col-md-9 col-xs-9">
+          <span class="grey-dark pull-right w-30 p-t-5" ng-if="!vm.endSurvey">{{vm.showkey}} / {{vm.max}} Answered</span>
+          <uib-progressbar max="vm.max" value="dynamic" ng-if="!vm.endSurvey" ><span style="color:white; white-space:nowrap;"></span></uib-progressbar>
+        </div>
+        <div class="col-md-3 col-xs-3 p-t-20 p-r-5">
+          <p class="di">
+            <button class="grey-button w-10" ng-click="vm.slideQuestions('N', vm.allQuestions[vm.showkey].questionType)" ng-disabled = "vm.endSurvey"><i class="icon-arrow-down"></i></button>
+            <button class="grey-button w-10" ng-click="vm.slideQuestions('P')"  ng-disabled = "vm.endSurvey || vm.showkey === 0""><i class="icon-arrow-up" ></i></button>
+          </p>
+          </div>
+       <!-- <p ng-if="vm.showkey > 0 && vm.showkey <= (vm.exceptWelThank.length - 1)"> {{vm.showkey}} of {{vm.exceptWelThank.length - 1}} </p> -->
+      </div>
+      <!-- ####### NEXT/PREV BUTTONS ####### -->
+</section>

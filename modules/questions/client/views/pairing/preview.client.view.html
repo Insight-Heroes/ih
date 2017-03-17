@@ -1,0 +1,32 @@
+<!-- Pairing questions preview -->
+<div class="w-100 form-builder-option-block m-t-10 p-r-200">
+  <div class="clearfix" >
+    <div class="flex-container" ng-repeat="i in vm.choiceCounts track by $index">
+      <div class="flex-item" ng-if="vm.question.leftChoices[$index]">
+        <div class="formbuilder-a p-relative white-button">
+          <div class="d-in choice-dom">
+            <div class="option-a">
+              <span class="dark-red-c"> {{ $index + 1 }}</span>
+            </div>
+            <span class="font-15 grey-dark overflow-setting p-t-15" ng-bind="vm.question.leftChoices[$index].text">
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item visibilityHidden" ng-if="!vm.question.leftChoices[$index]"></div>
+      <div class="flex-item" ng-if="vm.question.rightChoices[$index]">
+        <div class="formbuilder-a p-relative white-button">
+          <div class="d-in choice-dom">
+            <div class="option-a">
+              <span class="dark-red-c"> {{ $index + 1 }}</span>
+            </div>
+            <span class="font-15 grey-dark overflow-setting p-t-15" 
+              ng-bind="vm.question.rightChoices[$index].text">
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

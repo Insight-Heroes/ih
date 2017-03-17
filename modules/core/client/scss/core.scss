@@ -1,0 +1,39 @@
+@import 'base';
+@import 'myfontastic';
+@import 'left-navbar';
+@import 'navbar';
+@import 'toaster';
+@import 'loading-bar';
+@import 'override-medium-editor.scss';
+@import '../../../surveys/client/scss/survey';
+@import '../../../users/client/scss/signin';
+@import '../../../users/client/scss/signup';
+@import '../../../projects/client/scss/_project.scss';
+@import '../../../users/client/scss/userDetails';
+@import '../../../user-responses/client/scss/_userResponses.scss';
+@import '../../../shared/client/scss/rbac';
+@import '../../../presentation/client/scss/_presentation.scss';
+@import '../../../questions/client/scss/question-form';
+@import 'ionicons';
+@import '../../../analysis/client/scss/analysis';
+@import '../../../payments/client/scss/payments';
+
+[ng\:cloak],
+[ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+.error-text {
+  display: none;
+}
+.has-error .help-block.error-text {
+  display: block;
+}
+.has-error .help-inline.error-text {
+  display: inline;
+}
+.rzslider .rz-ticks .rz-tick {
+  padding: 0 !important;
+}

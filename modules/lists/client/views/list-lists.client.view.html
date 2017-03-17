@@ -1,0 +1,49 @@
+<div class="absolute-top">
+  <ng-include ng-init="activeSurveyNav='distribute'" src="'modules/shared/client/views/survey-navbar.client.html'">
+  </ng-include>
+  <!-- Side Navigation-->
+  <div class="p-l-50 p-r-50 p-t-30">
+    <div class="f-aveinr p-b-30 sdfdsf">
+      <span class="f-24"><span class="grey-dark opacity-6" ui-sref="surveys.distribute({ id: vm.survey._id })">Distribute</span>&nbsp;<img src="../../../../../modules/core/client/img/insight-images/ic_arrow_low.png" />&nbsp; Lists</span>
+      <button class="p-t-10 p-b-10 f-r blue-button white w-15 pull-right" type="button" ui-sref="lists.create({surveyId: vm.survey._id})" ng-if="vm.lists.length">Create List</button>
+    </div>
+    <div class="f-aveinr distribute-rectangle m-auto primary-white" ng-if="vm.lists.$resolved && !vm.lists.length">
+      <p class="p-20 nav-bar text-center">LISTS</p>
+      <img src="../../../../../modules/core/client/img/insight-images/ic_lists_empty.png" class="img-center m-t-15">
+      <div align="center" class="grey-dark  f-aveinr f-18 m-t-10 opacity-5"> No list created yet! Create your first list
+        </br>
+        and begin distributing
+      </div>
+      <div class="text-center p-b-20">
+        <button class="blue-button white w-20 p-b-10 m-t-30" type="button" ui-sref="lists.create({surveyId: vm.survey._id})">Create List</button>
+      </div>
+    </div>
+    <div class="f-aveinr" ng-if="vm.lists.$resolved && vm.lists.length">
+      <div class="user-table">
+        <table class="user-table-border p-t-20 w-100 m-auto table-layout-fixed">
+          <thead>
+            <tr>
+              <th width="20%" class="align-left p-l-20">LIST NAME</th>
+              <th>NUMBER OF RESPONDENTS</th>
+              <th>CREATED ON </th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="list in vm.lists">
+              <td class="word-break align-left" ng-bind="list.name"></td>
+              <td ng-bind="list.contactCount"></td>
+              <td ng-bind="list.created | date:'mediumDate'"></td>
+              <td>
+
+                <button class="white grey-button-table b-none b-r-4 p-10 m-r-10" ui-sref="lists.addContacts({listId: list._id, surveyId: vm.survey._id})">Upload</button>
+                <button class="white grey-button-table b-none b-r-4 p-10 m-r-10" ui-sref="lists.edit({listId: list._id, surveyId: vm.survey._id})">Edit</button>
+                <button class="white grey-button-table b-none b-r-4 p-10" ng-click="vm.delete(list, $event)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

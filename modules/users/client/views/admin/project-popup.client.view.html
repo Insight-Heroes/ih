@@ -1,0 +1,50 @@
+<div class="h-100 create-survey light-grey b-r-4">
+    <!-- Header section -->
+    <div class="top-section p-10">
+        <p class="col-md-11 p-l-55 text-center m-t-10 f-aveinr f-20">
+            Assign to User
+        </p>
+        <img src="../../../../../modules/core/client/img/insight-images/ic_close.png" ng-click="vm.closeModal()" class="p-t-20 pull-right set-margin" />
+    </div>
+    <!-- Middle body -->
+    <div class="main-container col-md-12">
+        <!-- First Step - Project Assign -->
+        <div class="user-table">
+            <div class="p-relative col-md-12 f-aveinr m-t-15 m-b-20">
+              <span class="pull-left f-14 m-t-15 grey-dark f-w-600 opacity-6">PROJECT LIST</span>
+              <div class="search-field col-md-4">
+                <i class="ion-search"></i>
+                <input data-ng-model="searchTexts" class="search-model form-control" placeholder="Search for projects" ng-keyup="vm.changedTable()" />
+              </div>
+            </div>
+            <!--ng-blur="vm.changedTableOut()"-->
+            <div class="d-in col-md-12 p-l-0 p-r-0 set-max o-auto d-in">
+                <md-radio-group ng-model="vm.selectedProject">
+                  <table class="user-table-height user-table-border f-aveinr col-md-12 m-auto o-y-auto user-table-survey">
+                      <thead>
+                          <tr>
+                            <th class="f-14 f-b">PROJECT NAME</th>
+                            <th class="f-14 f-b">CREATED ON </th>
+                            <th class="f-14 f-b">RESPONDENTS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="project in vm.projects | filter: {name: searchTexts}">
+                            <td class="text-left">
+                              <md-radio-button class="d-b f-l md-primary" value="{{ project._id }}"></md-radio-button>
+                              <p class="overflow-setting-survey">{{ ::project.name }}</p>
+                            </td>
+                            <td> {{ ::project.created | date:'d MMM, yyyy' }} </td>
+                            <td>{{ ::project.publishedCnt }}</td>
+                        </tr>
+                  </tbody>
+                 </table>
+              </md-radio-group>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 m-r-20 p-absolute b-0 l-0 h-50 p-r-30">
+    <button type="submit" class="col-md-4 f-r red-button b-r-2 f-12" ng-click="vm.assignProject()">ASSIGN</button>
+</div>
+

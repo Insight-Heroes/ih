@@ -1,0 +1,328 @@
+  .user-sign-up {
+      .user-name-row{
+        width: calc(100% - 120px);
+        float: left;
+        margin-left: 20px;
+      }
+     .usersignup-note {
+        color: #555;
+        font-family: "AvenirNextLTPro-Regular";
+        font-size : 12px;
+      }
+      .signin {
+         font-family: 'AvenirNextLTPro-Regular' !important;
+         color: #686868;
+      }
+      .show-signup {
+        color: #C32026;
+      }
+      .signin-header {
+          text-transform: uppercase;
+          letter-spacing: 0;
+          line-height: 1.6;
+          font-size: 22px;
+      }
+
+     /*Color codes*/
+     .sign-up-red {
+      color: $sign-up-red;
+    }
+    .sign-up-grey {
+      color: #B0B0B0;
+    }
+    /*Padding*/
+    .p-l-128 {
+      padding-left: 128px;
+    }
+    .p-r-50 {
+      padding-right: 50px;
+    }
+    .p-r-36 {
+      padding-right: 36px;
+    }
+    .p-l-50 {
+      padding-left: 50px;
+    }
+
+    /*Width*/
+    .w-31 {
+      width: 31%;
+    }
+    .w-35  {
+      width: 35%;
+    }
+    .w-70 {
+      width: 70%;
+    }
+    .w-45 {
+      width: 45%;
+    }
+    .w-49 {
+      width: 49%;
+    }
+    .w-88 {
+      width: 88%;
+    }
+    .p-t-13{
+      padding-top: 13px !important;
+    }
+    .form-group{
+      margin-bottom: 0 !important;
+      padding-bottom: 24px;
+      p.help-block.error-text{
+        margin-bottom: 0;
+      }
+    }
+    /*Common Labels*/
+    .signup-labels {
+      font-family: 'AvenirNextLTPro-Regular';
+      letter-spacing: 0;
+      line-height: 22px;
+      color: #2B2B2B !important;
+      font-size: 18px;
+      font-weight: 100;
+      margin-bottom: 0;
+      padding-bottom: 8px;
+    }
+    .box-style {
+          border: none;
+          margin: 0;
+          font-size: 16px;
+          letter-spacing: 0;
+          font-weight: 300;
+          height: 60px;
+      }
+    .round-image, .image-display {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+      background-color: transparent;
+      border-style: dashed;
+      box-shadow: none;
+      outline: none !important;
+      position: relative;
+      margin-bottom: 0;
+      padding: 0;
+      img {
+        width: 100%;
+      }
+    }
+    .image-display {
+      left: 0;
+      top: 0;
+      z-index:  -1;
+      border-style: dashed;
+      border-width: 1px;
+      border-color: #eee;
+      display: none;
+      position: absolute;
+      max-width: 100%;
+    }
+    .image-display-company {
+      position: absolute;
+      right: 21em;
+      top: 33em;
+      /* z-index: -1; */
+      border-style: solid;
+      border-width: 1px;
+      border-color: aliceblue;
+      display: none;
+      width: 4%;
+      height: 4%;
+    }
+    .parent-index{
+      z-index: 999;
+      height: 100px;
+    }
+    .d-block {
+      display: block !important;
+    }
+    #avtar1, #avtar2,  {
+        display:none;
+      }
+      .round-image::-webkit-file-upload-button{
+      display: none !important;
+      }
+      .border-hide {
+        border-style: hidden;
+      }
+      .border-hide:after {
+        display: none;
+        }
+      .round-image:after {
+          content: "";
+          background: url(../../../../../modules/core/client/img/insight-images/ic_add_profilepic.png) no-repeat center center;
+          speak: none;
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+      }
+      .upload-logo {
+        display: inline-block;
+        background-color: #ffffff;
+        box-shadow: none;
+        outline: none !important;
+      }
+      // .upload-logo:after {
+      //   content: "\ea0a";
+      //   font-size: 20px;
+      //   font-family: 'icomoon' !important;
+      //   speak: none;
+      //   font-style: normal;
+      //   font-weight: normal;
+      //   font-variant: normal;
+      //   text-transform: none;
+      //   line-height: 1;
+      //   position: absolute;
+      //   top: 20px;
+      //   right: 20px;
+      // }
+      .custom-hr {
+          float: left;
+          width: calc(100% - 48px);
+          margin-top:10px !important;
+          border-color: #b0b0b0;
+          margin-bottom: 0;
+        }
+      .circle-decoration {
+        display: flex;
+        padding: 40px 50px 0;
+        &.p-r-l-28{
+          padding-left: 28px;
+          padding-right: 28px;
+        }
+        &.p-lr-distribute{
+          padding-left: 28px;
+          padding-right: 65px;
+        }
+        .circle-background:after {
+          display: none;
+        }
+      }
+      .signup-page-heading {
+        padding-top: 20px;
+      }
+
+      /*Buttons*/
+   .user-login-section {
+    a,button {
+      border: none;
+      border-radius: 3px;
+      color: #ffffff;
+      background-color: #C32026;
+      }
+      button {
+          padding: 10px 10px 10px 10px;
+      }
+    }
+
+    // .italic-style::-webkit-input-placeholder {
+    //   font-family: 'AvenirNextLTPro-It';
+    //   color: $user-grey;
+    // }
+
+    .italic-style:-ms-input-placeholder {
+      font-family: 'AvenirNextLTPro-It';
+      color: $user-grey;
+    }
+    .user-login {
+        font-size: 15px;
+        font-family: 'AvenirNextLTPro-Regular' !important;
+        border: none;
+        border-radius: 2px;
+        color: #ffffff;
+        background-color: #C32026;
+        padding: 13px;
+        text-align: center;
+
+        &:hover {
+        text-decoration: none;
+        cursor: pointer;
+        }
+    }
+
+    .italic-style:-moz-placeholder {
+      font-family: 'AvenirNextLTPro-It';
+      color: $user-grey;
+    }
+
+    .italic-style::-moz-placeholder {
+      font-family: 'AvenirNextLTPro-It';
+      color: $user-grey;
+    }
+
+     .circle-background {
+        background-color: $sign-up-red;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        color: white;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+      }
+
+    .circle-grey {
+      background-color: $user-sign-up-grey;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      color: white;
+      font-size: 14px;
+      line-height: 24px;
+      text-align: center;
+      }
+      .icon-checkmark{
+        margin-top: -1px;
+        .icon-checkmark:before {
+          content: "\e90d";
+          font-size: 27px;
+          line-height: 17px;
+          margin: -6px;
+        }
+      }
+
+  }
+    .avtar-2 {
+    position: absolute;
+    right: 0.5em;
+    top: 14px;
+    max-width: 22%;
+    max-height: 46%;
+          /* z-index: -1; */
+      border-style: solid;
+      border-width: 1px;
+      border-color: aliceblue;
+      display: none;
+    }
+
+  .signin-header {
+    font-family: "AvenirNextLTPro-Regular";
+    color: #686868 !important;
+    }
+
+  .padding-fix {
+    padding-top: 15px;
+  }
+  .padding-fix::-webkit-input-placeholder {
+    padding-top: 5px;
+  }
+  .form-group {
+    margin-bottom: 7px !important;
+  }
+.drop-image {
+  top: 58px;
+  right: 30px;
+}
+
+.authentication-message{
+  i{
+    font-size: 78px;
+    color: $dark-red;
+    display: inline-block;
+    height: 78px;
+  }
+}

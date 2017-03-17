@@ -1,0 +1,22 @@
+<!-- Multi Choice questions preview -->
+<div class="m-t-10 w-100 m-auto form-builder-option-block p-r-175">
+  <div class="text-left">
+    <img ng-src="{{vm.mediaFiles[0].thumbUrl}}"
+      ng-if="vm.mediaFiles[0].thumbUrl"
+      style="width: 500px; height: 250px;">
+  </div>
+  <div class="flex-container">
+    <div class="flex-item" ng-repeat="choice in vm.question.choices track by $index" ng-class="{'w-100': vm.question.alignVertically}">
+      <div class="formbuilder-a p-relative white-button" >
+        <div class="choice-dom choice-dom-full-width">
+          <div class="option-a">
+            <span class="dark-red-c">{{ vm.numberToChars[$index] }}</span>
+          </div>
+          <span class="font-15 grey-dark overflow-setting p-t-15 p-b-15"
+            ng-bind="choice.text">
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

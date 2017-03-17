@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="23px" height="23px" viewBox="0 0 23 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_upload_logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Sign-In-/-Sign-Up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="14_SignUp_step3" transform="translate(-977.000000, -494.000000)" fill="#BFBFBF">
+            <g id="email-ID" transform="translate(730.000000, 438.000000)">
+                <path d="M263.1,66.5 L258.9,66.5 L258.9,62.3 C258.9,61.914 258.587,61.6 258.2,61.6 C257.814,61.6 257.5,61.914 257.5,62.3 L257.5,66.5 L253.3,66.5 C252.913,66.5 252.6,66.813 252.6,67.2 C252.6,67.587 252.913,67.9 253.3,67.9 L257.5,67.9 L257.5,72.1 C257.5,72.487 257.814,72.8 258.2,72.8 C258.587,72.8 258.9,72.487 258.9,72.1 L258.9,67.9 L263.1,67.9 C263.487,67.9 263.8,67.587 263.8,67.2 C263.8,66.813 263.487,66.5 263.1,66.5 M258.2,77.022 C252.796,77.022 248.4,72.604 248.4,67.2 C248.4,61.796 252.796,57.4 258.2,57.4 C263.604,57.4 268,61.796 268,67.2 C268,72.604 263.604,77.022 258.2,77.022 M258.2,56 C252.015,56 247,61.015 247,67.2 C247,73.386 252.015,78.4 258.2,78.4 C264.386,78.4 269.4,73.386 269.4,67.2 C269.4,61.015 264.386,56 258.2,56" id="ic_upload_logo"></path>
+            </g>
+        </g>
+    </g>
+</svg>

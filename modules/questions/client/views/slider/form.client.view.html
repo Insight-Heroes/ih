@@ -1,0 +1,56 @@
+<ul class="tweak-pages p-0" >
+  <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle">
+    Slider Interval
+  </li>
+  <li show-errors>
+    <select
+      class="form-control"
+      ng-model="vm.question.optionCount"
+      name="optionCount"
+      ng-options="i for i in [2,3,4,5,6,7,8,9,10]"
+      ng-change="vm.sliderIntervalChange()"
+      required /></select>
+    <div ng-messages="vm.questionForm.optionCount.$error" role="alert">
+      <p class="help-block error-text" ng-message="required">
+        Please enter slider interval.
+      </p>
+      <p class="help-block error-text" ng-message="max">
+        Slider interval can not be greater than 10.
+      </p>
+      <p class="help-block error-text" ng-message="min">
+        Slider interval can not be less than 2.
+      </p>
+    </div>
+  </li>
+</ul>
+
+<ul class="tweak-pages p-0" ng-if="vm.question.questionType == 'slider'">
+  <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle m-b-20">
+    Slider interval labels
+  </li>
+  <li class="p-l-20 p-r-20 p-b-20 p-t-0 hide-style"  ng-repeat="row in vm.question.choices track by $index" show-errors>
+    <span class="w-5 m-r-5 d-in">{{ $index + 1 }}</span>
+    <div class="hide">
+      {{name="label"+$index}}
+    </div>
+    <input type="text"
+        class="w-70 p-l-10 form-builder-style-options grey-dark"
+        placeholder="Enter label"
+        ng-model="row.text"
+        maxlength="20"
+        name="{{name}}"
+        ng-change="vm.updateSliderConfig()"
+        required />
+      <img src="../../../../../modules/core/client/img/insight-images/ic_upload_logo.png"
+        ng-click="vm.addChoice($index)"
+        ng-hide="vm.question.choices.length > 9" class="m-l-5"/>
+      <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png"
+        ng-click="vm.removeChoice($index)"
+        ng-hide="vm.question.choices.length < 3" class="m-l-3"/>
+    <div ng-messages="vm.questionForm[name].$error" role="alert">
+      <p class="help-block error-text" ng-message="required">
+        Please enter label text.
+      </p>
+    </div>
+  </li>
+</ul>

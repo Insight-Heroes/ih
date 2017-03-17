@@ -1,0 +1,370 @@
+<div class="container">
+  <div class="col-xs-12 col-md-offset-1 col-md-10 user-sign-up">
+    <div class="row">
+      <div class="upper-sign-in col-md-8 col-md-offset-2 p-t-60">
+        <div class="insight-logo text-center">
+          <img  src= "../../../../../modules/core/client/img/insight-images/ih_logo_signin.png" />
+        </div>
+        <h3 class="signin-header l-s-1 text-center m-t-40">welcome  to insight heroes</h3>
+        <div class="circle-decoration" ng-class="{'':vm.activeForm === 'company'}">
+          <div  ng-click="vm.goBack()" class="circle-one circle-background  text-center f-l sign-up-red"><span ng-show="vm.userForm.$invalid">1</span>
+            <img src="../../../../../modules/core/client/img/insight-images/ic_check.png" ng-hide="vm.userForm.$invalid" class="icon-checkmark p-relative"/>
+          </div>
+          <hr class="custom-hr">
+          <span class="circle-grey text-center f-l sign-up-red" ng-class="{'signup-red': vm.userForm.$valid == true}">2</span>
+        </div>
+        <div class="signup-page-heading w-100 d-in" ng-class="{'':vm.activeForm === 'company'}">
+          <span  class="text-center pull-left  sign-up-red f-16 l-s-2 f-aveinr-medium"  ng-click="vm.goBack()">Personal Details</span>
+          <span class=" text-center pull-right sign-up-grey f-16 l-s-2 f-aveinr-medium" ng-class="{'company-form': vm.userForm.$valid == true}">Company Details</span>
+        </div>
+      </div>
+
+      <div class="whats-wrong col-md-12 col-sm-12 hide">
+        User form errors:
+        <ul>
+          <li ng-repeat="(key, errors) in vm.userForm.$error track by $index"> <strong>{{ key }}</strong> errors
+            <ul>
+              <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+            </ul>
+          </li>
+        </ul>
+        Company form errors:
+        <ul>
+          <li ng-repeat="(key, errors) in vm.companyForm.$error track by $index"> <strong>{{ key }}</strong> errors
+            <ul>
+              <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-8 col-md-offset-2 p-t-50" ng-show="vm.activeForm == 'user'">
+        <fieldset>
+          <!-- Main  Section starts Here-->
+          <form name="vm.userForm" ng-submit="vm.validateUserForm(vm.userForm.$valid)" class="signin"
+            novalidate autocomplete="off">
+            <div class="column-block">
+              <div class="form-group w-100 d-in">
+                <div class="f-l p-relative parent-index" show-errors>
+                  <label for= "avtar1" class="form-control round-image" ng-class="{'border-hide': vm.profileImageURL}">
+                  <input type="file" id="avtar1"
+                    ngf-select
+                    ng-model="vm.profileImage"
+                    name="profileImage"
+                    ngf-pattern="'image/*'"
+                    ngf-accept="'image/*'"
+                    ngf-max-size="vm.fileOptions.maxFileSize"
+                    ngf-multiple="false"
+                    name="file"
+                    ngf-change="vm.imagePreview($file, $invalidFile, 'profileImageURL')" />
+                  </label>
+                  <img class="image-display p-absolute"   ng-class="{'d-block': vm.profileImageURL}" ng-src="{{ vm.profileImageURL }}" />
+                  <div ng-messages="vm.userForm.profileImage.$error" role="alert">
+                    <p class="help-block error-text" ng-message="maxSize">Image file size error. You are allowed to upload images upto {{ ::((vm.fileOptions.maxFileSize/1024)/1024) }}MB only.</p>
+                    <p class="help-block error-text" ng-message="required">Please select your profile image.</p>
+                    <p class="help-block error-text" ng-message="pattern">Only image files are allowed to upload.</p>
+                  </div>
+                </div>
+                <div class="user-name-row">
+                  <div class="row">
+                    <div class="col-md-6 p-r-10">
+                      <div class="" show-errors>
+                        <label for="firstName" class="signup-labels">First Name</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control box-style italic-style" ng-model="vm.credentials.firstName" placeholder="John" required>
+                        <div ng-messages="vm.userForm.firstName.$error" role="alert">
+                          <p class="help-block error-text" ng-message="required">First name is required.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 p-l-10">
+                      <div class="" show-errors>
+                        <label for="lastName" class="signup-labels">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control box-style italic-style" ng-model="vm.credentials.lastName" placeholder="Doe" required>
+                        <div ng-messages="vm.userForm.lastName.$error" role="alert">
+                          <p class="help-block error-text" ng-message="required">Last name is required.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group w-100 d-in">
+                <div class="row">
+                  <div class="col-md-6 p-r-10" show-errors>
+                    <label for="mobileNo" class="signup-labels">Mobile number</label>
+                    <input type="text" id="mobileNo" name="mobileNo" class="form-control box-style italic-style " ng-model="vm.credentials.mobileNo" placeholder="xxxx-xxxx-xxxx" required minlength="10" ng-pattern="/^\d+$/">
+                    <div ng-messages="vm.userForm.mobileNo.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Mobile number is required.</p>
+                      <p class="help-block error-text" ng-message="minlength">Mobile number must be minimum of 10 digit.</p>
+                      <p class="help-block error-text" ng-message="pattern">Mobile number must be numeric.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 p-l-10" show-errors>
+                    <label for="email" class="signup-labels">Email</label>
+                    <input type="email" id="email" name="email" class="form-control box-style italic-style " ng-model="vm.credentials.email" placeholder="johndoe@xyz.com" lowercase required>
+                    <div ng-messages="vm.userForm.email.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Email address is required.</p>
+                      <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group w-100 d-in" show-errors>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="address" class="signup-labels">Address</label>
+                    <textarea id="address" name="address" class="padding-fix form-control box-style italic-style " ng-model="vm.credentials.address"
+                      placeholder="PO Box 11100, Aurora" required rows="3">
+                    </textarea>
+                    <div ng-messages="vm.userForm.address.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Address is required.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group w-100 d-in" show-errors>
+                <div class="row">
+                  <div class="col-md-4 p-r-10">
+                    <label for="pincode" class="signup-labels">Pin/Zip code</label>
+                    <input type="text" id="pincode" name="pincode" class="form-control box-style " ng-model="vm.credentials.zipcode" placeholder="ABC123" required maxlength="6" minlength="3" max-length="16" ng-pattern="/\w+$/">
+                    <div ng-messages="vm.userForm.pincode.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Pin/Zip code is required.</p>
+                      <p class="help-block error-text" ng-message="minlength">Pin/Zip code must be valid.with minimum 3 characters.</p>
+                      <p class="help-block error-text" ng-message="pattern">Pin/Zip code must be numeric.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4 p-l-10 p-r-10" show-errors>
+                    <label for="state" class="signup-labels">State/Province</label>
+                    <input type="text" id="state" name="state" class="form-control box-style italic-style"  ng-model="vm.credentials.state" placeholder="Terrarium City" required>
+                    <div ng-messages="vm.userForm.state.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">State/Province is required.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4 p-l-10" show-errors>
+                    <label for="country" class="signup-labels">Country</label>
+                    <div class="select-box-wrapper" ng-controller="HeaderController as hc">
+                      <select type="text" id="country" name="country" class="form-control box-style italic-style" ng-model="vm.credentials.country" placeholder="Country Name" required>
+                        <option value="">Please select</option>
+                        <option ng-repeat="country in hc.countries">{{country}}</option>
+                      </select>
+                    </div>
+                    <div ng-messages="vm.userForm.country.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Country is required.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Password & Password confirmation fields -->
+              <div class="form-group w-100 d-in" show-errors>
+                <div class="row">
+                  <div class="col-md-6 p-r-10">
+                    <label class="signup-labels">Password</label>
+                    <input type="password" name="password" class="form-control box-style "
+                      ng-model="vm.credentials.password" placeholder="Password" required maxlength="15" minlength="8">
+                    <div ng-messages="vm.userForm.password.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Password is required.</p>
+                      <p class="help-block error-text" ng-message="minlength">Password must be greater than 6 characters.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 p-l-10" show-errors>
+                    <label class="signup-labels">Confirm Password</label>
+                    <input type="password" name="passwordConfirmation" class="form-control box-style"  ng-model="vm.credentials.passwordConfirmation" placeholder="Retype Password" ng-pattern="{{vm.credentials.password}}">
+                    <div ng-messages="vm.userForm.passwordConfirmation.$error" role="alert">
+                      <p class="help-block error-text" ng-message="pattern">Password mismatch, try again</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-show="vm.error" class="text-center text-danger">
+                <strong ng-bind="vm.error"></strong>
+              </div>
+              <div class="form-group w-100 d-in">
+                <div class="row">
+                  <div class="col-md-6 signin p-t-13 f-16">
+                    Have an account? <a ui-sref="authentication.signin" class="show-signup" href="/authentication/signin">Sign in</a> now!
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <button type="submit" class="user-login w-100 f-r">
+                    Continue
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </fieldset>
+      </div>
+      <form name="vm.companyForm" ng-submit="vm.signup(vm.companyForm.$valid)" class="signin" novalidate autocomplete="off">
+        <div class="col-md-8 col-md-offset-2 p-t-50" ng-show="vm.activeForm == 'company'">
+          <fieldset>
+            <div class="column-block">
+              <div class="form-group d-in w-100" show-errors>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="cname" class="signup-labels">Company Name</label>
+                    <input type="text" id="cname" name="cname" class="form-control box-style italic-style" ng-model="vm.credentials.company.name" placeholder="Enter Company Name" required>
+                    <div ng-messages="vm.companyForm.cname.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Name is required.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group d-in w-100" show-errors>
+                <div class="row">
+                  <div class="col-md-6 p-r-10">
+                    <label for="design" class="signup-labels p-relative">Designation</label>
+                    <input type="text" id="design" name="design" class="form-control box-style italic-style" ng-model="vm.credentials.company.designation" placeholder="Regional Manager" required>
+                    <div ng-messages="vm.companyForm.design.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Designation is required.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 p-l-10" show-errors>
+                    <label for="logo" class="signup-labels">Logo</label>
+                    <div class="p-relative">
+                      <label for= "avtar2" class="form-control upload-logo p-relative box-style">
+                        <input  id="avtar2" type="file" ngf-select
+                          ng-model="vm.companyLogo"
+                          name="companyLogo"
+                          ngf-pattern="'image/*'"
+                          ngf-accept="'image/*'"
+                          required
+                          ngf-change="vm.imagePreview($file, $invalidFile, 'companyLogoURL')"
+                          ngf-max-size="vm.fileOptions.maxFileSize"/>
+                        <p class="m-t-10">Upload Logo</p>
+                        <img ng-class="{'dn': vm.companyLogoURL}" class="upload-fix" src="../../../../../modules/core/client/img/insight-images/ic_add.png"/>
+                      </label>
+                      <img class="avtar-2 p-absolute"   ng-class="{'d-block': vm.companyLogoURL}" ng-src="{{ vm.companyLogoURL }}" />
+                    </div>
+                    <!-- -->
+                    <!--  <label for= "avtar1" class="form-control round-image" ng-class="{'border-hide': vm.profileImageURL}"> -->
+                    <input type="file" id="avtar1"
+                      ngf-select
+                      required
+                      ng-model="vm.companyLogo"
+                      name="companyLogo"
+                      ngf-pattern="'image/*'"
+                      ngf-accept="'image/*'"
+                      ngf-max-size="vm.fileOptions.maxFileSize"
+                      ngf-multiple="false"
+                      name="file"
+                      ngf-change="vm.imagePreview($file, $invalidFile, 'profileImageURL')" />
+
+                    <img class="image-display p-absolute"   ng-class="{'d-block': vm.profileImageURL}" ng-src="{{ vm.profileImageURL }}" />
+                    <!-- -->
+                    <div ng-messages="vm.companyForm.companyLogo.$error" role="alert">
+                      <p class="help-block error-text" ng-message="maxSize">Image file size error. You are allowed to upload images upto {{ ::((vm.fileOptions.maxFileSize/1024)/1024) }}MB only.</p>
+                      <p class="help-block error-text" ng-message="required">Please select your company logo.</p>
+                      <p class="help-block error-text" ng-message="pattern">Only image files are allowed to upload.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group d-in w-100">
+                <div class="row">
+                  <div class="col-md-4 p-r-10" show-errors>
+                    <label for="numberOfEmployees" class="signup-labels">Number of employees</label>
+                    <input type="number" id="numberOfEmployees" placeholder="1" name="numberOfEmployees" class="form-control text-center box-style" ng-model="vm.credentials.company.numberOfEmployees" required min="1" max="500">
+                    <div ng-messages="vm.companyForm.numberOfEmployees.$error" role="alert">
+                      <p class="help-block error-text italic-style" ng-message="required">Number of employees is required.</p>
+                      <p class="help-block error-text italic-style" ng-message="min">Minimum number of employees must not be less than 1.</p>
+                      <p class="help-block error-text italic-style" ng-message="max">Maximum number of employees must not be greater than 500.</p>
+                      <p class="help-block error-text italic-style" ng-message="number">Number of employees must be numeric.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-md-offset-2 p-l-10" show-errors>
+                    <label for="numberOfAnalysts" class="signup-labels">Number of analysts</label>
+                    <input type="number" id="numberOfAnalysts" placeholder="1" name="numberOfAnalysts" class="form-control text-center box-style" ng-model="vm.credentials.company.numberOfAnalysts"  required min="1" max="100">
+                    <div ng-messages="vm.companyForm.numberOfAnalysts.$error" role="alert">
+                      <p class="help-block error-text italic-style" ng-message="required">Number of analysts is required.</p>
+                      <p class="help-block error-text italic-style" ng-message="min">Minimum number of analysts must not be less than 1.</p>
+                      <p class="help-block error-text italic-style" ng-message="max">Maximum number of analysts must not be greater than 100.</p>
+                      <p class="help-block error-text italic-style" ng-message="number">Number of analysts must be numeric.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group d-in w-100">
+                <div class="row">
+                  <div class="col-md-6 p-r-10" show-errors>
+                    <label for="website" class="signup-labels">Website URL</label>
+                    <input type="text" id="website" name="website" class="form-control box-style" ng-model="vm.credentials.company.website"  placeholder="www.yourcompany.com" ng-pattern='/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/'  required>
+                    <div ng-messages="vm.companyForm.website.$error" role="alert">
+                      <p class="help-block error-text italic-style" ng-message="pattern">Website URL is invalid.</p>
+                      <p class="help-block error-text italic-style" ng-message="required">Website URL is required.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 p-l-10" show-errors>
+                    <label for="domain" class="signup-labels">Domain for whitelabeling</label>
+                    <input type="text" id="domain" name="domain" ng-init="vm.credentials.company.domain='insightheroes.com/'" class="form-control box-style italic-style" ng-model="vm.credentials.company.domain"  required>
+                    <div ng-messages="vm.companyForm.domain.$error" role="alert">
+                      <p class="help-block error-text italic-style"  ng-message="required">Domain for whitelabeling is required.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group w-100 d-in" show-errors>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="languages" class="m-0 w-100 signup-labels">
+                      <p class="m-b-0 m-r-5 pull-left">Languages that Surveys are  conducted in</p>
+                      <p class="primary-grey usersignup-note p-0 m-b-0">(Enter multiple by separating with commas)</p>
+                    </label>
+                    <input type="text" id="languages" name="languages" class="m-t-0 form-control box-style italic-style" ng-model="vm.credentials.company.languages" placeholder="English,French,Tamil" required>
+                    <div ng-messages="vm.companyForm.languages.$error" role="alert">
+                      <p class="help-block error-text italic-style" ng-message="required">Language is required.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group w-100 d-in">
+                <div class="row">
+                  <div class="col-md-4 p-r-10" show-errors>
+                    <label for="monthlyRespondents" class="signup-labels">Monthly respondents</label>
+                    <input type="number" id="monthlyRespondents" name="monthlyRespondents" class="form-control box-style italic-style" ng-model="vm.credentials.company.monthlyRespondents" placeholder="200" required min="1">
+                    <div ng-messages="vm.companyForm.monthlyRespondents.$error" role="alert">
+                      <p class="help-block error-text italic-style" ng-message="required">Monthly respondents is required.</p>
+                      <p class="help-block error-text italic-style" ng-message="min">Monthly respondents must not be less than 1.</p>
+                      <p class="help-block error-text italic-style" ng-message="number">Monthly respondents must be numeric.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4 p-l-10 p-r-10" show-errors>
+                    <label for="currency" class="signup-labels">Currency</label>
+                    <div class="select-box-wrapper">
+                    <select type="text" id="currency" name="currency" class="form-control box-style italic-style" ng-model="vm.credentials.company.currency" placeholder="USD" required>
+                      <option value="">Please select</option>
+                      <option>USD</option>
+                      <option>EURO</option>
+                    </select>
+                    </div>
+                    <div ng-messages="vm.companyForm.currency.$error" role="alert">
+                      <p class="help-block error-text italic-style" ng-message="required">Currency is required.</p>
+                    </div>
+
+                  </div>
+                  <div class="col-md-4 p-l-10" show-errors>
+                    <label for="skypeID" class="signup-labels">Skype ID</label>
+                    <input type="text" id="skypeID" name="skypeID" class="form-control box-style italic-style" ng-model="vm.credentials.company.skypeID" placeholder="johndoe" required>
+                    <div ng-messages="vm.companyForm.skypeID.$error" role="alert">
+                      <p class="help-block error-text italic-style" ng-message="required">Skype ID is required.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group w-100 d-in">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="user-login w-50">Complete Signup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="text-center form-group">
+      </div>
+    </div>
+  </div>
+</div>

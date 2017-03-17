@@ -1,0 +1,122 @@
+<div class="h-100 create-survey light-grey b-r-4">
+    <!-- Header section -->
+    <div class="top-section p-10">
+        <p class="col-md-11 p-l-55 text-center m-t-10 f-aveinr f-20">
+            Distribute Survey
+        </p>
+        <img src="../../../../../modules/core/client/img/insight-images/ic_close.png" ng-click="vm.closeModal()" class="p-t-20 pull-right set-margin" />
+    </div>
+    <!-- Middle body -->
+    <div class="main-container col-md-12">
+        <!-- Top Navigation -->
+        <div class="user-sign-up col-md-8 col-md-offset-2 m-b-20">
+            <div class="circle-decoration p-t-10" ng-class="w-60-log">
+                <div ng-click="vm.goToListSelection()" class="circle-one circle-background text-center f-l sign-up-red">
+                    <span ng-show="vm.activeTab === 'lists-selection'">1</span>
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_check.png" ng-show="vm.activeTab === 'contacts-selection'" class="icon-checkmark p-relative" />
+                </div>
+                <hr class="custom-hr">
+                <span
+                    class="circle-grey text-center f-l"
+                   ng-class="{'signup-red': (vm.activeTab === 'contacts-selection')}">
+                    2
+                </span>
+            </div>
+            <div class="signup-page-heading col-md-12">
+                <span class="text-center f-l f-w-600 sign-up-red f-14 l-s-2 f-aveinr-medium"
+                ng-click="vm.goToListSelection()" role="button" tabindex="0">
+                Choose Lists
+               </span>
+               <span class="text-center f-r sign-up-grey f-w-600 f-14 l-s-2 f-aveinr-medium"
+                  ng-class="{'company-form': (vm.activeTab === 'contacts-selection')}">
+                Select Respondants
+                </span>
+            </div>
+        </div>
+        <!-- First Step - List selection -->
+        <div ng-show="vm.activeTab === 'lists-selection'" class="user-table">
+            <div class="p-relative col-md-12 f-aveinr m-b-20">
+                <span class="pull-left f-14 m-t-15 grey-dark f-w-600 opacity-6">ALL LISTS</span>
+                <div class="search-field col-md-3">
+                  <i class="ion-search"></i>
+                  <input data-ng-model= "searchTexts" class="search-model form-control" placeholder="Search Lists" ng-keyup="vm.changedTable()" ng-blur="vm.changeTableOut()" />
+                </div>
+            </div>
+            <div class="set-max d-in col-md-12 p-l-0 p-r-0  o-auto d-in">
+                <table class="user-table-height user-table-border f-aveinr col-md-12 m-auto user-table-survey">
+                    <thead>
+                        <tr>
+                          <th class="f-14 f-b">LIST NAME</th>
+                          <th class="f-14 f-b">CREATED ON </th>
+                          <th class="f-14 f-b">RESPONDENTS</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="list in lists = ( vm.lists | filter: {name: searchTexts} )">
+                        <td class="text-left" ng-init="list.selected = false" ng-click="vm.checks(list)"><md-checkbox  md-no-ink=""  aria-label="Checkbox No Ink" ng-model="list.selected" value={{list.name}} class="f-l md-primary"></md-checkbox><p class="overflow-setting-survey">{{list.name}}</p></td>
+                        <td>{{list.created | date: mediumDate }}</td>
+                        <td>{{list.contactCount}}</td>
+                    </tr>
+                    <tr ng-if="lists.length == 0 && vm.lists.length != 0">
+                      <td colspan="3">No list found for your search</td>
+                    </tr>
+                    <tr ng-if="vm.lists.length == 0">
+                      <td colspan="3">You have not created any list. Please create list to publish this survey.</td>
+                    </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+        <!-- Second Step - List contacts selection -->
+        <div ng-show="vm.activeTab === 'contacts-selection'" class=" m-t-0 f-aveinr d-in col-md-12 p-l-0 p-r-0 m-h-200 user-table col-md-12">
+            <div class="list-chosen-button checkbox-white-wrapper m-b-5 col-md-12" >
+              <div class="checkbox-content clearfix">
+                <span class="pull-left f-bold l-h-30 p-r-20">Lists Chosen:</span>
+                <button  class="list-block pull-left f-r red-button b-blue b-r-2 m-r-10 f-12" ng-bind="list" ng-repeat="list in vm.ListNameArray track by $index"></button>
+                <span class="grey-dark opacity-6 p-t-10 l-h-40" ng-if="vm.ListNameArray.length > 2">and {{vm.ListNameArray.length-2}} more..</span>
+                <span class="pull-right" ng-click="vm.goToListSelection()">
+                    <i class="icon-edit f-20 color-68"></i>
+                </span>
+              </div>
+            </div>
+            <div class="d-in col-md-12 checkbox-white-wrapper m-b-5">
+              <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"
+                     ng-model="vm.randomSelection"
+                     value={{list.name}}
+                     ng-change="vm.listSelection = !vm.randomSelection;"
+                     class="md-primary "
+                     ng-init="vm.randomSelection=false">
+              </md-checkbox>
+              <div class="checkbox-content">
+                <span class="f-14 f-bold">Send Randomly  across all platforms</span>
+                <p class="d-b m-b-0 p-t-10"  ng-show="vm.randomSelection">It is long established fact that a reader will be distracted by the</br>
+                readable content of a page when looking at its layout. The point</br> of using
+                Loren Ipsum is that it has more-or-less normal</p>
+              </div>
+            </div>
+            <div class="col-md-12 p-t-20 p-b-10 p-l-20 p-r-20 b-r-4 d-in white-b">
+                <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"
+                     ng-change="vm.randomSelection = !vm.listSelection"
+                     ng-model="vm.listSelection"
+                     ng-init="vm.listSelection=true"
+                     class="pull-left m-b-0 md-primary">
+                </md-checkbox>
+                <div class="checkbox-content">
+                  <p class="m-b-0">Choose Number of Respondants per platform ({{vm.ListNameArray.length}} left)</p>
+                </div>
+                <div class="row">
+                  <div class="p-l-20 p-r-0" ng-hide="vm.randomSelection" >
+                      <div class="col-md-4 text-center p-l-0 p-r-20 p-b-10" ng-repeat="type in vm.respondantTypeCnt track by $index">
+                          <span class="p-5 d-b pull-left">{{type.title}}</span>
+                          <input type="text" class="w-100 border-styling h-50 text-center " id="respondent[$index]" name="respondent[$index]" ng-model="vm.respdtCnt[type.respondentType]" placeholder="{{type.count}}/0000" ng-change="vm.validRespCount(type.count, type.respondentType)"/>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 m-r-20 p-absolute b-0 l-0 h-50" ng-class="{'p-r-30': vm.activeTab === 'lists-selection', 'p-r-15': vm.activeTab === 'contacts-selection'}">
+        <button type="submit" class="m-t-10 col-md-4 f-r red-button b-r-2 f-12" ng-show="vm.activeTab === 'lists-selection'" ng-click="vm.activeClick()" ng-disabled="vm.activeLabel">NEXT</button>
+        <button type="submit" class="m-t-18 col-md-3 f-r red-button-generic dark-red white p-5 b-r-2 f-12" ng-show="vm.activeTab === 'contacts-selection'" ng-click="vm.publishSurvey()">PUBLISH TO <span ng-bind="vm.ListNameArray.length"></span> LISTS</button>
+    </div>
+</div>

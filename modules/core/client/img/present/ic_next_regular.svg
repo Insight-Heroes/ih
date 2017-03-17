@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_next_regular</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="StoryBoard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+        <g id="04_storyboards_messaging" transform="translate(-914.000000, -504.000000)">
+            <g id="ic_next_regular" transform="translate(922.000000, 512.000000) scale(-1, 1) translate(-922.000000, -512.000000) translate(910.000000, 500.000000)">
+                <g id="Group">
+                    <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
+                    <polygon id="Shape" fill="#000000" points="20 11 7.83 11 13.42 5.41 12 4 4 12 12 20 13.41 18.59 7.83 13 20 13"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

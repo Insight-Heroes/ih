@@ -1,0 +1,38 @@
+<section class="create-survey light-grey b-r-4">
+  <div class="top-section p-10">
+    <h3 class="col-md-11 p-l-55 text-center m-t-10" ng-if='vm.page === "create"'>Create a Survey</h3>
+    <h3 class="col-md-11 p-l-55 text-center m-t-10" ng-if='vm.page !== "create"'>Edit Survey</h3>
+    <img src="../../../../../modules/core/client/img/insight-images/ic_close.png" ng-click="vm.closeModal()" class="p-t-20 pull-right set-margin"/>
+  </div>
+  <div class="w-60 m-auto">
+    <form name="vm.surveyForm" ng-submit="vm.saveSurvey(vm.surveyForm.$valid)" class="m-t-10 form-horizontal" novalidate autocomplete="off">
+      <fieldset>
+
+        <div class="form-group" show-errors>
+          <h4 class="text-center" for="name">Survey Name</h4>
+          <input type="text" id="name" name="name" class="form-control box-style italic-style" ng-model="vm.survey.name" placeholder="Survey Name"  maxlength="50" CamelCase required>
+          <div ng-messages="vm.surveyForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Please enter survey name.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <h4 class="text-center" for="description">Description</h4>
+          <input type="text" ng-model="vm.survey.description" name='description' class="form-control box-style italic-style" placeholder="Survey Description"  maxlength="100" required/>
+          <div ng-messages="vm.surveyForm.description.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Please enter survey description.</p>
+          </div>
+        </div>
+        <div class="text-center form-group m-t-30">
+          <button type="submit" class="red-button-generic dark-red white w-60 p-10" ng-if='vm.page === "create"'>Create</button>
+          <button type="submit" class="red-button-generic dark-red white w-60 p-10" ng-if='vm.page !== "create"'>Update</button>
+        </div>
+        <div ng-show="vm.error" class="text-center text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+        <div ng-show="vm.success" class="text-center text-success">
+          <strong ng-bind="vm.success"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

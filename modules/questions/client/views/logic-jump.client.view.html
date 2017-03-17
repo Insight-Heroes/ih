@@ -1,0 +1,122 @@
+<!-- Side Navigation-->
+<div class="modal-header logic-jump-header">
+  <p class="text-center w-90 m-auto d-in">LOGIC JUMP</p>
+  <div class="pull-right layout  white d-b text-center"> <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png" ng-click="vm.closeModal()"/> </div>
+</div>
+<div class="modal-body logic-jump-body">
+  <form class="logic-condition" name="vm.logicForm" novalidate>
+    <div class="background-grey p-t-35 p-b-35">
+      <div class="p-relative sideNavSection questionnaire" ng-repeat="(key, item) in vm.logicjumpsAll | orderBy:'logicPosition'" show-errors>
+        <!-- Used this wrapper specificaaly for Finding the inner contents to append it -->
+        <div class="w-80 m-auto logic-wrapper m-b-20">
+          <div class="logic-jump-container border-style-solid w-100 m-auto p-40">
+            <div class="logic-questions"> <img class="delete-sign p-absolute" src="../../../../../modules/core/client/img/insight-images/ic_subtract.png" ng-click="vm.removeJumps(key);" style="float:right" /> <img class="upload-sign p-absolute" src="../../../../../modules/core/client/img/insight-images/ic_upload_logo.png" ng-click="vm.populateEmptyJumps(key);" style="float:right" />
+                  <!-- ################# logic rows start ################## -->
+                  <div class="logic-if p-t-10" ng-repeat="el in item.logic track by $index" show-errors> <span class="f-aveinr pull-left logic-jump-pre-text f-bold grey-dark opacity-6 f-italics">{{$index === 0 ? "If" : "And"}}</span>
+                    <div class="logic-right-div">
+                      <div class="row">
+                        <div class="col-md-5 p-r-5">
+                            <div class="custom-dropdown question-wrapper" ng-class="{'golden-color': vm.logicForm.logicQuestion_{{$index}}_{{key}}.$valid}">
+                                <!-- Added by Kalpesh -->
+                                <div class="question-selection btn-group dropdown" uib-dropdown>
+                                  <a class="p-l-5 p-b-10" uib-dropdown-toggle href="javascript:void(0)">
+                                    <em ng-repeat="q in vm.questions" ng-if="q._id == el.question">
+                                      <span class="el">Q{{q.position+1}}</span>
+                                      {{ q.title | removetags}}
+                                    </em>
+                                    <em class="color-error" ng-if="el.questionError">Please Select Question</em>
+                                    <span class="caret"></span>
+                                  </a>
+                                  <ul class="dropdown-menu question-selection" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                      <li role="menuitem" class="padding-custom" ng-repeat="c in vm.questions track by $index"> <a  href="#" ng-click="vm.updateQuestionModel(el, c, $index)">
+                                      <span class="el">Q{{c.position+1}}</span> {{ c.title | removetags }}</a></li>
+                                  </ul>
+                                </div>
+                                <!-- Added by Kalpesh - END -->
+                            </div>
+                        </div>
+                        <div class="col-md-1 p-r-5">
+                          <div class="custom-dropdown question-wrapper is-box">
+                            <span>Is</span>
+                          </div>
+                        </div>
+                        <div class="col-md-5 question-wrapper p-r-5">
+                          <div class="custom-dropdown question-wrapper answer-box" ng-class="{'golden-color': vm.logicForm.logicAns_{{$index}}_{{key}}.$valid}">
+                            <!-- Added by Kalpesh -->
+                            <div class="btn-group" uib-dropdown>
+                              <a class="" uib-dropdown-toggle href="javascript:void(0)">
+                                <em ng-repeat="opt in el.choices" ng-if="opt._id == el.choice">
+                                  <img ng-hide="opt.url == NULL" ng-src="{{ opt.url }}" width="35" height="35" class="" />
+                                  {{ opt.url ? opt.name : opt.text}}
+                                </em>
+                                <em class="color-error" ng-if="el.answerError">Please Select Answer</em>
+                                <span class="caret"></span>
+                              </a>
+                              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                <li role="menuitem" ng-repeat="opt in el.choices track by $index">
+                                    <a href="#" ng-click="vm.updateChoiceModel(el, opt, $index, key)">
+                                    <img ng-hide="opt.url == NULL" src="{{ opt.url }}" width="35" height="35" />
+                                    <span>{{opt.url ? opt.name : opt.text}}</span>
+                                    </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <!-- Added by Kalpesh END -->
+                        </div>
+                        <div class="col-md-1">
+                          <div class="logic-add" ng-if="$index === 0">
+                            <img src="../../../../../modules/core/client/img/insight-images/ic_upload_logo.png" ng-click="vm.appendToMainDiv('add', '{{item.logic.length-1}}', item.logic);" ng-model="item.logic" />
+                          </div>
+                          <div class="f-aveinr logic-add" ng-if="$index > 0">
+                            <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png" ng-click="vm.appendToMainDiv('remove', $index, item.logic, el.question, item._id);" ng-model="item.logic" />
+                          </div>
+                        </div>
+                      </div>
+                      {{item.question}}
+                    </div>
+                  </div>
+                  <!--########### logic rows end ################# -->
+              </div>
+              <div class="logic-jumpto p-t-10"> <span class="f-aveinr f-l f-bold grey-dark opacity-6 f-italics">Jump To</span>
+                  <div class="logic-right-div">
+                      <div class="row" ng-class="{'golden-color': vm.logicForm.jumpTo_{{key}}.$valid}">
+                          <div class="col-md-11 p-r-5">
+                              <!-- Added by Kalpesh -->
+                              <div class="custom-dropdown question-wrapper question-selection">
+                                  <div class="btn-group" uib-dropdown>
+                                      <a class="p-l-5" uib-dropdown-toggle href="javascript:void(0)">
+                                        <em ng-repeat="c in vm.quesAllType" ng-if="c._id == item.jumptoQuestion">
+                                          <span class="el">Q{{c.position+1}}</span>{{ c.title | removetags }}
+                                        </em>
+                                        <em class="color-error" ng-if="item.jumpToError">Please Select Jump To Question</em>
+                                        <span class="caret"></span>
+                                      </a>
+                                      <ul class="dropdown-menu question-selection" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                          <li role="menuitem" class="padding-custom" ng-repeat="c in vm.quesAllType track by $index"> <a href="#" ng-click="vm.updateJumpQuestionModel(item, c, $index)"> <span class="el">Q{{c.position+1}}</span>{{ c.title | removetags }}</a></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                              <!-- Added by Kalpesh END -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h1 class="sideNavSection questionnaire w-100 text-center m-auto p-t-100" ng-if="vm.showallLogicdelete">
+      Are you sure, Logic jump will be empty for this question?
+    </h1>
+  </form>
+</div>
+
+
+
+<div class="modal-footer logic-jump-footer">
+  <div class="f-r w-35">
+    <button class="f-r grey-button w-30 m-l-10 m-r-10" ng-click="vm.closeModal()">Cancel</button>
+    <button class="f-r red-button w-30 m-l-10 m-r-10" ng-click="vm.saveLogicJumps(vm.logicForm.$valid, vm.logicForm.$error)">Save</button>
+  </div>
+</div>

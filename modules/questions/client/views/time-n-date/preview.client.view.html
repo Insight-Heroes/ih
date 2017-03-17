@@ -1,0 +1,34 @@
+<div class="w-100 m-auto form-builder-option-block">
+  <div class="w-50 f-l  m-t-60"   ng-if="vm.question.timeDate.type === 'Date' || vm.question.timeDate.type === 'TimeAndDate'">
+    <md-datepicker ng-model="vm.myDate" md-placeholder="Enter date" disabled></md-datepicker>
+  </div>
+  <div class="w-50 m-auto  f-l  m-t-60"
+      ng-if="vm.question.timeDate.type === 'Time' || vm.question.timeDate.type === 'TimeAndDate'">
+    <div uib-timepicker
+      ng-model="time"
+      hour-step="vm.question.timeDate.timeOptions.hourStep"
+      minute-step="vm.question.timeDate.timeOptions.minuteStep"
+      show-meridian="vm.question.timeDate.timeOptions.amPm"></div>
+  </div>
+  <div
+    class='w-50 hide text-center'>
+    <div class="formbuilder-a p-relative m-t-20">
+      <div class="d-in">
+        <div class="option-a">
+          <span class="dark-red-c">{{ $index + 1 }}</span>
+        </div>
+        <span class="font-15 grey-dark"
+          ng-bind="choice.text">
+        </span>
+      </div>
+    </div>
+  </div>
+
+<!--   <div class="text-center m-20"
+      ng-if="vm.question.timeDate.type === 'Date' || vm.question.timeDate.type === 'TimeAndDate'">
+    <div uib-datepicker
+      ng-model="date"
+      datepicker-options="vm.datepickerOptions">
+    </div>
+  </div> -->
+</div>

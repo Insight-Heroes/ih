@@ -1,0 +1,94 @@
+<ul class="tweak-pages p-0">
+  <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle">
+    Date & Time selection
+  </li>
+  <li show-errors>
+    <select
+      ng-model="vm.question.timeDate.type"
+      class="form-control"
+      name="dateTimeSelection"
+      required>
+      <option value='Time'>Time Selection only</option>
+      <option value='Date'>Date Selection only</option>
+      <option value='TimeAndDate'>Both Time and Date selection</option>
+    </select>
+    <div ng-messages="vm.questionForm[dateTimeSelection].$error" role="alert">
+      <p class="help-block error-text" ng-message="required">
+        This field is required
+      </p>
+    </div>
+  </li>
+  <!-- Time Selection options -->
+  <span ng-if="vm.question.timeDate.type === 'Time' || vm.question.timeDate.type === 'TimeAndDate'">
+    <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle">
+      Time selection options
+    </li>
+    <li class="p-relative" show-errors>
+      <span>Hour Step</span>
+      <img class="p-absolute drop-image-select-time" src="../../../../../modules/core/client/img/insight-images/ic_drop_down.png">
+      <select
+        ng-model="vm.question.timeDate.timeOptions.hourStep"
+        class="form-control"
+        name="timeHourStep"
+        ng-options="i for i in [1,2,3,4]"
+        required>
+      </select>
+      <div ng-messages="vm.questionForm[timeHourStep].$error" role="alert">
+        <p class="help-block error-text" ng-message="required">
+          Please select hour step
+        </p>
+      </div>
+    </li>
+    <li class="p-relative" show-errors>
+      <span>Minute Step</span>
+      <img class="p-absolute drop-image-select-time" src="../../../../../modules/core/client/img/insight-images/ic_drop_down.png">
+      <select
+        ng-model="vm.question.timeDate.timeOptions.minuteStep"
+        class="form-control"
+        name="timeMinuteStep"
+        ng-options="i for i in [1,2,5,10,15,30]"
+        required>
+      </select>
+      <div ng-messages="vm.questionForm[timeMinuteStep].$error" role="alert">
+        <p class="help-block error-text" ng-message="required">
+          Please select minute step
+        </p>
+      </div>
+    </li>
+    <li class="header-nav w-100 p-20">
+      Show am/pm (12 hour clock)
+      <span class="f-r m-t-20-n">
+        <md-switch aria-label="Show am/pm(12 hour clock)"
+            ng-model="vm.question.timeDate.timeOptions.amPm" class="md-warn">
+        </md-switch>
+      </span>
+    </li>
+  </span>
+
+  <!-- Date Selection options -->
+  <span ng-if="vm.question.timeDate.type === 'Date' || vm.question.timeDate.type === 'TimeAndDate'">
+    <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle hide">
+      Date selection options
+    </li>
+    <li class="header-nav w-100 p-20 hide">
+      Show future dates only
+      <span class="f-r m-t-20-n">
+        <md-switch
+            aria-label="Show future dates only"
+            ng-disabled="vm.question.timeDate.dateOptions.pastDates"
+            ng-model="vm.question.timeDate.dateOptions.futureDates" class="md-warn">
+        </md-switch>
+      </span>
+    </li>
+    <li class="header-nav w-100 p-20 hide">
+      Show past dates only
+      <span class="f-r m-t-20-n">
+        <md-switch
+            aria-label="Show past dates only"
+            ng-disabled="vm.question.timeDate.dateOptions.futureDates"
+            ng-model="vm.question.timeDate.dateOptions.pastDates" class="md-warn">
+        </md-switch>
+      </span>
+    </li>
+  </span>
+</ul>

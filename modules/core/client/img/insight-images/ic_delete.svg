@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="21px" viewBox="0 0 20 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_delete</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Form-Builder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.400000006">
+        <g id="02_AddNewQuestion" transform="translate(-1370.000000, -190.000000)" fill="#000000">
+            <g id="ic_delete" transform="translate(1370.000000, 190.000000)">
+                <g id="Capa_1">
+                    <g id="Group">
+                        <path d="M19.542748,3.08318699 L17.0858049,3.08318699 L13.4126829,3.08318699 L13.4126829,0 L6.16626016,0 L6.16626016,3.08318699 L2.70552846,3.08318699 L0.0360243902,3.08318699 L0.0360243902,3.93684553 L2.80182114,3.93684553 L4.72084553,20.9446829 L15.0704878,20.9446829 L16.9895122,3.93684553 L19.5428049,3.93684553 L19.542748,3.08318699 L19.542748,3.08318699 L19.542748,3.08318699 Z M7.01980488,0.853658537 L12.5589106,0.853658537 L12.5589106,3.08318699 L7.01980488,3.08318699 L7.01980488,0.853658537 L7.01980488,0.853658537 Z M14.3077154,20.0909675 L5.48350407,20.0909675 L3.66088618,3.93684553 L6.16614634,3.93684553 L13.4125691,3.93684553 L16.1302764,3.93684553 L14.3077154,20.0909675 L14.3077154,20.0909675 Z" id="Shape"></path>
+                        <rect id="Rectangle-path" x="6.75141463" y="6.34012195" width="0.853658537" height="11.8266423"></rect>
+                        <rect id="Rectangle-path" x="9.46826829" y="6.34012195" width="0.853658537" height="11.8266423"></rect>
+                        <rect id="Rectangle-path" x="12.1851789" y="6.34012195" width="0.853658537" height="11.8266423"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

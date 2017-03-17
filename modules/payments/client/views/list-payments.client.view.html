@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Payments</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="payment in vm.payments"
+       ui-sref="payments.view({ paymentId: payment._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="payment.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="payment.user" ng-bind="payment.user.displayName"></span>
+        <span ng-if="!payment.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="payment.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.payments.$resolved && !vm.payments.length">
+    No Payments yet, why don't you <a ui-sref="payments.create">create one</a>?
+  </div>
+</section>

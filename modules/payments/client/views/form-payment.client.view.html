@@ -1,0 +1,148 @@
+<section ui-view>
+  <div class="">
+    <div layout="column"  class="sideNavSection  layout-column">
+      <div>
+        <div class="primary-white static-sidebar">
+           <ng-include ng-init="activeTab='payments'" src="'modules/shared/client/views/dashboard-sidebar.client.html'"></ng-include>
+        </div>
+        <div class="w-static-sidebar d-in">
+            <div class="container-fluid">
+              <div class="row text-right dblock">
+                <div class="w-0 d-in m-b-30">
+                  <button class="create-project-button w-100 white m-auto" ui-sref="payments.transaction_history">Purchase History</button>
+                </div>
+              </div>
+              <div class="row f-16 dblock" ng-class="{'dn': vm.hide === true}">
+                <div class="col-sm-6 col-sm-offset-3">
+                  <div class="boxes-white clearfix text-center">
+                      <p class="payment-box-title">
+                        Current Plan - {{vm.plans[vm.authentication.user.plan.subscriptionType].name}}
+                      </p>
+                      <p class="text-center f-bold grey-dark opacity-6 f-16 m-b-0 p-t-0 l-s-1">
+                        {{vm.plans[vm.authentication.user.plan.subscriptionType].noOfRespondants}}
+                        RESPONDENTS
+                        <span ng-if="vm.authentication.user.plan.subscriptionType == 'Free'">
+                          FOR 30 DAYS
+                        </span>
+                        <span ng-if="vm.authentication.user.plan.subscriptionType == 'Y'">
+                          PER YEAR
+                        </span>
+                        <span ng-if="vm.authentication.user.plan.subscriptionType == 'M'">
+                          PER MONTH
+                        </span>
+                      </p>
+                      <p class="text-center m-b-0 grey-dark opacity-6 f-12 p-b-0 l-s-1">UNLIMITED PROJECTS | UNLIMITED SURVEYS</p>
+                      <p class="text-center f-bold p-t-15 f-32 p-b-10 l-s-1 m-b-0">
+                        {{ vm.authentication.user.plan.totalNoOfRespondants - vm.authentication.user.plan.receivedUserResponses }}
+                      </p>
+                      <p class="text-center m-b-0 grey-dark opacity-6 f-14 p-b-0 l-s-1 p-b-30">Total Respondents Remaining</p>
+                      <button class="create-project-button w-80 white m-auto"
+                        ng-show="vm.authentication.user.plan.isSubscribed"
+                        ng-click="vm.cancelSubscription()">Stop Subscription</button>
+                      <button class="create-project-button w-80 white m-auto grey-dark"
+                        ng-show="!vm.authentication.user.plan.isSubscribed && vm.authentication.user.plan.subscriptionType != 'Free'"
+                        disabled="" >Subscription Cancelled</button>
+
+                  </div>
+                </div>
+              </div>
+              <div class="row dblock">
+                <div class="col-sm-6 col-sm-offset-3">
+                  <div class="boxes-white">
+                    <div class="text-center payment-box-title">
+                      Purchase a plan!
+                    </div>
+                    <div class="row">
+                      <div class="col-md-2" ng-if="!authentication.user.plan.isSubscribed"></div>
+                      <div class="col-md-4 text-center p-r-0">
+                        <p class="d-in upgrade-theme yearly payment-button-tab" ng-class="{'active': vm.planType === 'Y'}" ng-click="vm.planType = 'Y'">YEARLY</p>
+                      </div>
+                      <div class="col-md-4 text-center p-l-0 p-r-0">
+                        <p class="d-in upgrade-theme monthly payment-button-tab" ng-class="{'active': vm.planType === 'M'}" ng-click="vm.planType = 'M'">MONTHLY</p>
+                      </div>
+                      <div class="col-md-4 text-center p-l-0" ng-hide="!vm.authentication.user.plan.isSubscribed">
+                        <p class="d-in upgrade-theme add-ons payment-button-tab" ng-class="{'active': vm.planType === 'A'}" ng-click="vm.planType = 'A'">ADD-ONS</p>
+                      </div>
+                    </div>
+                    <div class="row dn" ng-class="{'db': vm.planType === 'Y'}">
+                    <div class="m-t-10">
+                      <div class="col-md-6 col-md-offset-3">
+                        <p class="f-bold dark-red-c text-center">HERO 1</p>
+                        <p class="text-center">Most popular among our heroes!</p>
+                      </div>
+                    </div>
+                      <div class="plan-box col-md-6 col-md-offset-3">
+                        <p class="text-center f-bold grey-dark opacity-6 f-18 p-t-10 l-s-1">BILLED YEARLY</p>
+                        <p class="text-center f-bold f-24 m-b-0 l-s-1 p-t-5">$1100</p>
+                        <!-- <p class="text-center f-bold f-12">PER YEAR</p> -->
+                        <!-- <p class="text-center f-bold f-24 m-b-0 l-s-1 p-t-5">$500</p> -->
+                        <!-- <p class="text-center f-bold f-12">PER MONTH</p> -->
+                        <div class="p-t-10 f-bold grey-dark opacity-6 f-16 m-b-0 text-center">
+                          <p class="m-b-0">60,000 RESPONDENTS ONLY</p>
+                          <p class="m-b-0">12 MONTHS</p>
+                        </div>
+                        <p class="text-center f-bold p-t-40 m-b-0 grey-dark opacity-6 f-12 p-b-0 l-s-1">UNLIMITED PROJECTS</p>
+                        <p class="text-center f-bold grey-dark opacity-6 f-12 p-b-5 l-s-1">UNLIMITED SURVEYS</p>
+                        <div class="w-80 m-auto p-b-10">
+                          <button ng-click="vm.openModal('year')" class="create-project-button w-100 white m-auto" >BUY</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row dn" ng-class="{'db': vm.planType === 'M'}">
+                    <div class="m-t-10">
+                      <div class="col-md-6 col-md-offset-3">
+                        <p class="f-bold dark-red-c text-center">HERO 2</p>
+                        <p class="text-center">Most popular among our heroes!</p>
+                      </div>
+                    </div>
+                      <div class="plan-box col-md-6 col-md-offset-3">
+                        <p class="text-center f-bold grey-dark opacity-6 f-18 p-t-10 l-s-1">BILLED MONTHLY</p>
+                        <p class="text-center f-bold f-24 m-b-0 l-s-1 p-t-5">$100</p>
+                        <!-- <p class="text-center f-bold f-12">PER MONTH</p> -->
+                        <!-- <p class="text-center f-bold f-24 m-b-0 l-s-1 p-t-5">$500</p> -->
+                        <!-- <p class="text-center f-bold f-12">PER MONTH</p> -->
+                        <div class="p-t-10 f-bold grey-dark opacity-6 f-16 m-b-0 text-center">
+                          <p class="m-b-0">5,000 RESPONDENTS ONLY</p>
+                          <p class="m-b-0">1 MONTH</p>
+                        </div>
+                        <p class="text-center f-bold p-t-40 m-b-0 grey-dark opacity-6 f-12 p-b-0 l-s-1">UNLIMITED PROJECTS</p>
+                        <p class="text-center f-bold grey-dark opacity-6 f-12 p-b-5 l-s-1">UNLIMITED SURVEYS</p>
+                        <div class="w-80 m-auto p-b-10">
+                          <button ng-click="vm.openModal('month')" class="create-project-button w-100 white m-auto">BUY</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row dn" ng-class="{'db': vm.planType === 'A'}" >
+                    <div class="m-t-10">
+                      <div class="col-md-6 col-md-offset-3">
+                        <p class="f-bold dark-red-c text-center">BE YOUR OWN HERO</p>
+                        <p class="text-center">Have a large team?</br> Enter the number of respondents.</br>These number gets added to your current active plan.</p>
+                      </div>
+                    </div>
+                      <div class="plan-box col-md-6 col-md-offset-3">
+                        <div class="addon-plan text-center p-t-60 p-b-20">
+                          <p class="f-bold m-b-0">RESPONDENTS</p>
+                        </div>
+                        <div class="w-90 m-auto text-center p-b-40">
+                          <input type="text" ng-model="vm.addOnRespondent" maxlength="7" class="b-transparent outline-none text-center f-bold" placeholder="1000" ng-change="MessageError()">
+                          <div class="box-divider">&nbsp;</div>
+                            <p class="f-bold m-b-0 f-30 p-t-30" ng-show="vm.addOnRespondent">$ {{vm.addOnRespondent * 0.99 | number:2}}</p>
+                        </div>
+                        <div class="w-80 m-auto p-b-10">
+                          <button ng-click="vm.openModal('addon')" class="create-project-button w-100 white m-auto" >BUY</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+       </div>
+    </div>
+  </div>
+</section>
+
+

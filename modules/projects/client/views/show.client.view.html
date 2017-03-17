@@ -1,0 +1,124 @@
+<!--Static side bar-->
+<div class="survey-container h-100">
+  <div layout="column"  class="h-100 sideNavSection ng-scope layout-column">
+    <div class="m-r-0 h-100">
+      <div class="static-sidebar primary-white">
+        <ng-include ng-init="activeTab='dashboard'" src="'modules/shared/client/views/dashboard-sidebar.client.html'"></ng-include>
+      </div>
+      <div class="w-static-sidebar d-in">
+        <!-- Survey Container-->
+        <div class="container-fluid">
+          <div class="survey-layout-nav col-md-2 f-l col-sm-2 col-xs-3-1 hide">
+            <div class="survey-block">
+              <h6 class="text-left grey">LAYOUT</h6>
+              <ul class="view-block">
+                <li class="list-view left-bar-aligment">
+                    <img  src="../../../../../modules/core/client/img/insight-images/ic_list_deselect.png" class=""/>
+                  <span class="List View grey">List View</span>
+                </li>
+                <li class="gmodules/projects/client/views/show.client.view.htmlrid-view left-bar-aligment">
+                   <img  src="../../../../../modules/core/client/img/insight-images/ic_grid_deselect.png" class=""/>
+                  <span class="List View grey">Grid View</span>
+                </li>
+              </ul>
+            </div>
+            <div class="survey-block">
+              <h6  class="text-left">VIEW</h6>
+              <ul class="view-block">
+                <li class="all left-bar-aligment">
+                   <img  src="../../../../../modules/core/client/img/insight-images/ic_temp_2.png" class=""/>
+                  <span  class="grey">All</span>
+                </li>
+                <li class="active-project left-bar-aligment">
+                    <img  src="../../../../../modules/core/client/img/insight-images/ic_temp_2.png" class=""/>
+                    <span  class="grey">Active Surveys</span>
+                </li>
+                <li class="inactive-projects left-bar-aligment">
+                    <img  src="../../../../../modules/core/client/img/insight-images/ic_temp_2.png" class=""/>
+                    <span  class="grey">InActive Surveys</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row">
+              <div ng-if ="vm.surveys && (vm.surveys.length > 0)" class="active-projects pull-left">
+                {{ ::vm.project.name }} : SURVEYS ({{vm.surveys.length}})
+              </div>
+              <div ng-if="vm.surveys && (vm.surveys.length > 0)" class="pull-right col-md-2 p-r-0 p-l-20">
+                <button  class='create-project-button w-100 dark-red white' type="button"  ng-click="vm.goToEditAddSurvey('')">Create Survey</button>
+              </div>
+          </div>
+
+          <div class="row p-t-10 m-minus-30">
+            <div class="col-md-4 col-lg-3 col-sm-6 m-t-30" ng-repeat='survey in vm.surveys'>
+              <div class="project-inner-blocks p-0 white-b m-0">
+                <div class="project-inner-section b-style">
+                  <div class="f-16 w-100 project-name">
+                    <p class="d-in black-generic survey-name m-0 bold-color" title="{{survey.name}}">{{::survey.name}}</p>
+                    <div uib-dropdown class="f-r">
+                      <a href="" uib-dropdown-toggle class="w-20-p text-center p-l-10 p-r-10">
+                        <img src="../../../../../modules/core/client/img/insight-images/ic_more-black.png"/>
+                      </a>
+                      <ul uib-dropdown-menu class="dropdown-menu-right block-minimize">
+                        <li class="p-5">
+                          <a ng-click="vm.goToEditAddSurvey(survey)">
+                            <i class="ion-edit ion p-r-5"></i>  Edit
+                          </a>
+                        </li>
+                        <li class="p-5">
+                          <a ng-click="vm.deleteSurvey(survey, $event)">
+                            <i class="ion-trash-b p-r-5"></i> Delete
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="project-inner-section">
+                  <div class="m-b-7">
+                    <span class="w-40 p-b-10 created-on">Questions:</span><span class="p-l-10 w-40">{{::survey.questions.length}}</span>
+                  </div>
+                  <div class="m-b-7">
+                    <span class="w-40 p-b-10 created-on">Responses:</span><span class="p-l-10 w-40">{{::survey.userResponses}}</span>
+                  </div>
+                  <div class="m-b-7">
+                    <span class="w-40 p-b-10 created-on">Created on :</span><span calss=" grey-color w-40">
+                      {{ ::survey.created | date:'d MMM, yyyy' }}
+                    </span>
+                  </div>
+                  <div class="m-b-7">
+                  <span class="w-40 p-b-10 created-on">Last Opened on :</span><span calss=" grey-color w-40">
+                      {{ ::survey.lastOpenedOn | date:'d MMM, yyyy' }}
+                    </span>
+                  </div>
+                </div>
+                <div class="p-20 b-bottom-style view-detail">
+                  <button class="view-hover p-13" ui-sref="surveys.design({id: survey._id})">VIEW DETAILS</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty state -->
+          <div class="row">
+            <div class="p-t-100 content surveyPage-color-height col-xs-12 col-md-8 col-md-offset-2">
+              <div ng-if="vm.surveys && (vm.surveys.length == 0)" class="w-80 m-auto">
+                <div class="m-l-minus-90 text-center">
+                  <img class="p-r-4 p-b-2 m-b-10" src="../../../../../modules/core/client/img/insight-images/ic_surveys_empty.png"/>
+                  <div class="f-32 grey-dark l-s-1">No Surveys Created</div>
+                  <div class="grey-dark opacity-6  f-18 w-40 m-auto">Create your first survey by clicking on the button below !</div>
+                  <div class="w-60 m-l-20">
+                    <button class='create-project-button dark-red white f-r m-t-20 w-40' type="button" value="projects.new" ng-click="vm.goToEditAddSurvey('')">Create Survey</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Survey Container Ends Here-->
+      </div>
+    </div>
+  </div>
+</div>

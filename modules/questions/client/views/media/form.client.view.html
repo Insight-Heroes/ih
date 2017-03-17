@@ -1,0 +1,68 @@
+<!-- Image uploads -->
+<ul class="tweak-pages p-0">
+    <li class="primary-background header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle border-bottom-style">
+    Media Type
+<!--     <span class="f-r">
+      <icon class=" ion-arrow-down-b"
+        ng-if="!vm.switches.choices"
+        >
+      </icon>
+      <icon class="ion-arrow-up-b"
+        ng-if="vm.switches.choices">
+      </icon>
+    </span> -->
+    </li>
+
+  <div class="preview-media" ng-show="vm.switches.choices">
+   <md-nav-bar md-selected-nav-item="vm.currentNavItem" nav-bar-aria-label="navigation links">
+      <md-nav-item name="media" class="md-ink-ripple md-active switch-media text-center p-t-10 p-b-10 w-50 f-l" md-nav-click="vm.switches.type = 'media'; vm.setMediaLink(); ">
+        MEDIA
+      </md-nav-item>
+      <md-nav-item class="switch-media text-center p-t-10 p-b-10 w-50 f-l" md-nav-click="vm.switches.type = 'link'; vm.generatePreview(); vm.setMediaLink();"> <!-- vm.mediaFiles = [{ file: '' }]; -->
+        LINK
+      </md-nav-item>
+    </md-nav-bar>
+    <div class="">
+      <li class="w-100 p-40 text-right"
+          ng-repeat="img in vm.mediaFiles track by $index">
+        <span class="m-r-10">
+          <!-- {{ img.name }} -->
+        </span>
+
+          <button class="red-button w-80 m-auto m-r-25"
+              ng-show="vm.switches.type === 'media' && !img.thumbUrl"
+              ngf-select
+              ngf-pattern="vm.mediaFilePattern.join(',')"
+              ngf-multiple="false"
+              ng-model="img.file"
+              name="img{{$index}}"
+              ngf-change="vm.validateFile($file, $invalidFile, $index, img)">
+              Upload
+          </button>
+
+          <input ng-show="vm.switches.type === 'link' && vm.switches.type !== 'media'" type="text" id="videoUrl" name="videoUrl" class="p-10" ng-model="vm.question.videoUrl" placeholder="Video Ex: https://vimeo.com/.." ng-change="vm.generatePreview()" ng-paste="vm.generatePreview()" ng-cut="vm.generatePreview()" style="float:left;height:10%; width:90%">
+
+        <div class="p-relative d-in m-r-5 img-preview" ng-if="img.thumbUrl && vm.switches.type !== 'link'">
+          <img
+            ngf-thumbnail="img.thumbUrl">
+          <div class="p-absolute clear-image-deprecated hide"
+            ng-click="vm.clearImage(img)">
+              x
+          </div>
+        </div>
+        <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png"
+            class="m-t-5"
+            ng-show="img.thumbUrl && vm.switches.type !== 'link'"
+            ng-click="vm.clearImage(img)"/>
+      </li>
+    </div>
+    <!-- Link -->
+     <div ng-show="linkactive == false">
+        <input type="text" class="w-60 p-l-10 form-builder-style-options grey-dark" placeholder="Enter link"/>
+       <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png"
+        class="m-t-5"
+        ng-show="img.thumbUrl"
+        ng-click="vm.clearImage(img)"/>
+     </div>
+  </div>
+</ul>

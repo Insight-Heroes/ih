@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<div align="center">
+			<p style="width:100%">
+				<img src="{{protocol}}//{{host}}/modules/core/client/img/coming-soon/ih_logo_signin.png">
+			</p>
+
+			<br>
+			<p style="width:100%">
+				<b> Insight Heroes Pvt. Ltd. </b>
+			</p>
+			<br>
+			<p style="width:100%;">
+				<table class="table" style="table-layout: fixed; width: 100%; word-wrap: break-word; white-space: normal;">
+					<tr>
+						<th width="60%">Invoice Details</th>
+						<th width="40%">{{showHistory.companyName}}</th>
+					</tr>
+
+					<tr>
+						<td>
+							Invoice Number: {{showHistory.invoice}} <br/>
+							Invoice Date: {{showHistory.invoiceDate}}
+						</td>
+
+						<td>
+							{{showHistory.address}} <br/>
+							{{showHistory.state}} <br/>
+							{{showHistory.country}} <br/>
+							{{showHistory.zipcode}}
+						</td>
+					</tr>
+
+				</table>
+			</p>
+
+			<p style="width:100%;">
+				<table class="table" style="table-layout: fixed; width: 100%; word-wrap: break-word; white-space: normal;">
+					<tr>
+						<th width="60%">Product</th>
+						<th width="40%">Price</th>
+					</tr>
+					<tr>
+						<td>
+							Name: <b>{{showHistory.planType}}</b><br/>
+							Number of Respondents: {{showHistory.noRepondants}}<br/>
+							Duration: {{showHistory.duration}}<br/>
+							{{showHistory.featureProj}}<br/>
+							{{showHistory.featureSur}}
+						</td>
+						<td>
+							${{showHistory.price}}
+						</td>
+					</tr>
+
+					<tr>
+						<td> <strong> Total Amount </strong> </td>
+						<td> ${{showHistory.price}} </td>
+					</tr>
+
+				</table>
+			</p>
+			<p></p>
+			<p><strong>Thank you for doing business with us.</strong></p>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<div class="user-sign-in">
+  <div class="w-45 m-auto">
+    <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+      <fieldset class="p-r-17 p-t-60  w-80 m-auto">
+      <div class="insight-logo">
+      <img src= "../../../../../modules/core/client/img/insight-images/ih_logo_signin.png"/>
+      </div>
+      <h3 class="signin-header l-s-1 text-center m-t-40">welcome  back to insight heroes</h3>
+        <p class="d-i text-center m-b-40 gr-font">possible tagline if we have one</p>
+        <div class="form-group w-100 d-in" show-errors>
+          <div class="row">
+            <div class="col-md-12">
+              <label for="email" class="user-label">Email Address</label>
+              <input type="email" id="email" name="email" class="form-control  box-style email-style" ng-model="vm.credentials.email" placeholder="example@email.com" lowercase required>
+              <div ng-messages="vm.userForm.email.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Email address is required.</p>
+                <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group w-100 d-in" show-errors>
+          <div class="row">
+            <div class="col-md-12">
+              <label for="password" class="user-label">Password </label>
+              <input type="password" id="password" name="password" class="box-style form-control password-field" ng-model="vm.credentials.password" placeholder="*******" required/><span class="password-forgot"><a ui-sref="password.forgot" class="forgot-password"><em>Forgot?</em></a></span>
+              <div ng-messages="vm.userForm.password.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Password is required.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group w-100 d-in">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="signup f-16 m-t-5">Do not have account yet? <a ui-sref="authentication.signup" class="signup-text">Sign up</a> now!</div>
+              <div class="user-sign-in-options">
+                <div class="confirmation-email">
+                  <a ui-sref="confirmationEmail.resend" class="resend f-16">Did not receive confirmation email?</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 p-l-0">
+              <div class="user-login-section">
+                <button type="submit" class="user-login w-100">Sign in</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <uib-alert type="danger" ng-show="vm.error" class="text-center text-danger">
+          <span ng-bind="vm.error"></span>
+        </uib-alert>
+      </fieldset>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<ul class="tweak-pages p-0">
+  <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle m-b-20">
+    Rows Titles(Questions)
+  </li>
+  <li class="p-l-20 p-r-20 p-b-20 p-t-0 hide-style"  ng-repeat="row in vm.question.rows track by $index" show-errors>
+    <span class="w-10 m-r-5" ng-init="nm=''">{{ $index + 1 }}</span>
+    <div class="hide">
+      {{name="row"+$index}}
+    </div>
+    <input type="text"
+        class="outline-none w-70 p-l-10 form-builder-style-options grey-dark"
+        placeholder="Enter row {{ $index + 1 }}"
+        ng-model="row.text"
+        name="{{name}}"
+        required />
+      <img src="../../../../../modules/core/client/img/insight-images/ic_upload_logo.png"
+        ng-hide="vm.question.rows.length > 4"
+        ng-click="vm.addRowCols($index, 'rows')" class="outline-none m-l-5" />
+      <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png"
+        ng-click="vm.removeRowCols($index, 'rows')"
+        ng-hide="vm.question.rows.length < 3" class="outline-none m-l-3" />
+    <div ng-messages="vm.questionForm[name].$error" role="alert">
+      <p class="help-block error-text" ng-message="required">
+        Please enter row text.
+      </p>
+    </div>
+  </li>
+
+  <li class="header-nav light-grey w-100 p-15 p-l-20 p-r-20 click-toggle m-b-20">
+    Columns Titles(Answers)
+  </li>
+  <li  class="p-l-20 p-r-20 p-b-20 p-t-0 hide-style" ng-repeat="c in vm.question.columns track by $index" show-errors>
+    <span class="w-10 m-r-5" ng-init="nm=''">{{ $index + 1 }}</span>
+    <div class="hide">
+      {{name="col"+$index}}
+    </div>
+    <input type="text"
+        class="outline-none w-70 p-l-10 form-builder-style-options grey-dark"
+        placeholder="Enter column {{ $index + 1 }}"
+        ng-model="c.text"
+        name="{{name}}"
+        required />
+      <img src="../../../../../modules/core/client/img/insight-images/ic_upload_logo.png"
+        ng-hide="vm.question.columns.length > 4"
+        ng-click="vm.addRowCols($index, 'columns')" class="outline-none m-l-5" />
+      <img src="../../../../../modules/core/client/img/insight-images/ic_subtract.png"
+        ng-click="vm.removeRowCols($index, 'columns')"
+        ng-hide="vm.question.columns.length < 3" class="outline-none m-l-3" />
+    <div ng-messages="vm.questionForm[name].$error" role="alert">
+      <p class="help-block error-text" ng-message="required">
+        Please enter column text.
+      </p>
+    </div>
+  </li>
+</ul>

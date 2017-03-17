@@ -1,0 +1,162 @@
+<ng-include ng-init="activeSurveyNav='distribute'"
+  src="'modules/shared/client/views/survey-navbar.client.html'">
+</ng-include>
+<div class="" ui-view>
+  <div layout="column" class="sideNavSection ng-scope layout-column absolute-top">
+    <div class="p-l-50 p-r-50 p-t-30">
+      <div class="upper-navigation-header">
+        <font size="5" color="gray" ui-sref="surveys.distribute({ id: vm.survey._id })">Distribute</font>
+        <img src="../../../../../modules/core/client/img/insight-images/ic_arrow_low.png"  class="m-l-10" style="margin-bottom: 7px"/>
+        <font size="5" color="gray" class="m-l-10" ui-sref="lists.list({ id: vm.survey._id })">Lists</font>
+        <img src="../../../../../modules/core/client/img/insight-images/ic_arrow_low.png"  class="m-l-10" style="margin-bottom: 7px"/>
+        <font class="m-l-10" size="5" ng-if="!vm.list._id">Create New List</font>
+        <font class="m-l-10" size="5" ng-if="vm.list._id">Edit List</font>
+      </div>
+      <div class="container">
+          <div class="col-md-10 col-md-offset-1 user-details user-sign-up">
+              <div class="row">
+                  <div class="upper-sign-in col-md-offset-2 col-md-8">
+                      <div class="circle-decoration p-lr-distribute" ng-class="w-60-log">
+                          <div
+                              ui-sref="lists.edit({listId: vm.list._id, surveyId: vm.survey._id})"
+                              class="circle-one circle-background text-center f-l sign-up-red">
+                              <p ng-show="vm.userForm.$invalid">1</p>
+                              <img src="../../../../../modules/core/client/img/insight-images/ic_check.png" ng-hide="vm.userForm.$invalid" class="icon-checkmark p-relative" />
+                          </div>
+                          <hr class="custom-hr">
+                          <p class="circle-grey text-center f-l sign-up-red" ng-class="{'signup-red': vm.userForm.$valid == true}">2</p>
+                      </div>
+                      <div class="signup-page-heading w-100 d-in" ng-class="">
+                          <span class="text-center pull-left sign-up-red f-16 l-s-2 f-aveinr-medium" ng-click="vm.goBack()">List Details</span>
+                          <span class=" text-center pull-right sign-up-grey f-16 l-s-2 f-aveinr-medium" ng-class="{'company-form': vm.userForm.$valid == true}">Import Respondents</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <fieldset>
+        <!-- Main  Section starts Here-->
+        <form name="vm.userForm" ng-submit="vm.save(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+            <div class="container">
+                <div class="col-md-10 col-md-offset-1 user-details user-sign-up">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 p-t-50">
+                            <div class="column-block">
+                                <div class="form-group w-100 d-in" show-errors>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="email" class="signup-labels">List Name</label>
+                                            <textarea name="name" class="padding-fix form-control box-style italic-style " ng-model="vm.list.name" required placeholder="The Death Star v3.0" required rows="3">
+                                            </textarea>
+                                            <div ng-messages="vm.userForm.name.$error" role="alert">
+                                                <p class="help-block error-text" ng-message="required">List name is required.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group w-100 d-in">
+                                  <div class="row">
+                                    <div class="col-md-6 p-r-10" show-errors>
+                                        <label for="firstName" class="signup-labels">Default from <b><i>Email Id</i></b></label>
+                                        <input type="text" id="firstName" name="firstName" class="form-control box-style italic-style" ng-model="vm.list.fromEmail" placeholder="Test List 1">
+                                        <div ng-messages="vm.userForm.firstName.$error" role="alert">
+                                            <p class="help-block error-text" ng-message="required">Email is required.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 p-l-10" show-errors>
+                                        <label for="lastName" class="signup-labels">Default from <b><i>Name</i></b></label>
+                                        <input type="text" id="lastName" name="lastName" class="form-control box-style italic-style" ng-model="vm.list.fromName" placeholder="Test List 1">
+                                        <div ng-messages="vm.userForm.lastName.$error" role="alert">
+                                            <p class="help-block error-text" ng-message="required">Name is required.</p>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group w-100 d-in" show-errors>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <label for="email" class="signup-labels">Company/Organisation</label>
+                                      <textarea name="company" class="padding-fix form-control box-style italic-style " ng-model="vm.list.companyName" placeholder="The Death Star v3.0" rows="3">
+                                      </textarea>
+                                      <div ng-messages="vm.userForm.company.$error" role="alert">
+                                          <p class="help-block error-text" ng-message="required">Company name is required.</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group w-100 d-in" show-errors>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <label for="email" class="signup-labels">Address</label>
+                                      <textarea name="address" class="padding-fix form-control box-style italic-style " ng-model="vm.list.address" placeholder="Address Line 1, Address Line 2" rows="3">
+                                      </textarea>
+                                      <div ng-messages="vm.userForm.address.$error" role="alert">
+                                          <p class="help-block error-text" ng-message="required">Address is required.</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group w-100 d-in" show-errors>
+                                  <div class="row">
+                                    <div class="col-md-4 p-r-10">
+                                        <label for="pincode" class="signup-labels">Pin/Zip code</label>
+                                      <input type="text" id="pincode" name="pincode" class="form-control box-style " ng-model="vm.list.zipcode" placeholder="ABC123" required maxlength="6" minlength="3" max-length="16" ng-pattern="/\w+$/">
+                                      <div ng-messages="vm.userForm.pincode.$error" role="alert">
+                                            <p class="help-block error-text" ng-message="required">Pin/Zip code is required.</p>
+                                            <p class="help-block error-text" ng-message="minlength">Pin/Zip code must be valid.with minimum 3 characters.</p>
+                                            <p class="help-block error-text" ng-message="pattern">Pin/Zip code must be numeric.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 p-r-10 p-l-10" show-errors>
+                                        <label for="state" class="signup-labels">State/Province</label>
+                                        <input type="text" id="state" name="state" class="form-control box-style italic-style" ng-model="vm.list.state" placeholder="Terrarium City">
+                                        <div ng-messages="vm.userForm.state.$error" role="alert">
+                                            <p class="help-block error-text" ng-message="required">State/Province is required.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 p-l-10" show-errors>
+                                        <label for="country" class="signup-labels">Country</label>
+                                      <div class="select-box-wrapper" ng-controller="HeaderController as hc">
+                                        <select type="text" id="country" name="country" class="form-control box-style italic-style" ng-model="vm.list.country" placeholder="Country Name" required>
+                                          <option value="">Please select</option>
+                                          <option ng-repeat="country in hc.countries">{{country}}</option>
+                                        </select>
+                                      </div>
+                                        <div ng-messages="vm.userForm.country.$error" role="alert">
+                                            <p class="help-block error-text" ng-message="required">Country is required.</p>
+                                        </div>
+                                    </div>
+                                  </div>
+                                    <!-- Nov 21 at 5:40pm Phone Number / email is compulsary-->
+                                </div>
+                                <div class="form-group w-100 d-in">
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="w-100 f-l" show-errors>
+                                        <label for="mobileNo" class="signup-labels">Phone number</label>
+                                        <input type="text" id="mobileNo" name="mobileNo" class="form-control box-style italic-style " ng-model="vm.list.mobileNo" placeholder="xxxx-xxxx-xxxx" required minlength="10" ng-pattern="/^\d+$/">
+                                        <div ng-messages="vm.userForm.mobileNo.$error" role="alert">
+                                            <p class="help-block error-text" ng-message="required">Phone number is required.</p>
+                                            <p class="help-block error-text" ng-message="minlength">Phone number must be minimum of 10 digit.</p>
+                                            <p class="help-block error-text" ng-message="pattern">Phone number must be numeric.</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="dark-container layout dark-grey  navbar navbar-default" ui-view>
+                <div class="w-100">
+                    <button class="w-14 blue-button white f-r m-r-20 m-t-7 p-t-8 p-b-8" type="submit">Save</button>
+                </div>
+            </nav>
+        </form>
+    </fieldset>
+  </div>
+</div>

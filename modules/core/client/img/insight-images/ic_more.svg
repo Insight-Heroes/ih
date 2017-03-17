@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="4px" height="16px" viewBox="0 0 4 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.1 (35376) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_more</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Distribute" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="05_createnew_step1" transform="translate(-1405.000000, -24.000000)" fill="#FFFFFF">
+            <g id="molecules/toolbar" transform="translate(-2.000000, 0.000000)">
+                <path d="M1409,40 C1410.10457,40 1411,39.1045695 1411,38 C1411,36.8954305 1410.10457,36 1409,36 C1407.89543,36 1407,36.8954305 1407,38 C1407,39.1045695 1407.89543,40 1409,40 Z M1409,34 C1410.10457,34 1411,33.1045695 1411,32 C1411,30.8954305 1410.10457,30 1409,30 C1407.89543,30 1407,30.8954305 1407,32 C1407,33.1045695 1407.89543,34 1409,34 Z M1409,28 C1410.10457,28 1411,27.1045695 1411,26 C1411,24.8954305 1410.10457,24 1409,24 C1407.89543,24 1407,24.8954305 1407,26 C1407,27.1045695 1407.89543,28 1409,28 Z" id="ic_more"></path>
+            </g>
+        </g>
+    </g>
+</svg>

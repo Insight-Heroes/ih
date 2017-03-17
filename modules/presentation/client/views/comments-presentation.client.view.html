@@ -1,0 +1,169 @@
+<!--Static side bar-->
+<div class="">
+  <div class="container-fluid chart-resize ">
+    <div class="row p-relative">
+      <div class="previous-next-buttons z-1 w-100" ng-class="{'w-60': vm.preview === false, 'col-md-offset-1': vm.preview === false }">
+        <span ng-click="vm.previousSlide()"  class="primary-backgroundgrey p-20 b-b-r b-t-r p-absolute l-0 c-grey" ng-class="{'l-25': vm.preview === false}">
+          <img src="../../../../../modules/core/client/img/present/ic_previous_regular.png" class=""/>
+        </span>
+        <span ng-click="vm.nextSlide()"  class="primary-backgroundgrey p-20 b-b-l b-t-l c-grey p-absolute r-0 ">
+          <img src="../../../../../modules/core/client/img/present/ic_next_regular.png" class=""/>
+        </span>
+      </div>
+      <div class= "" ng-repeat="presentation in vm.presentationView.graphs | orderBy: 'slideNo'" ng-show="vm.currentIndex === $index">
+
+        <div class="col-md-7 col-md-offset-1 p-t-10" ng-show="vm.preview === false">
+          <p class="text-center f-20">Screen Number: {{:: presentation.slideNo }}</p>
+          <p class="text-center f-18 f-bold">Created On: {{ ::vm.presentationView.created | date:'d MMM, yyyy' }}</p>
+      </div>
+      <div class="chart-size board col-md-12 m-t-0 p-b-50" ng-class="{'col-md-7':vm.preview === false, 'col-md-offset-1':vm.preview === false }">
+      <!-- =====================================================-     -->
+      <div class="w-500 m-r-auto m-l-auto" ng-class="{'p-t-10': vm.preview === !false, 'p-b-400': vm.preview === !false, 'resize-chart-present': vm.preview === !false, 'w-300-p': presentation.chartType == 'polarArea'}">
+        <div class="text-center m-b-10 m-t-10 m-l-10" ng-class="{'m-h-100':vm.preview !== false}">
+
+          <p class="increase-font-size f-18 d-inflex d-moz-flex text-hidden" ng-hide="vm.inPlaceEditing" ng-class="{'w-100':vm.preview === false}" ng-bind-html="presentation.slideTitle">
+
+          </p>
+          <span class="d-in">
+              <i class="ion ion-edit m-r-10 f-14" ng-show="presentation.slideTitle != null && !vm.inPlaceEditing"
+                 ng-click="vm.inPlaceEditing = true"></i>
+          </span>
+          <div  ng-model="presentation.slideTitle" class="w-90 d-in form-control div-block0" ng-keyup="vm.editText(presentation,$event)" medium-editor bind-options="{'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h2', 'h3', 'quote']}}" ng-if="vm.inPlaceEditing" ></div>
+            <span class="pull-right p-t-10">
+                 <i class="ion ion-checkmark m-r-5 m-l-5"
+                    ng-click="vm.saveStoryAndDiscription(presentation)"
+                   ng-show="vm.inPlaceEditing"></i>
+                  <!-- <i class="ion ion-close m-r-10"
+                  ng-click="vm.cancelVariableRename()"
+                  ng-show="vm.inPlaceEditing"></i> -->
+            </span>
+        </div>
+        <div class="text-center m-b-10 m-t-10 m-l-10" ng-class="{'m-h-100':vm.preview !== false}">
+          <p class="increase-font-size f-16 d-inflex d-moz-flex text-hidden" ng-hide="vm.inDiscriptionEditing" ng-class="{'w-100':vm.preview === false}" ng-bind-html="presentation.description">
+          </p>
+          <span class="d-in">
+              <i class="ion ion-edit m-r-10 f-14" ng-show="presentation.description != '' && !vm.inDiscriptionEditing"
+                 ng-click="vm.inDiscriptionEditing = true"></i>
+            </span>
+          <div  ng-model="presentation.description" class="w-90 d-in form-control div-block1" ng-keyup="vm.editText(presentation,$event)" medium-editor bind-options="{'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h2', 'h3', 'quote']}}" ng-if="vm.inDiscriptionEditing" ></div>
+          <span class="pull-right p-t-10">
+               <i class="ion ion-checkmark m-r-5 m-l-5"
+                   ng-click="vm.saveStoryAndDiscription(presentation)"
+                   ng-show="vm.inDiscriptionEditing"></i>
+                <!-- <i class="ion ion-close m-r-10"
+                ng-click="vm.cancelVariableRename()"
+                ng-show="vm.inDiscriptionEditing"></i> -->
+            </span>
+        </div>
+        <div class="text-center m-b-10 m-t-10 m-l-10">
+          <p class="increase-font-size f-14 p-b-10 d-inflex d-moz-flex  text-hidden" ng-hide="vm.ingraphTitleEditing" ng-class="{'w-100':vm.preview === false}" ng-bind-html="presentation.graphTitle">
+          </p>
+          <span class="d-in">
+                <i class="ion ion-edit m-r-10 f-14" ng-show="presentation.graphTitle != '' && !vm.ingraphTitleEditing"
+                   ng-click="vm.ingraphTitleEditing = true"></i>
+              </span>
+          <div  ng-model="presentation.graphTitle" class="w-90 d-in form-control div-block2" ng-keyup="vm.editText(presentation,$event)" medium-editor bind-options="{'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h2', 'h3', 'quote']}}" ng-if="vm.ingraphTitleEditing" ></div>
+          <span class="pull-right p-t-10">
+                <i class="ion ion-checkmark m-r-5 m-l-5"
+                   ng-click="vm.saveStoryAndDiscription(presentation)"
+                   ng-show="vm.ingraphTitleEditing">
+                </i>
+                 <!-- <i class="ion ion-close m-r-10"
+                  ng-click="vm.cancelVariableRename()"
+                  ng-show="vm.ingraphTitleEditing">
+                </i> -->
+          </span>
+        </div>
+        <div class="m-auto w-400">
+        <canvas
+          class="chart-base"
+          ng-show="presentation.statsType == 'percentile'"
+          chart-options="presentation.graphOptions"
+          chart-type="presentation.chartType"
+          chart-data="presentation.percentData"
+          chart-series="presentation.series"
+          chart-labels="presentation.labels">
+        </canvas>
+        <canvas
+          class="chart-base"
+          ng-show="presentation.statsType == 'count'"
+          chart-options="presentation.graphOptions"
+          chart-type="presentation.chartType"
+          chart-data="presentation.data"
+          chart-series="presentation.series"
+          chart-labels="presentation.labels"
+          >
+        </canvas>
+        </div>
+      </div>
+      </div>
+      <div class="primary-white side-shadow navigation-right-sidebar p-relative" ng-show="vm.preview === false">
+        <h3 class="text-center p-t-10 m-t-10">Comments</h3>
+        <p class="text-center p-l-15 p-r-15">Please enter your comments below.<br/>These comments can be viewed by everyone who are involved in this project.</p>
+        <div class="comment-section o-auto">
+          <div class="comments-list">
+            <div ng-repeat="comments in vm.commentsList" class="comment-word-break">
+              <span><em class="user-name" ng-bind-html="comments.userDisplayName"></em>:</span>
+              <span><em class="" ng-bind-html="comments.comment"></em></span>
+            </div>
+          </div>
+          <!-- <div class="background-grey comment-sent-box"> -->
+          <div class="comment-sent-box">
+            <div class="row outer">
+              <div class="col-sm-9 p-r-0">
+                <div class="outline-none comment-box f-14 container-text p-0 background-grey b-0" ng-model="vm.comments" medium-editor name="title" bind-options="{'toolbar': {'buttons': ['bold', 'italic', 'underline', 'h2', 'h3', 'quote']}}"  data-placeholder="Write your message here.." ng-click="vm.otrue" required>
+                </div>
+              </div>
+              <div class="col-sm-3 p-l-0">
+                <div class="comment-sent-button">
+                  <img src="../../../../../modules/core/client/img/insight-images/icons_send.png" ng-click="vm.sendComment(presentation._id)"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
+      </div>
+    </div>
+  </div>
+    <nav class="p-fixed b-0 w-100 o-hidden dark-container present-bottom-bar layout dark-grey navbar navbar-default">
+      <div class="w-100 p-l-20 p-r-20">
+        <span class="user-response-img">
+          <img class="text-center "  src="{{vm.presentationView.project.logo}}" />
+        </span>
+        <div class="back-arrow">
+          <a ng-click="vm.goBack()" class="cursor-pointer d-in w-20-p f-l">
+            <img src="../../../../../modules/core/client/img/insight-images/ic_back.png">
+          </a>
+        </div>
+          <div class="d-b nav-dark-list m-auto f-16">
+              <md-nav-bar ng-init="activeSurveyNav='previewOfChart'" md-selected-nav-item="activeSurveyNav" nav-bar-aria-label="navigation links">
+                  <md-nav-item class="f-16 white p-t-0"
+                      md-nav-click="vm.previewOfChart()"
+                      name="previewOfChart">
+                    <img src="../../../../../modules/core/client/img/present/ic_view_default.png" ng-if="!vm.preview"/>
+                    <img src="../../../../../modules/core/client/img/present/ic_view_active.png" ng-if="vm.preview" />
+
+                  </md-nav-item>
+<!--                   <md-nav-item class="f-16 white p-t-0"
+                      md-nav-click=""
+                       name="redpan">
+                    <img src="../../../../../modules/core/client/img/present/ic_comments_default.png"  />
+                  </md-nav-item> -->
+                  <md-nav-item class="f-16 white p-t-0"
+                      md-nav-click="vm.activeCommentBox()"
+                       name="comment">
+                    <img src="../../../../../modules/core/client/img/present/ic_notes_defualt.png" ng-if="!vm.activecomment"/>
+                    <img src="../../../../../modules/core/client/img/present/ic_notes_active.png" ng-if="vm.activecomment" />
+                  </md-nav-item>
+                  <md-nav-item class="f-16 white p-t-0"
+                      md-nav-click=""
+                      name="distribute"
+                      ng-click="vm.sendPdfPopup(presentation,$event)">
+                    <img src="../../../../../modules/core/client/img/present/ic_share_default.svg"/>
+                  </md-nav-item>
+              </md-nav-bar>
+          </div>
+      </div>
+    </nav>

@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>User permissions</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="user-permission in vm.userPermissions"
+       ui-sref="userPermissions.view({ user-permissionId: user-permission._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="userPermission.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="userPermission.user" ng-bind="userPermission.user.displayName"></span>
+        <span ng-if="!userPermission.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="user-permission.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.userPermissions.$resolved && !vm.userPermissions.length">
+    No User permissions yet, why don't you <a ui-sref="userPermissions.create">create one</a>?
+  </div>
+</section>

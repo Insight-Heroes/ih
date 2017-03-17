@@ -1,0 +1,59 @@
+<!-- <section class="row text-center" ng-if="vm.confirmationStatus == 'token-expired'">
+  <h3 class="col-md-12">Confirmation token Expired.</h3>
+  <a ui-sref="confirmationEmail.resend" class="col-md-12">Resend confirmation email?</a>
+</section>
+<section class="row text-center" ng-if="vm.confirmationStatus == 'invalid-token'">
+  <h3 class="col-md-12">Invalid confirmation token or account is already confirmed.</h3>
+  <a ui-sref="confirmationEmail.resend" class="col-md-12">Resend confirmation email?</a>
+</section> -->
+
+<div class="d-b light-grey f-aveinr authentication-message text-center" ng-if="vm.confirmationStatus == 'token-expired'">
+	<p class="p-t-60 m-b-100 w-15 m-auto">
+	  <img src="../../../../../modules/core/client/img/insight-images/ih_logo_signin.png"/>
+	</p>
+	<h3 class="text-center gr-font m-b-40 f-22">ACCOUNT ERROR</h3>
+	<p class="w-7 m-auto m-b-40">
+	  <i class="ion-ios-close-outline"></i>
+	</p>
+	<div class="w-40 m-auto m-b-40">
+	  <p  class="text-center gr-font f-18">Confirmation token Expired</p>
+	</div>
+	<div class="confirmation-email text-center">
+	  <button class="f-aveinr h-50 red-button text-center" ui-sref="confirmationEmail.resend">Resend confirmation email?</button>
+	</div>
+</div>
+
+<div class="d-b light-grey f-aveinr authentication-message text-center" ng-if="vm.confirmationStatus == 'invalid-token'">
+	<p class="p-t-60 m-b-100 w-15 m-auto">
+	  <img src="../../../../../modules/core/client/img/insight-images/ih_logo_signin.png"/>
+	</p>
+	<h3 class="text-center gr-font m-b-40 f-22">ACCOUNT ERROR</h3>
+	<p class="w-7 m-auto m-b-40">
+	  <i class="ion-ios-close-outline"></i>
+	</p>
+	<div class="w-40 m-auto m-b-40">
+	  <p  class="text-center gr-font f-18">Invalid confirmation token or account is already confirmed</p>
+	</div>
+	<div class="confirmation-email text-center">
+	  <button class="f-aveinr h-50 red-button text-center" ui-sref="confirmationEmail.resend">Resend confirmation email?</button>
+	</div>
+</div>
+  <!-- confirmation Dialog For ConfirmationMail-->
+<div class="d-b light-grey f-aveinr authentication-message text-center" ng-if="vm.confirmationStatus == 'account-confirmed'">
+	<p class="p-t-60 m-b-100 w-15 m-auto">
+	  <img src="../../../../../modules/core/client/img/insight-images/ih_logo_signin.png"/>
+	</p>
+	<h3 class="text-center gr-font m-b-40 f-22">ACCOUNT SUCCESSFULLY VERIFIED</h3>
+	<p class="w-7 m-auto m-b-40">
+	  <img  src="../../../../../modules/core/client/img/insight-images/ic_successful.png" srcset="../../../../../modules/core/client/img/insight-images/ic_successful@2x.png 2x" />
+	</p>
+	<div class="w-40 m-auto m-b-40">
+	  <p  class="text-center gr-font f-18">Your email is successfully verified and account is activated</p>
+	</div>
+	<div class="confirmation-email text-center">
+	  <button class="f-aveinr h-50 red-button text-center" ui-sref="authentication.signin">LOG IN</button>
+	</div>
+</div>
+
+  <!-- <h3 class="col-md-12">Your email is successfully verified and account is activated.</h3>
+  <a ui-sref="authentication.signin" class="col-md-12">Sign in</a> -->

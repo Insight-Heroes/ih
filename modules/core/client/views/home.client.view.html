@@ -1,0 +1,86 @@
+<div style="padding-top: 50px;" class="text-center" ng-if="vm.env === 'development'">
+  <div ng-hide="vm.authentication.user">
+    <a class="btn btn-primary m-t-10" ui-sref="authentication.signup">Sign Up</a>
+    <br>
+    <a class="btn btn-success m-t-10" ui-sref="authentication.signin">Sign In</a>
+  </div>
+  <div ng-show="vm.authentication.user">
+	  <a class="btn btn-success m-t-10" ui-sref="dashboard">Dashboard</a>
+    <br>
+    <a class="btn btn-warning m-t-10" ng-click="vm.authentication.logout()">Logout</a>
+  </div>
+</div>
+ <form name="emailForm" ng-submit="vm.saveUserEmail(emailForm.$valid)" class="container form-inline"
+      novalidate autocomplete="off">
+    <div class="row text-center d-b m-t-80">
+          <p>
+            <img src="../../../../../modules/core/client/img/coming-soon/ih_logo_signin.png"/>
+          </p>
+          <div class="p-t-20 p-b-20 f-24 open-bold">There is a new superhero squad</br>on the block!</div>
+          <div class="p-t-20">
+            <p class="f-18 l-s-1 open-Semi">Insight Heroes has the power to take complex analytics and present them as meaningful insights in record-shattering</br>times.Working on a platform that is built to transcend the distance of continents, IH never has and never will think</br>small. The future is here, and it's wearing one good-looking cape!</p>
+           </div>
+           <div class="form-group p-t-20 container">
+            <div class="row">
+              <div class="col-md-8 m-t-30 form-group" show-errors>
+                <input type="email" placeholder="Enter  Email ID" class="col-md-12 light-grey h-42 text-center b-style-solid  b-r-4"
+                    id="email" name="email"
+                    ng-model="vm.user.email" required/>
+                <div ng-messages="emailForm.email.$error" role="alert">
+                   <p class="help-block error-text p-t-40" ng-message="required">Please enter email.</p>
+                   <p class="help-block error-text" ng-message="email">Please enter correct email.</p>
+                </div>
+              </div>
+              <div class="col-md-3 m-t-30">
+                <button class="col-md-12 notified  dark-red white btn "> GET NOTIFIED</button>
+              </div>
+            </div>
+                <div class="p-t-30 row">
+                  <p  class="col-xs-12 col-md-12 m-t-30">FOLLOW US</p>
+                  <div  class="w-14 m-auto">
+                    <ul class="col-md-12 m-t-20">
+                      <li class="f-l  m-t-10 col-sm-4 l-none"><a target="_blank" href="https://www.facebook.com/InsightHeroes/"><img src="../../../../../modules/core/client/img/coming-soon/Facebook@1x.png.png"/></a></li>
+                      <li class="f-l  m-t-10 col-sm-4 l-none"><a target="_blank" href="https://twitter.com/InsightHeroes"><img src="../../../../../modules/core/client/img/coming-soon/Twitter@1x.png.png"/></a></li>
+                      <li class="f-l  m-t-10 col-sm-4 l-none"><img src="../../../../../modules/core/client/img/coming-soon/LinkedIn@1x.png.png"/></li>
+                    </ul>
+                  </div>
+               </div>
+          </div>
+    </div>
+ </form>
+
+
+<!--
+
+<div class="row m-t-100">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <form name="emailForm" ng-submit="vm.saveUserEmail(emailForm.$valid)" class="form-inline"
+      novalidate autocomplete="off">
+      <div class="form-group" show-errors>
+        <label for="email">Email address</label>
+        <input type="email" class="form-control"
+            id="email" name="email"
+            ng-model="vm.user.email" required>
+        <div ng-messages="emailForm.email.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Please enter email.</p>
+          <p class="help-block error-text" ng-message="email">Please enter correct email.</p>
+        </div>
+      </div>
+      <button class="btn btn-primary">Save</button>
+    </form>
+
+  </div>
+  <div class="col-md-4"></div>
+</div>
+  -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-86797743-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

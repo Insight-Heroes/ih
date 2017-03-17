@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Comments</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="comment in vm.comments"
+       ui-sref="comments.view({ commentId: comment._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="comment.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="comment.user" ng-bind="comment.user.displayName"></span>
+        <span ng-if="!comment.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="comment.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.comments.$resolved && !vm.comments.length">
+    No Comments yet, why don't you <a ui-sref="comments.create">create one</a>?
+  </div>
+</section>

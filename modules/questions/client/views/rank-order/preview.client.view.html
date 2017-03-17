@@ -1,0 +1,16 @@
+<div class="w-100 m-auto form-builder-option-block">
+  <div
+    class='w-50'
+    ng-repeat="choice in vm.question.choices track by $index">
+    <div class="formbuilder-a p-relative m-t-20 white-button">
+      <div class="d-in choice-dom">
+        <div class="option-a">
+          <span class="dark-red-c">{{ $index + 1 }}</span>
+        </div>
+        <span class="font-15 grey-dark overflow-setting p-t-15"
+          ng-bind="choice.text">
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="absolute-top">
+    <div class="p-b-20 p-l-50 p-r-50">
+      <div class="upper-navigation-header m-t-30">
+        <font size="5" color="grey" ui-sref="surveys.distribute({ id: vm.survey._id })">Distribute</font>
+        <img src="../../../../../modules/core/client/img/insight-images/ic_arrow_low.png"  class="m-l-10" style="margin-bottom: 7px"/>
+        <font size="5" color="grey" class="m-l-10" ui-sref="lists.list({ id: vm.survey._id })">Lists</font>
+        <img src="../../../../../modules/core/client/img/insight-images/ic_arrow_low.png"  class="m-l-10" style="margin-bottom: 7px"/>
+        <font class="m-l-10" size="5" >{{ vm.list.name }}</font>
+      </div>        <p class=" f-aveinr w-50 f-l grey-dark">
+            <span class="f-bold">Verify the columns that where imported</span>
+            <span class="p-l-20">{{ vm.csv.headers.length }} columns imported from CSV.</span>
+        </p>
+        <p class="text-right f-aveinr light-blue" ng-click="vm.goToCSVUpload()">Reupload?</p>
+        <div class="distribute-rectangle ">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="p-l-20 p-r-20 p-t-20 m-l-10">
+                        Select Respondent Type
+                        <div class="select-box-wrapper m-t-10">
+                            <select ng-model="vm.respondentType"
+                                class="b-style-solid form-control f-aveinr"
+                                ng-options="k as v for (k, v) in vm.defaultRespondentTypes">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex o-auto">
+                <!-- instead of four column we can move into one column and use ng-repeat -->
+                <div class="w-100 m-auto p-t-10 p-20 ">
+                    <div class="p-relative listName w-23 m-10 p-0 primary-white"
+                        ng-class="{'light-blue-border': vm.csv.activeColumn === $index}"
+                        ng-repeat="h in vm.csv.headers track by $index">
+                        <!-- Column heading -->
+                        <div align="center"
+                            ng-if="vm.defaultHeaders[$index] !== -1 && vm.defaultHeaders[$index] !== 0"
+                            class="f-aveinr-medium f-18 l-h-0 rectangle-header">
+                            <span ng-hide="vm.newColumn && $index === vm.csv.activeColumn">{{ vm.list.contactHeaders[vm.defaultHeaders[$index]] }}</span>
+                        </div>
+
+                        <!-- Record skipped -->
+                        <div align="center"
+                            style="color: #c1c123;"
+                            class="f-aveinr-medium f-18 l-h-0 rectangle-header"
+                            ng-if="vm.defaultHeaders[$index] == -1">
+                            <span ng-hide="vm.newColumn && $index === vm.csv.activeColumn">Skipped</span>
+                            <br>
+                            <span>({{vm.csv.headers[$index]}} )</span>
+                        </div>
+
+                        <!-- Column not matched -->
+                        <div align="center"
+                            style="color: red;"
+                            class="f-aveinr-medium f-18 l-h-0 rectangle-header"
+                            ng-if="vm.defaultHeaders[$index] == 0">
+                            <span ng-hide="vm.newColumn && $index === vm.csv.activeColumn">Unmatched column</span>
+                            <br>
+                            <span ng-hide="vm.newColumn && $index === vm.csv.activeColumn">({{vm.csv.headers[$index]}} )</span>
+                        </div>
+
+                        <div class="m-20">
+                            <input class="form-control" type="text" name=""
+                                    ng-model="vm.defaultHeaders[$index]"
+                                    ng-show="vm.newColumn && vm.csv.activeColumn === $index" />
+                            <div class="p-relative" ng-hide="vm.newColumn && vm.csv.activeColumn === $index">
+                                <img class="p-absolute drop-image-distribute" src="../../../../../modules/core/client/img/insight-images/ic_drop_down.png"/>
+                                <select type="text"
+                                    ng-model="vm.defaultHeaders[$index]"
+                                    ng-change="vm.headerChoiceUpdate()"
+                                    class="b-style-solid l-h-18 h-30 form-control box-style italic-style f-aveinr"
+                                    placeholder="Make Selection"
+                                    ng-disabled="vm.csv.activeColumn !== $index">
+                                    <option selected>Make Selection</option>
+                                    <optgroup label="Available Columns Names">
+                                        <option value="{{slug}}" ng-repeat="(slug, display) in vm.list.contactHeaders">{{ display }}</option>
+                                    </optgroup>
+                                    <optgroup label="Create new Column">
+                                        <option value="NEW_COLUMN">New column name</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="p-l-90">
+                            <button ng-show="vm.csv.activeColumn === $index" class="w-50 save-distribute blue-button" ng-click="vm.saveColumn()">DONE</button>
+                            <span ng-show="vm.csv.activeColumn !== $index" class="outline-none f-aveinr text-center f-l" ng-click="vm.editCSVColumn($index)">Edit</span>
+                            <p class="outline-none f-aveinr w-50 text-center d-in" ng-click="vm.skipColumn($index)">Skip</p>
+                        </div>
+                        <ul class="p-l-0 csv-rows">
+                            <li class="p-t-15 p-l-10 individual-entry ui-list-respondent"
+                                ng-class="{'light-blue-border': vm.csv.activeColumn === $parent.$index}"
+                                ng-repeat="line in vm.csv.lines">
+                                {{ line[$parent.$index] }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class='blue-button white f-r m-t-30 w-15 m-b-35'
+            cng-class="{'grey-click': vm.contactsHeadersProcessed()}"
+            type="button" value="userAdmin.new"
+            ng-click="vm.saveContacts()">Save Respondents</button>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-strict-di>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <base href="/">
+  <title page-title></title>
+  <meta name="description" content="{{description}}">
+  <meta name="fragment" content="!">
+
+  <!-- Apple META -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Facebook META -->
+  <meta property="fb:app_id" content="{{facebookAppId}}">
+  <meta property="og:site_name" content="{{title}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{url}}">
+  <meta property="og:image" content="{{logo}}">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter META -->
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:url" content="{{url}}">
+  <meta name="twitter:image" content="{{logo}}">
+
+  <!-- Fav Icon -->
+  <link href="../../../../../modules/core/client/img/insight-images/fav_32.png" rel="shortcut icon" type="image/x-icon">
+
+  <!-- Application CSS Files -->
+  {{#each cssFiles}}<link rel="stylesheet" href="{{this}}">{{/each}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
+</head>
+
+<body class="ng-cloak">
+  <!-- Header -->
+  <ng-include
+    src="'modules/core/client/views/header.client.view.html'"
+    ng-if="navHeader && authentication.user">
+  </ng-include>
+  <ng-include
+    src="'modules/core/client/views/presentation.header.view.html'"
+    ng-if="presentationNavHeader && authentication.user">
+  </ng-include>
+
+  <div ui-view class="light-grey" ng-class="{'form-builder-wrapper': surveyPage}"></div>
+
+  <noscript>
+    <style>
+      [ng\:cloak], [ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: block !important;
+      }
+    </style>
+    <div class="alert alert-warning">
+      <strong>This page requires JavaScript.</strong> Please enable it in your browser.
+    </div>
+  </noscript>
+
+  <!--Embedding The User Object-->
+  <script type="text/javascript">
+    var user = {{{ user }}};
+    var env = "{{ env }}";
+    var questionTypes = {{{ questionTypes }}};
+    var maxFileSize = {{{ maxFileSize }}};
+    var pageTypes = {{{ pageTypes }}};
+    var userTypes = {{{ userTypes }}};
+    var dataCollectionTypes = {{{ dataCollectionTypes }}};
+    var defaultPlanTypes = {{{ defaultPlanTypes }}};
+  </script>
+
+  <!-- jQuery CDN required by froala editor -->
+  <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap Datepicker CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+
+
+  <!--Application JavaScript Files-->
+  {{#each jsFiles}}<script type="text/javascript" src="{{this}}"></script>{{/each}}
+
+  {{#if false}}
+  <!--Livereload script rendered -->
+  <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
+  {{/if}}
+</body>
+
+</html>

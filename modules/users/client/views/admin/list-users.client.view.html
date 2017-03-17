@@ -1,0 +1,98 @@
+<!--Static side bar-->
+<div class="survey-container" ui-view>
+  <div layout="column"  class="sideNavSection ng-scope layout-column">
+    <div>
+      <div class="primary-white static-sidebar">
+        <ng-include ng-init="activeTab='users'" src="'modules/shared/client/views/dashboard-sidebar.client.html'"></ng-include>
+      </div>
+
+      <!-- Filled State -->
+      <div class="w-static-sidebar d-in" ng-if="vm.user && (vm.user.length > 0)">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-9 col-md-offset-1">
+              <h1 class='m-l-0 users-logo text-center'>Users</h1>
+              <p class="text-center">View and edit all your users below</p>
+            </div>
+            <div class="col-md-2 p-r-0 p-l-20">
+              <button class='create-project-button dark-red white w-100 m-r-30' type="button" value="userAdmin.new" ng-click="vm.newUser()">Create User</button>
+            </div>
+          </div>
+        </div>
+        <div class="user-table m-t-20">
+          <table class="user-table-border w-100 table-layout-fixed">
+            <thead>
+            <tr>
+              <th width="75px">
+              <th class="align-left p-l-0" width="20%">USER NAME</th>
+              <th class="align-left p-l-0" width="20%">EMAIL</th>
+              <th>USER TYPE</th>
+              <th>CREATED ON </th>
+              <th>PROJECT ASSIGNED</th>
+              <th>ACTIONS</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat='user in vm.user'>
+              <td>
+                <img class="w-35-px h-35-px f-l b-r-50" src={{user.profileImage}} class="w-20"/>
+              </td>
+              <td class="l-h-40 align-left p-l-0 word-break" title="{{ user.firstName }} {{ user.lastName }}">
+
+                {{ (user.firstName + ' ' + user.lastName) | truncate:25}}
+              </td>
+              <td class="l-h-40 align-left p-l-0 word-break" title="{{user.email}}">
+                {{ user.email | truncate:25}}
+              </td>
+              <td class="transform">{{user.roles.toString()}}</td>
+              <td>{{user.created | date:'d MMM, yyyy'}}</td>
+              <td>
+                <div ng-if="!vm.projectCanBeAssigned(user)">
+                  NA
+                </div>
+                <div ng-if="vm.projectCanBeAssigned(user)">
+                  <button
+                      ng-if="!user.assignedProject"
+                      class="white grey-button-table b-none b-r-4 p-10"
+                      ng-click="vm.openPopUp(user)">ASSIGN
+                  </button>
+                  <p class="d-b f-14 f-bold m-b-0 m-t-15"
+                    ng-if="user.assignedProject">{{ user.assignedProject.name }}</p>
+                  <p class="d-b f-12 c-blue outline-none"
+                    ng-click="vm.openPopUp(user)"
+                    ng-if="user.assignedProject">(edit)</p>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="user-{{user.roles}}">
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_preview.svg"
+                      ng-if="vm.currentUser._id !== user._id"
+                      title="preview" class="m-r-15" ui-sref="users.edit({id: user._id})" role="button" tabindex="0"/>
+                    <img src="../../../../../modules/core/client/img/insight-images/ic_delete.png" title="delete"   class=""
+                      ng-if="vm.currentUser._id !== user._id"
+                      ng-click="vm.deleteUserPopup(user)"/>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="w-static-sidebar d-in" ng-if="vm.user && (vm.user.length === 0)" >
+        <div  class="m-auto text-center p-t-25 ">
+          <div>
+            <img class="p-r-4 p-b-2" src="../../../../../modules/core/client/img/insight-images/ic_users_empty.png"/>
+          </div>
+          <div class="f-32 l-s-1 p-t-10">Users</div>
+          <div class="grey-dark opacity-3 f-18 w-40 m-auto">No users yet! Create a new one by clicking </br>on the button below !</div>
+          <div class="w-60">
+            <button class='f-15 create-project-button dark-red white f-r m-t-25 w-30' type="button" ng-click="vm.newUser()">Create User</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
